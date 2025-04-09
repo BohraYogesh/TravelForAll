@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function BeAHostScreen() {
+export default function PopularDestinationScreen() {
   return (
     <View>
-      <Text>BeAHostScreen</Text>
+      <Text>PopularDestinationScreen</Text>
     </View>
   )
 }

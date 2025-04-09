@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function CreditCardScreen() {
+export default function BeAHostScreen() {
   return (
-    <View>
-      <Text>CreditCardScreen</Text>
+    <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+      <Text>Talk To Us</Text>
     </View>
   )
 }
