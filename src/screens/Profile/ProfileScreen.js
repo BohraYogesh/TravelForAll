@@ -75,6 +75,8 @@ const SettingsScreen = () => {
   const navigation = useNavigation();
   const [selectedTheme, setSelectedTheme] = useState('system');
   const [modalVisible, setModalVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const {theme, setTheme} = useTheme();
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
@@ -86,12 +88,12 @@ const SettingsScreen = () => {
   const [selectedMethods, setSelectedMethods] = useState([]);
   const [showMore, setShowMore] = useState(false);
   const [searchText, setSearchText] = useState('');
-  // const {colors} = useTheme();
+  const {colors} = useTheme();
 
-  const handleThemeChange = mode => {
-    setSelectedTheme(mode);
-    setModalVisible(false);
-  };
+  // const handleThemeChange = mode => {
+  //   setSelectedTheme(mode);
+  //   setModalVisible(false);
+  // };
 
   const handleLanguageChange = lang => {
     setSelectedLanguage(lang);
@@ -111,6 +113,11 @@ const SettingsScreen = () => {
   const getCurrencyLabel = id => {
     const found = currencyOptions.find(c => c.id === id);
     return found ? `${found.symbol}` : '';
+  };
+
+  const handleSelect = value => {
+    setTheme(value);
+    setVisible(false);
   };
 
   const paymentOptions = [
@@ -134,7 +141,7 @@ const SettingsScreen = () => {
   };
 
   return (
-    <ScrollView style={[styles.container]} showsVerticalScrollIndicator={false} >
+    <ScrollView style={[styles.container]} showsVerticalScrollIndicator={false}>
       <View>
         {/* My Profile */}
         <Text style={styles.sectionTitle}>My Profile</Text>
@@ -220,7 +227,7 @@ const SettingsScreen = () => {
         {/* Appearance */}
         <TouchableOpacity
           style={styles.row}
-          onPress={() => setModalVisible(true)}
+          onPress={() => setVisible(true)}
           activeOpacity={1}>
           <MaterialIcon
             name="theme-light-dark"
@@ -235,7 +242,7 @@ const SettingsScreen = () => {
             color="#000"
           />
         </TouchableOpacity>
-        
+
         {/* Language */}
         <TouchableOpacity
           style={styles.row}
@@ -365,7 +372,7 @@ const SettingsScreen = () => {
             <Text style={styles.phoneText}>+917823812240</Text>
           </TouchableOpacity>
         </View>
-        
+
         {/* Logout */}
         <TouchableOpacity
           style={styles.logoutBtn}
@@ -378,23 +385,24 @@ const SettingsScreen = () => {
       </View>
 
       {/* Theme Modal */}
-      <Modal animationType="slide" transparent visible={modalVisible}>
+      <Modal animationType="slide" transparent visible={visible}>
         <TouchableOpacity
           style={styles.modalOverlay}
           activeOpacity={1}
-          onPress={() => setModalVisible(false)}>
+          onPressOut={() => setVisible(false)}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Choose Theme</Text>
-            {themeOptions.map(theme => {
-              const isSelected = selectedTheme === theme.id;
+
+            {themeOptions.map(item => {
+              const isSelected = theme === item.id;
               return (
                 <TouchableOpacity
-                  key={theme.id}
+                  key={item.id}
                   style={styles.option}
-                  onPress={() => handleThemeChange(theme.id)}
+                  onPress={() => handleSelect(item.id)}
                   activeOpacity={1}>
                   <MaterialIcon
-                    name={theme.icon}
+                    name={item.icon}
                     size={responsiveFontSize(2.8)}
                     color={isSelected ? '#f97316' : '#000'}
                   />
@@ -403,7 +411,7 @@ const SettingsScreen = () => {
                       styles.optionText,
                       isSelected && {color: '#f97316'},
                     ]}>
-                    {theme.name}
+                    {item.name}
                   </Text>
                   <MaterialIcon
                     name={isSelected ? 'radiobox-marked' : 'radiobox-blank'}
