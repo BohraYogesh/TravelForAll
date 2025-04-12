@@ -1,0 +1,202 @@
+[
+  {
+    "city": "Delhi",
+    "state": "Delhi",
+    "country": "India",
+    "price": "₹4,500",
+    "description": "The capital city of India, known for its historical monuments and vibrant markets.",
+    "image": {
+      "uri": "https://cdn.britannica.com/37/189837-050-F0AF383E/New-Delhi-India-War-Memorial-arch-Sir.jpg"
+    }
+  },
+  {
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "country": "India",
+    "price": "₹5,200",
+    "description": "The financial capital of India, famous for Bollywood and Marine Drive.",
+    "image": {
+      "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/40/ce/c3/mumbai-marine-drive-along.jpg?w=900&h=-1&s=1"
+    }
+  },
+  {
+    "city": "Agra",
+    "state": "Uttar Pradesh",
+    "country": "India",
+    "price": "₹3,800",
+    "description": "Home to the iconic Taj Mahal, a symbol of love and a UNESCO World Heritage Site.",
+    "image": {
+      "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/960px-Taj_Mahal_%28Edited%29.jpeg"
+    }
+  },
+  {
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "country": "India",
+    "price": "₹4,200",
+    "description": "The Pink City, known for its palaces, forts, and rich cultural heritage.",
+    "image": {
+      "uri": "https://theheritageart.com/wp-content/uploads/2022/11/hawa-mahal.jpg"
+    }
+  },
+  {
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "country": "India",
+    "price": "₹5,400",
+    "description": "The Silicon Valley of India, known for its pleasant weather and tech parks.",
+    "image": {
+      "uri": "https://www.aalpha.net/wp-content/uploads/2019/01/bangalore-silicon-valley.jpg"
+    }
+  },
+  {
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "price": "₹4,700",
+    "description": "Known for its temples, Marina Beach, and Dravidian-style architecture.",
+    "image": {
+      "uri": "https://s3.india.com/wp-content/uploads/2024/03/Feature-Image_-Chennai-1.jpg"
+    }
+  },
+  {
+    "city": "Goa",
+    "state": "Goa",
+    "country": "India",
+    "price": "₹6,500",
+    "description": "A beach paradise famous for its vibrant nightlife and Portuguese heritage.",
+    "image": {
+      "uri": "https://travelcrafters.com.au/wp-content/uploads/2024/06/Beach-fun.jpg"
+    }
+  },
+  {
+    "city": "Varanasi",
+    "state": "Uttar Pradesh",
+    "country": "India",
+    "price": "₹3,600",
+    "description": "The spiritual capital of India, known for its ghats and Ganga Aarti.",
+    "image": {
+      "uri": "https://servdharm.com/cdn/shop/articles/Wallpaper_800x.jpg?v=1694405183"
+    }
+  },
+  {
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "country": "India",
+    "price": "₹4,300",
+    "description": "A cultural hub known for colonial architecture, arts, and literature.",
+    "image": {
+      "uri": "https://www.shikhar.com/images/gallery/tours/455/10-1497093111-11.jpg"
+    }
+  },
+  {
+    "city": "Udaipur",
+    "state": "Rajasthan",
+    "country": "India",
+    "price": "₹5,000",
+    "description": "The City of Lakes, famous for its palaces and romantic charm.",
+    "image": {
+      "uri": "https://s7ap1.scene7.com/is/image/incredibleindia/lake-palace-udaipur-rajasthan-1-attr-hero?qlt=82&ts=1727353329359"
+    }
+  },
+  {
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "country": "India",
+    "price": "₹5,100",
+    "description": "Famous for Charminar, biryani, and its IT hubs.",
+    "image": {
+      "uri": "https://static.toiimg.com/thumb/msid-25045273,width-748,height-499,resizemode=4,imgsize-91386/Hyderabad.jpg"
+    }
+  },
+  {
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "price": "₹4,600",
+    "description": "https://imgcld.yatra.com/ytimages/image/upload/t_yt_blog_c_fill_q_auto:good_f_auto_w_800_h_500/v1506064390/Shaniwar_wada_fort.jpg",
+    "image": {
+      "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pune_West_skyline_-_March_2017.jpg/330px-Pune_West_skyline_-_March_2017.jpg"
+    }
+  },
+  {
+    "city": "Shimla",
+    "state": "Himachal Pradesh",
+    "country": "India",
+    "price": "₹6,000",
+    "description": "A popular hill station known for its colonial architecture and cool climate.",
+    "image": {
+      "uri": "https://etimg.etb2bimg.com/photo/116597785.cms"
+    }
+  },
+  {
+    "city": "Manali",
+    "state": "Himachal Pradesh",
+    "country": "India",
+    "price": "₹6,800",
+    "description": "A scenic destination popular for honeymooners and adventure sports.",
+    "image": {
+      "uri": "https://www.citybit.in/wp-content/uploads/2024/09/Best-Time-to-Visit-Kullu-Manali-1024x576.jpg"
+    }
+  },
+  {
+    "city": "Amritsar",
+    "state": "Punjab",
+    "country": "India",
+    "price": "₹4,800",
+    "description": "Home to the Golden Temple, a spiritual and cultural hub.",
+    "image": {
+      "uri": "https://s7ap1.scene7.com/is/image/incredibleindia/golden-temple-amritsar-punjab-tri-hero?qlt=82&ts=1727166214134"
+    }
+  },
+  {
+    "city": "Rishikesh",
+    "state": "Uttarakhand",
+    "country": "India",
+    "price": "₹3,900",
+    "description": "Yoga capital of the world, nestled in the Himalayas.",
+    "image": {
+      "uri": "https://www.oyorooms.com/travel-guide/wp-content/uploads/2021/05/10.png"
+    }
+  },
+  {
+    "city": "Jodhpur",
+    "state": "Rajasthan",
+    "country": "India",
+    "price": "₹5,300",
+    "description": "The Blue City, known for Mehrangarh Fort and heritage culture.",
+    "image": {
+      "uri": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Mehrangarh_Fort_sanhita.jpg/960px-Mehrangarh_Fort_sanhita.jpg"
+    }
+  },
+  {
+    "city": "Leh",
+    "state": "Ladakh",
+    "country": "India",
+    "price": "₹8,000",
+    "description": "A high-desert city surrounded by the Himalayas, known for its monasteries.",
+    "image": {
+      "uri": "https://cdn.britannica.com/72/124772-050-02974A7A/Palace-kings-Leh-Ladakh-India-Jammu-and.jpg"
+    }
+  },
+  {
+    "city": "Darjeeling",
+    "state": "West Bengal",
+    "country": "India",
+    "price": "₹6,200",
+    "description": "Famous for tea gardens, Toy Train, and views of Kanchenjunga.",
+    "image": {
+      "uri": "https://www.holidify.com/images/bgImages/DARJEELING.jpg"
+    }
+  },
+  {
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "country": "India",
+    "price": "₹4,900",
+    "description": "A major city with deep roots in history and textile industry.",
+    "image": {
+      "uri": "https://th-i.thgim.com/public/news/national/tamil-nadu/cimotm/article68602861.ece/alternates/FREE_1200/WhatsApp%20Image%202024-09-04%20at%201.58.42%20AM.jpeg"
+    }
+  }
+]

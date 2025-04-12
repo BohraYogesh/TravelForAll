@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const exploreData = [
   {
@@ -24,9 +31,9 @@ const exploreData = [
     destinations: 60,
     price: '₹17,875',
     images: [
-      'https://www.holidify.com/images/bgImages/ROME.jpg',
-      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
-      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg'
+      'https://lp-cms-production.imgix.net/2024-10/-CantoiStock-1299735828.jpg?auto=compress&format=auto&fit=crop&q=50&w=1200&h=800',
+      'https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/4b/5d/c8/caption.jpg',
+      'https://www.chaseforadventure.com/wp-content/uploads/2023/07/Things-to-do-in-Krabi.webp',
     ],
   },
   {
@@ -34,9 +41,9 @@ const exploreData = [
     destinations: 3,
     price: '₹10,466',
     images: [
-      'https://www.holidify.com/images/bgImages/ROME.jpg',
-      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
-      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg'
+      'https://www.tourmyindia.com/blog//wp-content/uploads/2023/09/Best-Weekend-Destinations-from-Jaipur.jpg',
+      'https://blog.weekendthrill.com/wp-content/uploads/2016/05/053016_0515_16IDEALWEEK1.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST6I1HUhGQtFEy-ZQsXRprzvCP-BY6QYisPw&s',
     ],
   },
   {
@@ -44,9 +51,9 @@ const exploreData = [
     destinations: 14,
     price: '₹10,945',
     images: [
-      'https://www.holidify.com/images/bgImages/ROME.jpg',
-      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
-      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg'
+      'https://media.cntraveler.com/photos/67782447e93d5ea2c59fec07/4:3/w_3148,h_2361,c_limit/Le_Sirenuse_Room_62-0553.jpg',
+      'https://media.cntraveller.com/photos/62f36e42e062900b0e3b7637/master/w_320%2Cc_limit/Le_Sirenuse_ALDOs_BAR-9051-La%2520Sponda%2C%2520Le%2520Sireneuse%2C%2520Positano%2C%2520Italy%2C-jun21-pr.jpg',
+      'https://www.ecstaticindiatours.com/uploads/blog/1696338863o0ow3-udaipur.jpg',
     ],
   },
   {
@@ -54,41 +61,85 @@ const exploreData = [
     destinations: 13,
     price: '₹10,945',
     images: [
-      'https://www.holidify.com/images/bgImages/ROME.jpg',
-      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
-      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg'
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA1zM1NH3jWBmN47Z-XVm4JiHq1QoDD3Ovow&s',
+      'https://hips.hearstapps.com/hmg-prod/images/snowdonia-national-park-in-wales-uk-royalty-free-image-1729091363.jpg?crop=0.530xw:1.00xh;0.239xw,0&resize=640:*',
+      'https://specials-images.forbesimg.com/imageserve/61cc77ede18f95935e179434/Llynnau-Mymbyr--Mount-Snowdon---Snowdon-Massif/960x0.jpg?fit=scale',
     ],
   },
 ];
-
-
 
 const ExploreSection = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Explore')} activeOpacity={0.8} style={{justifyContent:'space-between', flexDirection:'row', alignItems:'center'}}>
-      <Text style={styles.heading}>Explore</Text>
-      <Icon name="chevron-right" size={22} color="#000" />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Explore')}
+        activeOpacity={1}
+        style={{
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Text style={styles.heading}>Explore</Text>
+        <Icon name="chevron-right" size={22} color="#000" />
       </TouchableOpacity>
       <FlatList
         data={exploreData}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.title}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <View style={styles.imageGrid}>
-              <Image source={{ uri: item.images[0] }} style={styles.mainImage} />
-              <View style={styles.smallImageColumn}>
-                <Image source={{ uri: item.images[1] }} style={styles.smallImage} />
-                <Image source={{ uri: item.images[2] }} style={styles.smallImages} />
+        keyExtractor={item => item.title}
+        renderItem={({item}) => (
+          <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            if (item.title === 'Popular Destinations') {
+              navigation.navigate('PopulorDestination', {
+                category: item.title,
+                image: item.images[0],
+              });
+            } else if (item.title === 'Visa-free Countries') {
+              navigation.navigate('VisaFreeCountry', {
+                category: item.title,
+                image: item.images[0],
+              });
+            // } else if (item.title === 'Weekend Getaways') {
+            //   navigation.navigate('WeekendGetawayScreen', {
+            //     category: item.title,
+            //     image: item.images[0],
+            //   });
+            } else {
+              // Default screen for other categories
+              navigation.navigate('ExploreCategoryScreen', {
+                category: item.title,
+                image: item.images[0],
+              });
+            }
+          }}
+        >
+            <View style={styles.card}>
+              <View style={styles.imageGrid}>
+                <Image
+                  source={{uri: item.images[0]}}
+                  style={styles.mainImage}
+                />
+                <View style={styles.smallImageColumn}>
+                  <Image
+                    source={{uri: item.images[1]}}
+                    style={styles.smallImage}
+                  />
+                  <Image
+                    source={{uri: item.images[2]}}
+                    style={styles.smallImages}
+                  />
+                </View>
               </View>
+              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={styles.subtitle}>
+                {item.destinations} Destinations from
+              </Text>
+              <Text style={styles.price}>{item.price}</Text>
             </View>
-            <Text style={styles.cardTitle}>{item.title}</Text>
-            <Text style={styles.subtitle}>{item.destinations} Destinations from</Text>
-            <Text style={styles.price}>{item.price}</Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -111,7 +162,6 @@ const styles = StyleSheet.create({
     marginRight: 12,
     paddingBottom: 10,
     width: responsiveWidth(50),
-    
   },
   imageGrid: {
     flexDirection: 'row',

@@ -8,9 +8,9 @@ import {
   Alert,
   ScrollView,
   Modal,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -18,7 +18,8 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '../../context/theme';
 
 const themeOptions = [
   {id: 'light', name: 'Light', icon: 'white-balance-sunny'},
@@ -70,8 +71,6 @@ const currencyOptions = [
   },
 ];
 
-
-
 const SettingsScreen = () => {
   const navigation = useNavigation();
   const [selectedTheme, setSelectedTheme] = useState('system');
@@ -82,6 +81,12 @@ const SettingsScreen = () => {
 
   const [selectedCurrency, setSelectedCurrency] = useState('inr');
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
+
+  const [selectedPayment, setSelectedPayment] = useState(false);
+  const [selectedMethods, setSelectedMethods] = useState([]);
+  const [showMore, setShowMore] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  // const {colors} = useTheme();
 
   const handleThemeChange = mode => {
     setSelectedTheme(mode);
@@ -108,12 +113,35 @@ const SettingsScreen = () => {
     return found ? `${found.symbol}` : '';
   };
 
+  const paymentOptions = [
+    {
+      id: 'mastercard',
+      name: 'MasterCard Credit',
+    },
+    {id: 'visa_credit', name: 'Visa Credit'},
+    {id: 'visa_debit', name: 'Visa Debit'},
+    {
+      id: 'net_banking',
+      name: 'Net Banking',
+    },
+    {id: 'upi', name: 'UPI'},
+    {id: 'amex', name: 'American Express'}, // hidden initially
+  ];
+  const togglePayment = id => {
+    setSelectedMethods(prev =>
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id],
+    );
+  };
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={[styles.container]} showsVerticalScrollIndicator={false} >
       <View>
         {/* My Profile */}
         <Text style={styles.sectionTitle}>My Profile</Text>
-        <TouchableOpacity style={styles.row} activeOpacity={1} onPress={() => navigation.navigate('ProfileInfo')}>
+        <TouchableOpacity
+          style={styles.row}
+          activeOpacity={1}
+          onPress={() => navigation.navigate('ProfileInfo')}>
           <Icon
             name="person-outline"
             size={responsiveFontSize(3)}
@@ -127,7 +155,11 @@ const SettingsScreen = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} activeOpacity={1}>
+        {/* Preferred Payment Method */}
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => setSelectedPayment(true)}
+          activeOpacity={1}>
           <MaterialIcon
             name="credit-card-outline"
             size={responsiveFontSize(3)}
@@ -145,7 +177,10 @@ const SettingsScreen = () => {
 
         {/* My Trips */}
         <Text style={styles.sectionTitle}>My Trips</Text>
-        <TouchableOpacity style={styles.row} activeOpacity={1}>
+        <TouchableOpacity
+          style={styles.row}
+          activeOpacity={1}
+          onPress={() => navigation.navigate('HotelBooking')}>
           <MaterialIcon
             name="notebook-outline"
             size={responsiveFontSize(3)}
@@ -159,7 +194,11 @@ const SettingsScreen = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} activeOpacity={1}>
+        {/* Flight Bookings */}
+        <TouchableOpacity
+          style={styles.row}
+          activeOpacity={1}
+          onPress={() => navigation.navigate('FlightBooking')}>
           <MaterialIcon
             name="airplane"
             size={responsiveFontSize(3)}
@@ -178,6 +217,7 @@ const SettingsScreen = () => {
         {/* Settings */}
         <Text style={styles.sectionTitle}>Settings</Text>
 
+        {/* Appearance */}
         <TouchableOpacity
           style={styles.row}
           onPress={() => setModalVisible(true)}
@@ -187,7 +227,7 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color="#000"
           />
-          <Text style={styles.rowText}>Appearance</Text>
+          <Text style={styles.rowText}>Theme</Text>
           <Text style={styles.statusText}>{getThemeLabel(selectedTheme)}</Text>
           <Icon
             name="chevron-forward"
@@ -195,7 +235,8 @@ const SettingsScreen = () => {
             color="#000"
           />
         </TouchableOpacity>
-
+        
+        {/* Language */}
         <TouchableOpacity
           style={styles.row}
           onPress={() => setLanguageModalVisible(true)}
@@ -216,6 +257,7 @@ const SettingsScreen = () => {
           />
         </TouchableOpacity>
 
+        {/* Currency */}
         <TouchableOpacity
           style={styles.row}
           onPress={() => setCurrencyModalVisible(true)}
@@ -236,7 +278,11 @@ const SettingsScreen = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} activeOpacity={1}>
+        {/* Notifications */}
+        <TouchableOpacity
+          style={styles.row}
+          activeOpacity={1}
+          onPress={() => navigation.navigate('Notification')}>
           <MaterialIcon
             name="bell-outline"
             size={responsiveFontSize(3)}
@@ -250,7 +296,11 @@ const SettingsScreen = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.row} activeOpacity={1}>
+        {/* Account & Security */}
+        <TouchableOpacity
+          style={styles.row}
+          activeOpacity={1}
+          onPress={() => navigation.navigate('Account&Security')}>
           <MaterialIcon
             name="shield-lock-outline"
             size={responsiveFontSize(3)}
@@ -269,6 +319,7 @@ const SettingsScreen = () => {
         {/* Help Center */}
         <Text style={styles.sectionTitle}>Help Center</Text>
 
+        {/* FAQs */}
         <View style={styles.helpGrid}>
           <TouchableOpacity style={styles.helpItem} activeOpacity={1}>
             <MaterialIcon
@@ -314,7 +365,8 @@ const SettingsScreen = () => {
             <Text style={styles.phoneText}>+917823812240</Text>
           </TouchableOpacity>
         </View>
-
+        
+        {/* Logout */}
         <TouchableOpacity
           style={styles.logoutBtn}
           onPress={() =>
@@ -405,6 +457,81 @@ const SettingsScreen = () => {
         </TouchableOpacity>
       </Modal>
 
+      {/* Preferred Payment Method */}
+      <Modal animationType="slide" transparent visible={selectedPayment}>
+        <View style={styles.fullscreenModal}>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => setSelectedPayment(false)}>
+              <Icon name="close" size={24} />
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>Payment Methods</Text>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => setSelectedPayment(false)}>
+              <Icon name="checkmark" size={24} />
+            </TouchableOpacity>
+          </View>
+
+          {/* Search Bar */}
+          <View style={styles.searchBar}>
+            <Icon name="search" size={20} color="#888" />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search payment type"
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+          </View>
+
+          {/* Info Text */}
+          <Text style={styles.infoText}>
+            By selecting one or more (max 10) payment types, prices on Wego will
+            include applicable minimum payment fees. Please note that not all
+            providers support all payment types.
+          </Text>
+
+          {/* Filtered Payment List */}
+          <ScrollView>
+            {(showMore ? paymentOptions : paymentOptions.slice(0, 5))
+              .filter(option =>
+                option.name.toLowerCase().includes(searchText.toLowerCase()),
+              )
+              .map(option => {
+                const isSelected = selectedMethods.includes(option.id);
+                return (
+                  <TouchableOpacity
+                    activeOpacity={1}
+                    key={option.id}
+                    style={styles.optionRow}
+                    onPress={() => togglePayment(option.id)}>
+                    <MaterialIcon
+                      name={
+                        isSelected
+                          ? 'checkbox-marked'
+                          : 'checkbox-blank-outline'
+                      }
+                      size={22}
+                      color={isSelected ? '#f97316' : 'gray'}
+                    />
+                    <Text style={styles.optionText}>{option.name}</Text>
+                    {/* <Image source={option.icon} style={styles.optionIcon} /> */}
+                  </TouchableOpacity>
+                );
+              })}
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => setShowMore(!showMore)}>
+              <Text style={styles.showMoreText}>
+                {showMore ? 'Show less ▲' : 'Show more ▼'}
+              </Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+      </Modal>
+
       {/* Currency Modal */}
       <Modal animationType="slide" transparent visible={currencyModalVisible}>
         <TouchableOpacity
@@ -434,7 +561,7 @@ const SettingsScreen = () => {
                       styles.optionText,
                       isSelected && {color: '#f97316'},
                     ]}>
-                    {currency.symbol}  {currency.name}
+                    {currency.symbol} {currency.name}
                   </Text>
                   <MaterialIcon
                     name={isSelected ? 'radiobox-marked' : 'radiobox-blank'}
@@ -534,8 +661,8 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#fff',
-    borderTopRightRadius: 12,
-    borderTopLeftRadius: 12,
+    borderTopRightRadius: responsiveWidth(3),
+    borderTopLeftRadius: responsiveWidth(3),
     padding: responsiveHeight(2),
   },
   modalTitle: {
@@ -553,5 +680,58 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: responsiveFontSize(2),
     flex: 1,
+    marginLeft: responsiveWidth(2.5),
+  },
+  fullscreenModal: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: responsiveHeight(5),
+    paddingHorizontal: responsiveWidth(4),
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: responsiveHeight(2),
+  },
+  headerTitle: {
+    fontSize: responsiveFontSize(2.2),
+    fontWeight: '600',
+  },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f3f4f6',
+    borderRadius: responsiveWidth(2.5),
+    padding: responsiveHeight(1),
+    marginBottom: responsiveHeight(1),
+  },
+  searchInput: {
+    marginLeft: responsiveWidth(2),
+    flex: 1,
+    fontSize: responsiveFontSize(1.8),
+  },
+  infoText: {
+    fontSize: responsiveFontSize(1.5),
+    color: '#6b7280',
+    marginBottom: responsiveHeight(1.5),
+  },
+  optionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: responsiveHeight(1.2),
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#e5e7eb',
+  },
+  optionIcon: {
+    width: responsiveWidth(8),
+    height: responsiveHeight(2.5),
+    resizeMode: 'contain',
+  },
+  showMoreText: {
+    textAlign: 'center',
+    color: '#000',
+    marginTop: responsiveHeight(1.5),
+    fontSize: responsiveFontSize(1.8),
   },
 });

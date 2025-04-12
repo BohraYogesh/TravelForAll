@@ -16,7 +16,6 @@ import {
 import {RadioButton} from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-
 export default function PersonalInfoScreen() {
   const [gender, setGender] = useState();
   const [date, setDate] = useState(new Date());
@@ -131,7 +130,7 @@ export default function PersonalInfoScreen() {
       <TextInput style={styles.input} placeholder="Expiry Date" />
 
       {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton}>
+      <TouchableOpacity activeOpacity={1} style={styles.saveButton}>
         <Text style={styles.saveButtonText}>Save</Text>
       </TouchableOpacity>
     </ScrollView>
