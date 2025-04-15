@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -5,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -13,42 +13,52 @@ import {
 } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '../../context/theme'; 
 
 export default function AccountSecurity() {
   const navigation = useNavigation();
+  const {colors} = useTheme(); 
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View>
+    <ScrollView
+      style={[styles.container, {backgroundColor: colors.bg}]}
+      showsVerticalScrollIndicator={false}>
+      <View style={{backgroundColor: colors.bg}}>
         <TouchableOpacity
-          style={styles.row}
+          style={[styles.row, {borderBottomColor: colors.border}]}
           activeOpacity={1}
           onPress={() => navigation.navigate('TermsAndConditions')}>
           <Icon
             name="document-text-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Terms & Conditions</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Terms & Conditions
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
+
         <TouchableOpacity
-          style={styles.row}
+          style={[styles.row, {borderBottomColor: colors.border}]}
           activeOpacity={1}
           onPress={() => navigation.navigate('Privacy')}>
           <Icon
             name="lock-closed-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Privacy & policy</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Privacy & policy
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
       </View>
@@ -60,7 +70,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: responsiveWidth(4),
-    backgroundColor: '#fff',
   },
   sectionTitle: {
     fontSize: responsiveFontSize(2.2),
@@ -73,12 +82,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: responsiveHeight(1.8),
     borderBottomWidth: 1,
-    borderColor: '#ddd',
   },
   rowText: {
     fontSize: responsiveFontSize(2),
     marginLeft: responsiveWidth(4),
     flex: 1,
-    color: '#000',
   },
 });

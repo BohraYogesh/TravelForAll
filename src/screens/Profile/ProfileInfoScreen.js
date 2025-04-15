@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
+  Platform,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -15,8 +16,11 @@ import {
 } from 'react-native-responsive-dimensions';
 import {RadioButton} from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useTheme} from '../../context/theme';
 
 export default function PersonalInfoScreen() {
+  const {colors} = useTheme();
+
   const [gender, setGender] = useState();
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
@@ -24,114 +28,154 @@ export default function PersonalInfoScreen() {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShowPicker(Platform.OS === 'ios'); // iOS me picker open rahega
+    setShowPicker(Platform.OS === 'ios');
     setDate(currentDate);
-
-    // Format date
-    const d = currentDate.toLocaleDateString(); // You can customize the format
+    const d = currentDate.toLocaleDateString();
     setFormattedDate(d);
   };
 
   return (
     <ScrollView
-      contentContainerStyle={styles.container}
+      contentContainerStyle={[styles.container, {backgroundColor: colors.background}]}
       showsVerticalScrollIndicator={false}>
-      {/* Section 1: Personal Details */}
-      <Text style={styles.sectionTitle}>Personal Details</Text>
-      <Text style={styles.subText}>
+      <Text style={[styles.sectionTitle, {color: colors.text}]}>Personal Details</Text>
+      <Text style={[styles.subText, {color: colors.textLight}]}>
         All fields are mandatory. Enter exactly as they appear in passport/ID to
         avoid check-in complications.{' '}
-        <Text style={styles.link}>More Details</Text>
+        <Text style={[styles.link, {color: colors.link}]}>More Details</Text>
       </Text>
 
-      <TextInput style={styles.input} placeholder="First Name" />
-      <TextInput style={styles.input} placeholder="Surname (Last Name)" />
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="First Name"
+        placeholderTextColor={colors.placeholder}
+      />
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="Surname (Last Name)"
+        placeholderTextColor={colors.placeholder}
+      />
 
-      <Text style={styles.label}>Gender</Text>
+      <Text style={[styles.label, {color: colors.text}]}>Gender</Text>
       <View style={styles.radioGroup}>
         <RadioButton
           value="Male"
           status={gender === 'Male' ? 'checked' : 'unchecked'}
           onPress={() => setGender('Male')}
+          color={colors.primary}
         />
-        <Text style={styles.radioLabel}>Male</Text>
+        <Text style={[styles.radioLabel, {color: colors.text}]}>Male</Text>
         <RadioButton
           value="Female"
           status={gender === 'Female' ? 'checked' : 'unchecked'}
           onPress={() => setGender('Female')}
+          color={colors.primary}
         />
-        <Text style={styles.radioLabel}>Female</Text>
+        <Text style={[styles.radioLabel, {color: colors.text}]}>Female</Text>
       </View>
 
-      <View style={{}}>
-        <Pressable onPress={() => setShowPicker(true)}>
-          <TextInput
-            style={{
-              borderBottomWidth: 1,
-              borderColor: '#ccc',
-            }}
-            placeholder="Date of Birth"
-            value={formattedDate}
-            editable={false}
-            pointerEvents="none"
-          />
-        </Pressable>
+      <Pressable onPress={() => setShowPicker(true)}>
+        <TextInput
+          style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+          placeholder="Date of Birth"
+          placeholderTextColor={colors.placeholder}
+          value={formattedDate}
+          editable={false}
+          pointerEvents="none"
+        />
+      </Pressable>
 
-        {showPicker && (
-          <DateTimePicker
-            value={date}
-            mode="date"
-            display="default"
-            maximumDate={new Date()} // Prevent future dates
-            onChange={onChange}
-          />
-        )}
-      </View>
-      <TextInput style={styles.input} placeholder="Nationality" />
+      {showPicker && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display="default"
+          maximumDate={new Date()}
+          onChange={onChange}
+        />
+      )}
 
-      {/* Section 2: Contact Info */}
-      <Text style={styles.sectionTitle}>Contact Information</Text>
-      <Text style={styles.subText}>
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="Nationality"
+        placeholderTextColor={colors.placeholder}
+      />
+
+      <Text style={[styles.sectionTitle, {color: colors.text}]}>Contact Information</Text>
+      <Text style={[styles.subText, {color: colors.textLight}]}>
         All fields are mandatory. Fill out your contact information for a
         smoother booking experience.
       </Text>
 
       <TextInput
-        style={[styles.input, {color: 'gray'}]}
+        style={[styles.input, {color: 'gray', borderColor: colors.border, backgroundColor: colors.inputBg}]}
         placeholder="xyz@gmail.com"
         editable={false}
+        placeholderTextColor={colors.placeholder}
       />
 
       <View style={styles.phoneRow}>
         <TextInput
-          style={[styles.input, {width: responsiveWidth(20), color: 'black'}]}
+          style={[
+            styles.input,
+            {
+              width: responsiveWidth(20),
+              color: colors.text,
+              backgroundColor: colors.inputBg,
+              borderColor: colors.border,
+            },
+          ]}
           placeholder="+91"
           editable={false}
+          placeholderTextColor={colors.placeholder}
         />
         <TextInput
-          style={[styles.input, {flex: 1, marginLeft: responsiveWidth(3)}]}
+          style={[
+            styles.input,
+            {
+              flex: 1,
+              marginLeft: responsiveWidth(3),
+              color: colors.text,
+              backgroundColor: colors.inputBg,
+              borderColor: colors.border,
+            },
+          ]}
           placeholder="Phone Number"
+          placeholderTextColor={colors.placeholder}
         />
       </View>
 
-      {/* Section 3: Travel Documents */}
-      <Text style={styles.sectionTitle}>Travel Documents</Text>
-      <Text style={styles.subText}>
-        Please ensure that you are holding a valid and correct documentation for
-        travel.
+      <Text style={[styles.sectionTitle, {color: colors.text}]}>Travel Documents</Text>
+      <Text style={[styles.subText, {color: colors.textLight}]}>
+        Please ensure that you are holding a valid and correct documentation for travel.
       </Text>
 
-      <Text style={styles.docLabel}>Passport</Text>
-      <TextInput style={styles.input} placeholder="Passport Number" />
-      <TextInput style={styles.input} placeholder="Expiry Date" />
+      <Text style={[styles.docLabel, {color: colors.text}]}>Passport</Text>
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="Passport Number"
+        placeholderTextColor={colors.placeholder}
+      />
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="Expiry Date"
+        placeholderTextColor={colors.placeholder}
+      />
 
-      <Text style={styles.docLabel}>National ID</Text>
-      <TextInput style={styles.input} placeholder="ID Card Number" />
-      <TextInput style={styles.input} placeholder="Expiry Date" />
+      <Text style={[styles.docLabel, {color: colors.text}]}>National ID</Text>
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="ID Card Number"
+        placeholderTextColor={colors.placeholder}
+      />
+      <TextInput
+        style={[styles.input, {color: colors.text, borderColor: colors.border, backgroundColor: colors.inputBg}]}
+        placeholder="Expiry Date"
+        placeholderTextColor={colors.placeholder}
+      />
 
-      {/* Save Button */}
-      <TouchableOpacity activeOpacity={1} style={styles.saveButton}>
-        <Text style={styles.saveButtonText}>Save</Text>
+      <TouchableOpacity activeOpacity={0.9} style={[styles.saveButton, {backgroundColor: colors.primary}]}>
+        <Text style={[styles.saveButtonText, {color: '#fff'}]}>Save</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -140,29 +184,26 @@ export default function PersonalInfoScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: responsiveWidth(5),
-    backgroundColor: '#fff',
     paddingBottom: responsiveHeight(5),
   },
   sectionTitle: {
     fontSize: responsiveFontSize(2.2),
     fontWeight: 'bold',
-    // marginTop:responsiveHeight(2)
   },
   subText: {
     fontSize: responsiveFontSize(1.6),
-    color: 'gray',
     marginTop: responsiveHeight(1),
   },
   link: {
-    color: '#f97316',
     textDecorationLine: 'underline',
   },
   input: {
     borderBottomWidth: 1,
-    borderColor: '#ccc',
     paddingVertical: responsiveHeight(1),
     fontSize: responsiveFontSize(2),
     marginTop: responsiveHeight(2),
+    borderRadius: 4,
+    paddingHorizontal: 10,
   },
   label: {
     marginTop: responsiveHeight(2),
@@ -189,14 +230,12 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(2),
   },
   saveButton: {
-    backgroundColor: '#f97316',
     paddingVertical: responsiveHeight(1.8),
     alignItems: 'center',
     borderRadius: 10,
     marginTop: responsiveHeight(4),
   },
   saveButtonText: {
-    color: '#fff',
     fontSize: responsiveFontSize(2.2),
     fontWeight: 'bold',
   },

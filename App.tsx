@@ -9,7 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { ThemeProvider, useTheme } from './src/context/theme'; 
 
 // Screens
-import HomeScreen from './src/screens/HomeScreen';
+import HomeScreen from './src/screens/Home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import FlightScreen from './src/screens/TopServiceCard/FlightScreen';
 import HotelScreen from './src/screens/TopServiceCard/HotelScreen';

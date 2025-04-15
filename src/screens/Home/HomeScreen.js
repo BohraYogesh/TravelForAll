@@ -12,11 +12,11 @@ import {
   Modal,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import TravelMenuGrid from '../components/TravelMenuGrid';
-import ExploreSection from '../components/TravelCategory/ExploreSection';
-import PopularDestination from '../components/PopularDestination';
-import FlightsIcon from '../assets/plane.png';
-import HotelsIcon from '../assets/hotel.png';
+import TravelMenuGrid from '../../components/TravelMenuGrid';
+import ExploreSection from '../../components/TravelCategory/ExploreSection';
+import PopularDestination from '../../components/PopularDestination';
+import FlightsIcon from '../../assets/plane.png';
+import HotelsIcon from '../../assets/hotel.png';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -25,7 +25,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../context/theme';
+import { useTheme } from '../../context/theme';
 
 
 const data = [

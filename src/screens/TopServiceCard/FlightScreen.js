@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,10 +14,10 @@ import {
   responsiveHeight,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import {useTheme} from '../../context/theme';
+import { useTheme } from '../../context/theme'; // Adjust path accordingly
 
 const FlightBooking = () => {
-  const {colors} = useTheme();
+  const { colors } = useTheme(); // Access theme colors
   const [tripType, setTripType] = useState('one-way');
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -27,16 +27,16 @@ const FlightBooking = () => {
     if (selectedDate) setDate(selectedDate);
   };
 
-  const formatDate = dateObj => {
-    const options = {weekday: 'short', day: '2-digit', month: 'short'};
+  const formatDate = (dateObj) => {
+    const options = { weekday: 'short', day: '2-digit', month: 'short' };
     return dateObj.toLocaleDateString('en-US', options);
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.bg}]}>
+    <View style={[styles.container, { backgroundColor: colors.bg }]}>
       {/* Trip Type Selection */}
       <View style={styles.tripTypeContainer}>
-        {['One-way', 'Round-trip', 'Multi-city'].map(type => (
+        {['One-way', 'Round-trip', 'Multi-city'].map((type) => (
           <TouchableOpacity
             activeOpacity={1}
             key={type}
@@ -49,15 +49,18 @@ const FlightBooking = () => {
                     : colors.subbg,
               },
             ]}
-            onPress={() => setTripType(type.toLowerCase())}>
+            onPress={() => setTripType(type.toLowerCase())}
+          >
             <Text
-              style={
-                {color:
+              style={{
+                color:
                   tripType === type.toLowerCase()
                     ? '#000'
-                    : colors.text, fontWeight:
-                    tripType === type.toLowerCase() ? 'bold' : 'normal',}
-              }>
+                    : colors.text,
+                fontWeight:
+                  tripType === type.toLowerCase() ? 'bold' : 'normal',
+              }}
+            >
               {type}
             </Text>
           </TouchableOpacity>
@@ -65,7 +68,7 @@ const FlightBooking = () => {
       </View>
 
       {/* Flight Input Form */}
-      <View style={[styles.form, {backgroundColor: colors.subbg}]}>
+      <View style={[styles.form, { backgroundColor: colors.subbg }]}>
         <View style={styles.inputRow}>
           <Icon
             name="airplane-takeoff"
@@ -75,7 +78,7 @@ const FlightBooking = () => {
           <TextInput
             placeholder="From"
             placeholderTextColor={colors.secondary}
-            style={[styles.input, {color: colors.text}]}
+            style={[styles.input, { color: colors.text }]}
           />
         </View>
         <View style={styles.inputRow}>
@@ -87,13 +90,14 @@ const FlightBooking = () => {
           <TextInput
             placeholder="To"
             placeholderTextColor={colors.secondary}
-            style={styles.input}
+            style={[styles.input, { color: colors.text }]}
           />
         </View>
         <TouchableOpacity
           activeOpacity={1}
           style={styles.inputRow}
-          onPress={() => setShowDatePicker(true)}>
+          onPress={() => setShowDatePicker(true)}
+        >
           <Icon
             name="calendar"
             size={responsiveFontSize(2.2)}
@@ -143,7 +147,6 @@ const FlightBooking = () => {
 const styles = StyleSheet.create({
   container: {
     padding: responsiveWidth(5),
-    backgroundColor: '#fff',
     flex: 1,
   },
   tripTypeContainer: {
@@ -156,23 +159,9 @@ const styles = StyleSheet.create({
     paddingVertical: responsiveHeight(1.5),
     borderRadius: responsiveWidth(2),
     marginHorizontal: responsiveWidth(1.2),
-    backgroundColor: '#eee',
     alignItems: 'center',
   },
-  tripTypeSelected: {
-    backgroundColor: '#f97316',
-  },
-  tripTypeText: {
-    color: '#333',
-    fontSize: responsiveFontSize(1.6),
-  },
-  tripTypeTextSelected: {
-    color: '#000',
-    fontWeight: 'bold',
-    fontSize: responsiveFontSize(1.6),
-  },
   form: {
-    backgroundColor: '#f9f9f9',
     borderRadius: responsiveWidth(3),
     padding: responsiveWidth(4),
   },

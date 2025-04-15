@@ -136,10 +136,14 @@ const SettingsScreen = () => {
   };
 
   return (
-    <ScrollView style={[styles.container, {backgroundColor:colors.bg}]} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={[styles.container, {backgroundColor: colors.bg}]}
+      showsVerticalScrollIndicator={false}>
       <View>
         {/* My Profile */}
-        <Text style={[styles.sectionTitle, {color:colors.text}]}>My Profile</Text>
+        <Text style={[styles.sectionTitle, {color: colors.text}]}>
+          My Profile
+        </Text>
         <TouchableOpacity
           style={styles.row}
           activeOpacity={1}
@@ -149,7 +153,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Personal Info</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Personal Info
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -167,7 +173,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Preferred Payment Method</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Preferred Payment Method
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -178,7 +186,10 @@ const SettingsScreen = () => {
         <View style={styles.divider} />
 
         {/* My Trips */}
-        <Text style={[styles.sectionTitle, {color:colors.text}]}>My Trips</Text>
+        <Text style={[styles.sectionTitle, {color: colors.text}]}>
+          My Trips
+        </Text>
+        {/* Hotel Bookings */}
         <TouchableOpacity
           style={styles.row}
           activeOpacity={1}
@@ -188,7 +199,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Hotel Bookings</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Hotel Bookings
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -206,7 +219,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Flight Bookings</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Flight Bookings
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -217,7 +232,9 @@ const SettingsScreen = () => {
         <View style={styles.divider} />
 
         {/* Settings */}
-        <Text style={[styles.sectionTitle, {color:colors.text}]}>Settings</Text>
+        <Text style={[styles.sectionTitle, {color: colors.text}]}>
+          Settings
+        </Text>
 
         {/* Appearance */}
         <TouchableOpacity
@@ -229,8 +246,10 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Theme</Text>
-          <Text style={[styles.statusText, {color:colors.text}]}>{getThemeLabel(theme)}</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>Theme</Text>
+          <Text style={[styles.statusText, {color: colors.text}]}>
+            {getThemeLabel(theme)}
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -248,8 +267,8 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Language</Text>
-          <Text style={[styles.statusText, {color:colors.text}]}>
+          <Text style={[styles.rowText, {color: colors.text}]}>Language</Text>
+          <Text style={[styles.statusText, {color: colors.text}]}>
             {getLanguageLabel(selectedLanguage)}
           </Text>
           <Icon
@@ -269,8 +288,8 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Currency</Text>
-          <Text style={[styles.statusText, {color:colors.text}]}>
+          <Text style={[styles.rowText, {color: colors.text}]}>Currency</Text>
+          <Text style={[styles.statusText, {color: colors.text}]}>
             {getCurrencyLabel(selectedCurrency)}
           </Text>
           <Icon
@@ -290,7 +309,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Notifications</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Notifications
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -308,7 +329,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color:colors.text}]}>Account & Security</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            Account & Security
+          </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
@@ -319,30 +342,40 @@ const SettingsScreen = () => {
         <View style={styles.divider} />
 
         {/* Help Center */}
-        <Text style={[styles.sectionTitle, {color:colors.text}]}>Help Center</Text>
+        <Text style={[styles.sectionTitle, {color: colors.text}]}>
+          Help Center
+        </Text>
 
         {/* FAQs */}
         <View style={styles.helpGrid}>
-          <TouchableOpacity style={[styles.helpItem, {backgroundColor:colors.subbg}]} activeOpacity={1}>
+          <TouchableOpacity
+            style={[styles.helpItem, {backgroundColor: colors.subbg}]}
+            activeOpacity={1}>
             <MaterialIcon
               name="help-circle-outline"
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color:colors.text}]}>FAQs</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>FAQs</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.helpItem, {backgroundColor:colors.subbg}]} activeOpacity={1}>
+          {/* Chat with Us */}
+          <TouchableOpacity
+            style={[styles.helpItem, {backgroundColor: colors.subbg}]}
+            activeOpacity={1} onPress={() => navigation.navigate('Talk To Us')}>
             <MaterialIcon
               name="chat-outline"
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color:colors.text}]}>Chat with Us</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>
+              Chat with Us
+            </Text>
           </TouchableOpacity>
 
+            {/* WhatsApp */}
           <TouchableOpacity
-            style={[styles.helpItem, {backgroundColor:colors.subbg}]}
+            style={[styles.helpItem, {backgroundColor: colors.subbg}]}
             onPress={() => Linking.openURL('https://wa.me/7823812240')}
             activeOpacity={1}>
             <FontAwesome
@@ -350,12 +383,17 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color="#25D366"
             />
-            <Text style={[styles.helpText, {color:colors.text}]}>WhatsApp</Text>
-            <Text style={[styles.phoneText, {color:colors.text}]}>+91 7823812240</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>
+              WhatsApp
+            </Text>
+            <Text style={[styles.phoneText, {color: colors.text}]}>
+              +91 7823812240
+            </Text>
           </TouchableOpacity>
-
+          
+          {/* Phone */}
           <TouchableOpacity
-            style={[styles.helpItem, {backgroundColor:colors.subbg}]}
+            style={[styles.helpItem, {backgroundColor: colors.subbg}]}
             onPress={() => Linking.openURL('tel:7823812240')}
             activeOpacity={1}>
             <MaterialIcon
@@ -363,8 +401,10 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color:colors.text}]}>CALL US</Text>
-            <Text style={[styles.phoneText, {color:colors.text}]}>+917823812240</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>CALL US</Text>
+            <Text style={[styles.phoneText, {color: colors.text}]}>
+              +917823812240
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -385,8 +425,10 @@ const SettingsScreen = () => {
           style={styles.modalOverlay}
           activeOpacity={1}
           onPressOut={() => setVisible(false)}>
-          <View style={[styles.modalContent, {backgroundColor:colors.bg}]}>
-            <Text style={[styles.modalTitle, {color:colors.text}]}>Choose Theme</Text>
+          <View style={[styles.modalContent, {backgroundColor: colors.bg}]}>
+            <Text style={[styles.modalTitle, {color: colors.text}]}>
+              Choose Theme
+            </Text>
 
             {themeOptions.map(item => {
               const isSelected = theme === item.id;
@@ -404,7 +446,8 @@ const SettingsScreen = () => {
                   <Text
                     style={[
                       styles.optionText,
-                      { color: isSelected ? '#f97316' : colors.text },,
+                      {color: isSelected ? '#f97316' : colors.text},
+                      ,
                     ]}>
                     {item.name}
                   </Text>
@@ -423,11 +466,13 @@ const SettingsScreen = () => {
       {/* Language Modal */}
       <Modal animationType="slide" transparent visible={languageModalVisible}>
         <TouchableOpacity
-          style={styles.modalOverlay}
+          style={[styles.modalOverlay, {backgroundColor: 'rgba(0,0,0,0.5)'}]}
           activeOpacity={1}
           onPress={() => setLanguageModalVisible(false)}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Choose Language</Text>
+          <View style={[styles.modalContent, {backgroundColor: colors.subbg}]}>
+            <Text style={[styles.modalTitle, {color: colors.text}]}>
+              Choose Language
+            </Text>
             {languageOptions.map(lang => {
               const isSelected = selectedLanguage === lang.id;
               return (
@@ -439,19 +484,19 @@ const SettingsScreen = () => {
                   <MaterialIcon
                     name={lang.icon}
                     size={responsiveFontSize(2.8)}
-                    color={isSelected ? '#f97316' : '#000'}
+                    color={isSelected ? '#f97316' : colors.icon}
                   />
                   <Text
                     style={[
                       styles.optionText,
-                      isSelected && {color: '#f97316'},
+                      {color: isSelected ? '#f97316' : colors.text},
                     ]}>
                     {lang.name}
                   </Text>
                   <MaterialIcon
                     name={isSelected ? 'radiobox-marked' : 'radiobox-blank'}
                     size={responsiveFontSize(2.8)}
-                    color={isSelected ? '#f97316' : '#000'}
+                    color={isSelected ? '#f97316' : colors.icon}
                   />
                 </TouchableOpacity>
               );
@@ -462,35 +507,42 @@ const SettingsScreen = () => {
 
       {/* Preferred Payment Method */}
       <Modal animationType="slide" transparent visible={selectedPayment}>
-        <View style={styles.fullscreenModal}>
+        <View
+          style={[
+            styles.fullscreenModal,
+            {backgroundColor: colors.background},
+          ]}>
           {/* Header */}
-          <View style={styles.header}>
+          <View style={[styles.header, {borderBottomColor: colors.border}]}>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => setSelectedPayment(false)}>
-              <Icon name="close" size={24} />
+              <Icon name="close" size={24} color={colors.icon} />
             </TouchableOpacity>
-            <Text style={styles.headerTitle}>Payment Methods</Text>
+            <Text style={[styles.headerTitle, {color: colors.text}]}>
+              Payment Methods
+            </Text>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => setSelectedPayment(false)}>
-              <Icon name="checkmark" size={24} />
+              <Icon name="checkmark" size={24} color={colors.icon} />
             </TouchableOpacity>
           </View>
 
           {/* Search Bar */}
-          <View style={styles.searchBar}>
-            <Icon name="search" size={20} color="#888" />
+          <View style={[styles.searchBar, {backgroundColor: colors.inputBg}]}>
+            <Icon name="search" size={20} color={colors.placeholder} />
             <TextInput
-              style={styles.searchInput}
+              style={[styles.searchInput, {color: colors.text}]}
               placeholder="Search payment type"
+              placeholderTextColor={colors.placeholder}
               value={searchText}
               onChangeText={setSearchText}
             />
           </View>
 
           {/* Info Text */}
-          <Text style={styles.infoText}>
+          <Text style={[styles.infoText, {color: colors.textLight}]}>
             By selecting one or more (max 10) payment types, prices on Wego will
             include applicable minimum payment fees. Please note that not all
             providers support all payment types.
@@ -517,17 +569,19 @@ const SettingsScreen = () => {
                           : 'checkbox-blank-outline'
                       }
                       size={22}
-                      color={isSelected ? '#f97316' : 'gray'}
+                      color={isSelected ? colors.primary : colors.placeholder}
                     />
-                    <Text style={styles.optionText}>{option.name}</Text>
-                    {/* <Image source={option.icon} style={styles.optionIcon} /> */}
+                    <Text style={[styles.optionText, {color: colors.text}]}>
+                      {option.name}
+                    </Text>
+                    {/* Optional icon if needed: <Image source={option.icon} style={styles.optionIcon} /> */}
                   </TouchableOpacity>
                 );
               })}
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => setShowMore(!showMore)}>
-              <Text style={styles.showMoreText}>
+              <Text style={[styles.showMoreText, {color: colors.link}]}>
                 {showMore ? 'Show less ▲' : 'Show more ▼'}
               </Text>
             </TouchableOpacity>
@@ -538,11 +592,13 @@ const SettingsScreen = () => {
       {/* Currency Modal */}
       <Modal animationType="slide" transparent visible={currencyModalVisible}>
         <TouchableOpacity
-          style={styles.modalOverlay}
+          style={[styles.modalOverlay, {backgroundColor: 'rgba(0,0,0,0.5)'}]}
           activeOpacity={1}
           onPress={() => setCurrencyModalVisible(false)}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Choose Currency</Text>
+          <View style={[styles.modalContent, {backgroundColor: colors.subbg}]}>
+            <Text style={[styles.modalTitle, {color: colors.text}]}>
+              Choose Currency
+            </Text>
             {currencyOptions.map(currency => {
               const isSelected = selectedCurrency === currency.id;
               return (
@@ -554,22 +610,17 @@ const SettingsScreen = () => {
                     setCurrencyModalVisible(false);
                   }}
                   activeOpacity={1}>
-                  {/* <MaterialIcon
-                    name="currency-usd"
-                    size={responsiveFontSize(2.8)}
-                    color={isSelected ? '#f97316' : '#000'}
-                  /> */}
                   <Text
                     style={[
                       styles.optionText,
-                      isSelected && {color: '#f97316'},
+                      {color: isSelected ? '#f97316' : colors.text},
                     ]}>
                     {currency.symbol} {currency.name}
                   </Text>
                   <MaterialIcon
                     name={isSelected ? 'radiobox-marked' : 'radiobox-blank'}
                     size={responsiveFontSize(2.8)}
-                    color={isSelected ? '#f97316' : '#000'}
+                    color={isSelected ? '#f97316' : colors.icon}
                   />
                 </TouchableOpacity>
               );
@@ -650,7 +701,7 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
   versionText: {
     textAlign: 'center',
