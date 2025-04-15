@@ -6,8 +6,10 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../../context/theme';
 
 const ExploreCategoryScreen = () => {
+  const{colors} = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
   const { category, image } = route.params;
@@ -20,10 +22,10 @@ const ExploreCategoryScreen = () => {
   }, [navigation, category]);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.bg }]}>
       <Image source={{ uri: image }} style={styles.image} />
-      <Text style={styles.title}>{category}</Text>
-      <Text style={styles.description}>
+      <Text style={[styles.title, {color:colors.text}]}>{category}</Text>
+      <Text style={[styles.description, {color:colors.secondary}]}>
         This screen shows destinations under the "{category}" category. You can
         list related destinations here.
       </Text>

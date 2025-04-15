@@ -25,6 +25,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../context/theme';
 
 
 const data = [
@@ -73,15 +74,16 @@ export default function Home() {
   const [guests, setGuests] = useState(2);
   const [rooms, setRooms] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
+  const {colors} = useTheme();
 
 
   const renderItem = ({item}) => (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => navigation.navigate('GemDetailScreen', {item})}
-      style={styles.card}>
+      style={[styles.card, {backgroundColor: colors.subbg}]}>
       <Image source={item.image} style={styles.image} />
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={[styles.title, {color:colors.text}]}>{item.title}</Text>
     </TouchableOpacity>
   );
 
@@ -117,19 +119,19 @@ export default function Home() {
       </ImageBackground>
 
       {/* Flights and Hotels Cards */}
-      <View style={styles.containerss}>
+      <View style={[styles.containerss]}>
         {cardsData.map((card, index) => (
           <TouchableOpacity
             activeOpacity={1}
             key={index}
-            style={[styles.cardss]}
+            style={[styles.cardss, {backgroundColor: colors.subbg}]}
             onPress={() => navigation.navigate(card.screen)}>
             <Image
               source={card.icon}
               style={[styles.iconss, {tintColor: '#f97316'}]}
               resizeMode="contain"
             />
-            <Text style={[styles.labelss]}>{card.label}</Text>
+            <Text style={[styles.labelss, {color: colors.text}]}>{card.label}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -138,7 +140,7 @@ export default function Home() {
 
       {/* Destination Input */}
       <View style={{paddingHorizontal: 15, marginTop: responsiveHeight(2)}}>
-        <View style={[styles.inputRow]}>
+        <View style={[styles.inputRow, {backgroundColor: colors.subbg}]}>
           <Icon
             name="search"
             size={responsiveFontSize(2)}
@@ -149,22 +151,22 @@ export default function Home() {
             placeholderTextColor="#888"
             value={destination}
             onChangeText={setDestination}
-            style={[styles.textInput]}
+            style={[styles.textInput, {color:colors.text}]}
           />
         </View>
 
         {/* Date Pickers */}
-        <View style={styles.dateRow}>
+        <View style={[styles.dateRow]}>
           <TouchableOpacity
-            style={styles.dateBox}
+            style={[styles.dateBox, {backgroundColor: colors.subbg}]}
             onPress={() => setShowCheckIn(true)}>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
               <View>
-                <Icon name="calendar-alt" size={responsiveFontSize(2.8)} />
+                <Icon name="calendar-alt" size={responsiveFontSize(2.8)} style={{color: colors.text}} />
               </View>
               <View style={{justifyContent: 'center'}}>
                 <Text style={styles.dateText}>Check in</Text>
-                <Text style={styles.dateValue}>
+                <Text style={[styles.dateValue, {color:colors.text}]}>
                   {checkInDate.toDateString()}
                 </Text>
               </View>
@@ -173,10 +175,10 @@ export default function Home() {
 
           <TouchableOpacity
             activeOpacity={1}
-            style={styles.dateBox}
+            style={[styles.dateBox, {backgroundColor: colors.subbg}]}
             onPress={() => setShowCheckOut(true)}>
             <Text style={styles.dateText}>Check out</Text>
-            <Text style={styles.dateValue}>{checkOutDate.toDateString()}</Text>
+            <Text style={[styles.dateValue, {color:colors.text}]}>{checkOutDate.toDateString()}</Text>
           </TouchableOpacity>
         </View>
 
@@ -208,7 +210,7 @@ export default function Home() {
         {/* Guests & Rooms */}
         <TouchableOpacity
           activeOpacity={1}
-          style={styles.inputRow}
+          style={[styles.inputRow, {backgroundColor: colors.subbg}]}
           onPress={() => setModalVisible(true)}>
           <Icon
             name="door-open"
@@ -217,49 +219,49 @@ export default function Home() {
           />
           <Text
             style={
-              styles.textInput
+              [styles.textInput, {color: colors.text}]
             }>{`${guests} Guests in ${rooms} Room`}</Text>
         </TouchableOpacity>
 
         <Modal visible={modalVisible} transparent animationType="slide">
           <View style={styles.modalContainer}>
-            <View style={styles.modalBox}>
-              <Text style={styles.modalTitle}>Guests & Rooms</Text>
+            <View style={[styles.modalBox, {backgroundColor: colors.bg}]}>
+              <Text style={[styles.modalTitle, {color:colors.text}]}>Guests & Rooms</Text>
 
               <View style={styles.counterRow}>
-                <Text style={styles.labelText}>Guests:</Text>
+                <Text style={[styles.labelText, {color:colors.text}]}>Guests:</Text>
                 <View style={styles.counter}>
                   <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={styles.counterButton}
+                    activeOpacity={1}
+                    style={[styles.counterButton, {backgroundColor:colors.button}]}
                     onPress={() => guests > 1 && setGuests(guests - 1)}>
-                    <Text style={styles.counterButtonText}>-</Text>
+                    <Text style={[styles.counterButtonText, {color:colors.text}]}>-</Text>
                   </TouchableOpacity>
-                  <Text style={styles.counterValue}>{guests}</Text>
+                  <Text style={[styles.counterValue, {color:colors.text}]}>{guests}</Text>
                   <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={styles.counterButton}
+                    activeOpacity={1}
+                    style={[styles.counterButton, {backgroundColor:colors.button}]}
                     onPress={() => setGuests(guests + 1)}>
-                    <Text style={styles.counterButtonText}>+</Text>
+                    <Text style={[styles.counterButtonText, {color:colors.text}]}>+</Text>
                   </TouchableOpacity>
                 </View>
               </View>
 
               <View style={styles.counterRow}>
-                <Text style={styles.labelText}>Rooms:</Text>
+                <Text style={[styles.labelText, {color:colors.text}]}>Rooms:</Text>
                 <View style={styles.counter}>
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    style={styles.counterButton}
+                    style={[styles.counterButton, {backgroundColor:colors.button}]}
                     onPress={() => rooms > 1 && setRooms(rooms - 1)}>
-                    <Text style={styles.counterButtonText}>-</Text>
+                    <Text style={[styles.counterButtonText, {color:colors.text}]}>-</Text>
                   </TouchableOpacity>
-                  <Text style={styles.counterValue}>{rooms}</Text>
+                  <Text style={[styles.counterValue, {color:colors.text}]}>{rooms}</Text>
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    style={styles.counterButton}
+                    style={[styles.counterButton, {backgroundColor:colors.button}]}
                     onPress={() => setRooms(rooms + 1)}>
-                    <Text style={styles.counterButtonText}>+</Text>
+                    <Text style={[styles.counterButtonText, {color:colors.text}]}>+</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -292,7 +294,7 @@ export default function Home() {
 
       {/* Hidden Gems Section */}
       <View style={styles.container}>
-        <Text style={styles.heading}>Hidden Gems</Text>
+        <Text style={[styles.heading, {color:colors.text}]}>Hidden Gems</Text>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -319,11 +321,12 @@ const styles = StyleSheet.create({
   card: {
     width: responsiveWidth(50),
     backgroundColor: '#fff',
-    borderRadius: 8,
-    marginRight: 16,
+    borderRadius: responsiveWidth(2),
+    marginRight: responsiveWidth(3),
+    marginBottom: responsiveHeight(2),
     overflow: 'hidden',
     borderColor: '#ddd',
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   image: {
     width: responsiveWidth(55),

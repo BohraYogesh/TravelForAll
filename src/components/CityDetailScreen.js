@@ -5,8 +5,10 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../context/theme';
 
 const CityDetailScreen = ({ route, navigation }) => {
+  const { colors } = useTheme();
   const { city, state, country, price, description, image } = route.params;
 
   // Set dynamic title in the header
@@ -17,7 +19,7 @@ const CityDetailScreen = ({ route, navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={{ uri: image }} style={styles.image} />
-      <Text style={styles.title}>
+      <Text style={[styles.title, { color: colors.text}]}>
         {city}{state ? `, ${state}` : ''}
       </Text>
       <Text style={styles.subtitle}>{country}</Text>

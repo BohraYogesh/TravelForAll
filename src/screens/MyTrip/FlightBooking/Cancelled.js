@@ -5,11 +5,13 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../../../context/theme';
 
 export default function Cancelled() {
+  const {colors} = useTheme();
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>No Cancelled Trips</Text>
+      <Text style={[styles.text, {color:colors.text}]}>No Cancelled Trips</Text>
       <Text style={styles.subtext}>Looks good! You don't have any cancelld booking yet.</Text>
     </View>
   );

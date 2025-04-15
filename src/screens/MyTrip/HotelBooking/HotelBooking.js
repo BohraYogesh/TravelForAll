@@ -14,8 +14,12 @@ import {
 import Upcoming from './Upcoming';
 import Past from './Past';
 import Cancelled from './Cancelled';
+import { useTheme } from '../../../context/theme';
+import { useNavigation } from '@react-navigation/native';
 
-export default function HotelBooking({navigation}) {
+export default function HotelBooking() {
+  const navigation = useNavigation();
+  const { colors } = useTheme();
   const [current, setCurrent] = useState('Upcoming');
 
   const tabs = [
@@ -25,8 +29,8 @@ export default function HotelBooking({navigation}) {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.tabContainer}>
+    <SafeAreaView style={[styles.container, {backgroundColor:colors.bg}]}>
+      <View style={[styles.tabContainer]}>
         {tabs.map(tab => (
           <TouchableOpacity
             activeOpacity={1}
@@ -57,7 +61,7 @@ export default function HotelBooking({navigation}) {
         style={styles.bottomButton}
         activeOpacity={1}
         onPress={() => navigation.navigate('Hotel')}>
-        <Text style={styles.bottomButtonText}>Book a room now</Text>
+        <Text style={styles.bottomButtonText}>Book a Room now</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

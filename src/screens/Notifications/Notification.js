@@ -12,25 +12,27 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTheme } from '../../context/theme';
 
 export default function Notification() {
+  const {colors} = useTheme();
   const [isEnabled, setIsEnabled] = useState(true);
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={[styles.container, {backgroundColor:colors.bg}]} showsVerticalScrollIndicator={false}>
       <View>
         <View style={styles.row}>
           <MaterialIcon
             name={isEnabled ? 'bell-ring' : 'bell-outline'}
             size={responsiveFontSize(3)}
-            color={isEnabled ? '#f97316' : '#000'}
+            color={isEnabled ? '#f97316' : colors.text}
           />
 
-          <Text style={styles.rowText}>Notification</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Notification</Text>
           <Switch
             trackColor={{false: '#ccc', true: '#fdba74'}}
             thumbColor={isEnabled ? '#f97316' : '#fff'}

@@ -15,6 +15,7 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import { useTheme } from '../../context/theme';
 
 const hotels = [
   {
@@ -65,6 +66,7 @@ const hotels = [
 ];
 
 const GemDetailScreen = () => {
+  const {colors} = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
   const {item} = route.params;
@@ -90,7 +92,7 @@ const GemDetailScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, {backgroundColor: colors.subbg}]}>
       {/* Header Image */}
       <View>
         <Image source={item.image} style={styles.headerImage} />
@@ -116,8 +118,8 @@ const GemDetailScreen = () => {
 
       {/* Title & Description */}
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>
+        <Text style={[styles.title, {color:colors.text}]}>{item.title}</Text>
+        <Text style={[styles.description, {color: colors.secondary}]}>
           {item.description ||
             'Experience the beauty and charm of this hidden gem. Explore scenic views, comfortable stays, and unforgettable memories.'}
         </Text>
@@ -125,14 +127,14 @@ const GemDetailScreen = () => {
 
       {/* Hotel List */}
       <View style={styles.hotelContainer}>
-        <Text style={styles.sectionTitle}>Places to stay</Text>
+        <Text style={[styles.sectionTitle, {color:colors.text}]}>Places to stay</Text>
 
         {hotels.map((hotel, index) => (
           <View style={styles.card} key={index}>
             <Image source={{uri: hotel.image}} style={styles.hotelImage} />
             <View style={styles.cardContent}>
-              <Text style={styles.hotelName}>{hotel.name}</Text>
-              <Text style={styles.location}>
+              <Text style={[styles.hotelName, {color:colors.text}]}>{hotel.name}</Text>
+              <Text style={[styles.location, {color: colors.secondary}]}>
                 <Icon name="location-outline" size={responsiveFontSize(1.8)} />{' '}
                 {hotel.location}
               </Text>
@@ -142,7 +144,7 @@ const GemDetailScreen = () => {
                 </View>
                 <View>
                   <Text style={styles.rating}> {hotel.status}</Text>
-                  <Text style={styles.ratinges}> {hotel.Reviews}</Text>
+                  <Text style={[styles.ratinges,{color: colors.secondary}]}> {hotel.Reviews}</Text>
                 </View>
               </View>
             </View>

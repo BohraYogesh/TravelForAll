@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Platform
+  Platform,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,8 +14,10 @@ import {
   responsiveHeight,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import {useTheme} from '../../context/theme';
 
 const FlightBooking = () => {
+  const {colors} = useTheme();
   const [tripType, setTripType] = useState('one-way');
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -25,32 +27,37 @@ const FlightBooking = () => {
     if (selectedDate) setDate(selectedDate);
   };
 
-  const formatDate = (dateObj) => {
-    const options = { weekday: 'short', day: '2-digit', month: 'short' };
+  const formatDate = dateObj => {
+    const options = {weekday: 'short', day: '2-digit', month: 'short'};
     return dateObj.toLocaleDateString('en-US', options);
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.bg}]}>
       {/* Trip Type Selection */}
       <View style={styles.tripTypeContainer}>
-        {['One-way', 'Round-trip', 'Multi-city'].map((type) => (
+        {['One-way', 'Round-trip', 'Multi-city'].map(type => (
           <TouchableOpacity
-          activeOpacity={1}
+            activeOpacity={1}
             key={type}
             style={[
               styles.tripTypeButton,
-              tripType === type.toLowerCase() && styles.tripTypeSelected,
+              {
+                backgroundColor:
+                  tripType === type.toLowerCase()
+                    ? '#f97316'
+                    : colors.subbg,
+              },
             ]}
-            onPress={() => setTripType(type.toLowerCase())}
-          >
+            onPress={() => setTripType(type.toLowerCase())}>
             <Text
               style={
-                tripType === type.toLowerCase()
-                  ? styles.tripTypeTextSelected
-                  : styles.tripTypeText
-              }
-            >
+                {color:
+                  tripType === type.toLowerCase()
+                    ? '#000'
+                    : colors.text, fontWeight:
+                    tripType === type.toLowerCase() ? 'bold' : 'normal',}
+              }>
               {type}
             </Text>
           </TouchableOpacity>
@@ -58,17 +65,40 @@ const FlightBooking = () => {
       </View>
 
       {/* Flight Input Form */}
-      <View style={styles.form}>
+      <View style={[styles.form, {backgroundColor: colors.subbg}]}>
         <View style={styles.inputRow}>
-          <Icon name="airplane-takeoff" size={responsiveFontSize(2.2)} />
-          <TextInput placeholder="From" style={styles.input} />
+          <Icon
+            name="airplane-takeoff"
+            size={responsiveFontSize(2.2)}
+            color={colors.text}
+          />
+          <TextInput
+            placeholder="From"
+            placeholderTextColor={colors.secondary}
+            style={[styles.input, {color: colors.text}]}
+          />
         </View>
         <View style={styles.inputRow}>
-          <Icon name="airplane-landing" size={responsiveFontSize(2.2)} />
-          <TextInput placeholder="To" style={styles.input} />
+          <Icon
+            name="airplane-landing"
+            size={responsiveFontSize(2.2)}
+            color={colors.text}
+          />
+          <TextInput
+            placeholder="To"
+            placeholderTextColor={colors.secondary}
+            style={styles.input}
+          />
         </View>
-        <TouchableOpacity activeOpacity={1} style={styles.inputRow} onPress={() => setShowDatePicker(true)}>
-          <Icon name="calendar" size={responsiveFontSize(2.2)} />
+        <TouchableOpacity
+          activeOpacity={1}
+          style={styles.inputRow}
+          onPress={() => setShowDatePicker(true)}>
+          <Icon
+            name="calendar"
+            size={responsiveFontSize(2.2)}
+            color={colors.text}
+          />
           <Text style={styles.inputText}>{formatDate(date)}</Text>
         </TouchableOpacity>
         {showDatePicker && (
@@ -81,14 +111,24 @@ const FlightBooking = () => {
           />
         )}
         <View style={styles.inputRow}>
-          <Icon name="account" size={responsiveFontSize(2.2)} />
+          <Icon
+            name="account"
+            size={responsiveFontSize(2.2)}
+            color={colors.text}
+          />
           <Text style={styles.inputText}>1 Adult · Economy</Text>
         </View>
 
         {/* Payment Types */}
         <View style={styles.paymentRow}>
-          <Icon name="credit-card-outline" size={responsiveFontSize(2.2)} />
-          <Text style={styles.paymentText}>Payment Types: Mastercard, Visa, UPI</Text>
+          <Icon
+            name="credit-card-outline"
+            size={responsiveFontSize(2.2)}
+            color={colors.text}
+          />
+          <Text style={styles.paymentText}>
+            Payment Types: Mastercard, Visa, UPI
+          </Text>
         </View>
       </View>
 

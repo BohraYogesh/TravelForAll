@@ -16,8 +16,10 @@ import {
 import popularindiacities from '../components/popular_indian_cities.json';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useTheme } from '../context/theme';
 
 export default function PopularDestination() {
+  const {colors} = useTheme();
   const navigation = useNavigation();
   const [search, setSearch] = useState('');
 
@@ -28,13 +30,13 @@ export default function PopularDestination() {
   return (
     <View style={{padding: responsiveWidth(4), flex: 1}}>
       {/* Search Bar */}
-      <View style={styles.inputRow}>
-        <Icon name="search" size={responsiveFontSize(2)} style={styles.icon} />
+      <View style={[styles.inputRow, {backgroundColor: colors.subbg}]}>
+        <Icon name="search" size={responsiveFontSize(2)} style={[styles.icon]} />
         <TextInput
           placeholder="Search city..."
           value={search}
           onChangeText={setSearch}
-          style={styles.textInput}
+          style={[styles.textInput, {color: colors.text}]}
           placeholderTextColor="#999"
         />
       </View>
@@ -52,7 +54,7 @@ export default function PopularDestination() {
           }}
           renderItem={({item}) => (
             <TouchableOpacity
-              style={styles.card}
+              style={[styles.card, {backgroundColor: colors.subbg}]}
               activeOpacity={1}
               onPress={() =>
                 navigation.navigate('CityDetail', {

@@ -5,11 +5,13 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../../../context/theme';
 
 export default function Past() {
+  const {colors} = useTheme();
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>No Past Trips</Text>
+      <Text style={[styles.text, {color:colors.text}]}>No Past Trips</Text>
       <Text style={styles.subtext}>Your past bookings will be shown here.</Text>
     </View>
   );

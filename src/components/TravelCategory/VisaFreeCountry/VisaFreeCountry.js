@@ -13,17 +13,19 @@ import {
 } from 'react-native-responsive-dimensions';
 import VisaFree from './VisaFree';
 import Visaon from './Visaon';
+import { useTheme } from '../../../context/theme';
 
 export default function VisaFreeCountry({navigation}) {
+  const { colors} = useTheme();
   const [current, setCurrent] = useState('VisaFree');
 
   const tabs = [
-    {key: 'VisaFree', label: 'VisaFree'},
-    {key: 'visaOn', label: 'visaOn'},
+    {key: 'VisaFree', label: 'Visa Free'},
+    {key: 'VisaOn', label: 'Visa On'},
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor: colors.bg}]}>
       <View style={styles.tabContainer}>
         {tabs.map(tab => (
           <TouchableOpacity
@@ -47,7 +49,7 @@ export default function VisaFreeCountry({navigation}) {
 
       <View style={styles.contentWrapper}>
         {current === 'VisaFree' && <VisaFree />}
-        {current === 'visaOn' && <Visaon />}
+        {current === 'VisaOn' && <Visaon />}
       </View>
     </SafeAreaView>
   );

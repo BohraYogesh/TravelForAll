@@ -14,6 +14,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
+import { useTheme } from '../../context/theme';
 
 const exploreData = [
   {
@@ -69,6 +70,7 @@ const exploreData = [
 ];
 
 const ExploreSection = () => {
+  const {colors} = useTheme();
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -80,8 +82,8 @@ const ExploreSection = () => {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Text style={styles.heading}>Explore</Text>
-        <Icon name="chevron-right" size={22} color="#000" />
+        <Text style={[styles.heading, {color:colors.text}]}>Explore</Text>
+        <Icon name="chevron-right" size={22} color={colors.secondary} />
       </TouchableOpacity>
       <FlatList
         data={exploreData}
@@ -116,7 +118,7 @@ const ExploreSection = () => {
             }
           }}
         >
-            <View style={styles.card}>
+            <View style={[styles.card, {backgroundColor: colors.subbg}]}>
               <View style={styles.imageGrid}>
                 <Image
                   source={{uri: item.images[0]}}
@@ -133,7 +135,9 @@ const ExploreSection = () => {
                   />
                 </View>
               </View>
-              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={[styles.cardTitle, {
+                color:colors.text
+              }]}>{item.title}</Text>
               <Text style={styles.subtitle}>
                 {item.destinations} Destinations from
               </Text>

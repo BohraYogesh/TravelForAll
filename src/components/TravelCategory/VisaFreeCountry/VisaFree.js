@@ -12,6 +12,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../../../context/theme';
 
 const visaFreeData = [
   {
@@ -37,6 +38,7 @@ const visaFreeData = [
 ];
 
 export default function VisaFreeScreen({ navigation }) {
+  const { colors} = useTheme();
   const renderCard = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
@@ -67,7 +69,7 @@ export default function VisaFreeScreen({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.bg}]}>
       <FlatList
         data={visaFreeData}
         renderItem={renderCard}

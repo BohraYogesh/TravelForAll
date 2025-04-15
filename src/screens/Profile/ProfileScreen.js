@@ -73,8 +73,8 @@ const currencyOptions = [
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
-  const [selectedTheme, setSelectedTheme] = useState('system');
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [selectedTheme, setSelectedTheme] = useState('system');
+  // const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const {theme, setTheme} = useTheme();
 
@@ -89,11 +89,6 @@ const SettingsScreen = () => {
   const [showMore, setShowMore] = useState(false);
   const [searchText, setSearchText] = useState('');
   const {colors} = useTheme();
-
-  // const handleThemeChange = mode => {
-  //   setSelectedTheme(mode);
-  //   setModalVisible(false);
-  // };
 
   const handleLanguageChange = lang => {
     setSelectedLanguage(lang);
@@ -141,10 +136,10 @@ const SettingsScreen = () => {
   };
 
   return (
-    <ScrollView style={[styles.container]} showsVerticalScrollIndicator={false}>
+    <ScrollView style={[styles.container, {backgroundColor:colors.bg}]} showsVerticalScrollIndicator={false}>
       <View>
         {/* My Profile */}
-        <Text style={styles.sectionTitle}>My Profile</Text>
+        <Text style={[styles.sectionTitle, {color:colors.text}]}>My Profile</Text>
         <TouchableOpacity
           style={styles.row}
           activeOpacity={1}
@@ -152,13 +147,13 @@ const SettingsScreen = () => {
           <Icon
             name="person-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Personal Info</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Personal Info</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
@@ -170,20 +165,20 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="credit-card-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Preferred Payment Method</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Preferred Payment Method</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
         <View style={styles.divider} />
 
         {/* My Trips */}
-        <Text style={styles.sectionTitle}>My Trips</Text>
+        <Text style={[styles.sectionTitle, {color:colors.text}]}>My Trips</Text>
         <TouchableOpacity
           style={styles.row}
           activeOpacity={1}
@@ -191,13 +186,13 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="notebook-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Hotel Bookings</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Hotel Bookings</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
@@ -209,20 +204,20 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="airplane"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Flight Bookings</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Flight Bookings</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
         <View style={styles.divider} />
 
         {/* Settings */}
-        <Text style={styles.sectionTitle}>Settings</Text>
+        <Text style={[styles.sectionTitle, {color:colors.text}]}>Settings</Text>
 
         {/* Appearance */}
         <TouchableOpacity
@@ -232,14 +227,14 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="theme-light-dark"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Theme</Text>
-          <Text style={styles.statusText}>{getThemeLabel(selectedTheme)}</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Theme</Text>
+          <Text style={[styles.statusText, {color:colors.text}]}>{getThemeLabel(theme)}</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
@@ -251,16 +246,16 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="translate"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Language</Text>
-          <Text style={styles.statusText}>
+          <Text style={[styles.rowText, {color:colors.text}]}>Language</Text>
+          <Text style={[styles.statusText, {color:colors.text}]}>
             {getLanguageLabel(selectedLanguage)}
           </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
@@ -272,16 +267,16 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="currency-usd"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Currency</Text>
-          <Text style={styles.statusText}>
+          <Text style={[styles.rowText, {color:colors.text}]}>Currency</Text>
+          <Text style={[styles.statusText, {color:colors.text}]}>
             {getCurrencyLabel(selectedCurrency)}
           </Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
@@ -293,13 +288,13 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="bell-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Notifications</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Notifications</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
@@ -311,43 +306,43 @@ const SettingsScreen = () => {
           <MaterialIcon
             name="shield-lock-outline"
             size={responsiveFontSize(3)}
-            color="#000"
+            color={colors.text}
           />
-          <Text style={styles.rowText}>Account & Security</Text>
+          <Text style={[styles.rowText, {color:colors.text}]}>Account & Security</Text>
           <Icon
             name="chevron-forward"
             size={responsiveFontSize(2.2)}
-            color="#000"
+            color={colors.text}
           />
         </TouchableOpacity>
 
         <View style={styles.divider} />
 
         {/* Help Center */}
-        <Text style={styles.sectionTitle}>Help Center</Text>
+        <Text style={[styles.sectionTitle, {color:colors.text}]}>Help Center</Text>
 
         {/* FAQs */}
         <View style={styles.helpGrid}>
-          <TouchableOpacity style={styles.helpItem} activeOpacity={1}>
+          <TouchableOpacity style={[styles.helpItem, {backgroundColor:colors.subbg}]} activeOpacity={1}>
             <MaterialIcon
               name="help-circle-outline"
               size={responsiveFontSize(3)}
-              color="#000"
+              color={colors.text}
             />
-            <Text style={styles.helpText}>FAQs</Text>
+            <Text style={[styles.helpText, {color:colors.text}]}>FAQs</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.helpItem} activeOpacity={1}>
+          <TouchableOpacity style={[styles.helpItem, {backgroundColor:colors.subbg}]} activeOpacity={1}>
             <MaterialIcon
               name="chat-outline"
               size={responsiveFontSize(3)}
-              color="#000"
+              color={colors.text}
             />
-            <Text style={styles.helpText}>Chat with Us</Text>
+            <Text style={[styles.helpText, {color:colors.text}]}>Chat with Us</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.helpItem}
+            style={[styles.helpItem, {backgroundColor:colors.subbg}]}
             onPress={() => Linking.openURL('https://wa.me/7823812240')}
             activeOpacity={1}>
             <FontAwesome
@@ -355,32 +350,32 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color="#25D366"
             />
-            <Text style={styles.helpText}>WhatsApp</Text>
-            <Text style={styles.phoneText}>+91 7823812240</Text>
+            <Text style={[styles.helpText, {color:colors.text}]}>WhatsApp</Text>
+            <Text style={[styles.phoneText, {color:colors.text}]}>+91 7823812240</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.helpItem}
+            style={[styles.helpItem, {backgroundColor:colors.subbg}]}
             onPress={() => Linking.openURL('tel:7823812240')}
             activeOpacity={1}>
             <MaterialIcon
               name="phone-in-talk-outline"
               size={responsiveFontSize(3)}
-              color="#000"
+              color={colors.text}
             />
-            <Text style={styles.helpText}>CALL US</Text>
-            <Text style={styles.phoneText}>+917823812240</Text>
+            <Text style={[styles.helpText, {color:colors.text}]}>CALL US</Text>
+            <Text style={[styles.phoneText, {color:colors.text}]}>+917823812240</Text>
           </TouchableOpacity>
         </View>
 
         {/* Logout */}
         <TouchableOpacity
-          style={styles.logoutBtn}
+          style={[styles.logoutBtn]}
           onPress={() =>
             Alert.alert('Logout', 'Are you sure you want to logout?')
           }
           activeOpacity={1}>
-          <Text style={styles.logoutText}>Logout</Text>
+          <Text style={[styles.logoutText]}>Logout</Text>
         </TouchableOpacity>
       </View>
 
@@ -390,8 +385,8 @@ const SettingsScreen = () => {
           style={styles.modalOverlay}
           activeOpacity={1}
           onPressOut={() => setVisible(false)}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Choose Theme</Text>
+          <View style={[styles.modalContent, {backgroundColor:colors.bg}]}>
+            <Text style={[styles.modalTitle, {color:colors.text}]}>Choose Theme</Text>
 
             {themeOptions.map(item => {
               const isSelected = theme === item.id;
@@ -404,19 +399,19 @@ const SettingsScreen = () => {
                   <MaterialIcon
                     name={item.icon}
                     size={responsiveFontSize(2.8)}
-                    color={isSelected ? '#f97316' : '#000'}
+                    color={isSelected ? '#f97316' : colors.text}
                   />
                   <Text
                     style={[
                       styles.optionText,
-                      isSelected && {color: '#f97316'},
+                      { color: isSelected ? '#f97316' : colors.text },,
                     ]}>
                     {item.name}
                   </Text>
                   <MaterialIcon
                     name={isSelected ? 'radiobox-marked' : 'radiobox-blank'}
                     size={responsiveFontSize(2.8)}
-                    color={isSelected ? '#f97316' : '#000'}
+                    color={isSelected ? '#f97316' : colors.text}
                   />
                 </TouchableOpacity>
               );
@@ -645,7 +640,7 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(0.5),
   },
   logoutBtn: {
-    backgroundColor: '#eee',
+    backgroundColor: '#065f56',
     padding: responsiveHeight(2),
     marginTop: responsiveHeight(2),
     borderRadius: 50,
@@ -655,6 +650,7 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
+    color: '#fff'
   },
   versionText: {
     textAlign: 'center',

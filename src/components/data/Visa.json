@@ -1,0 +1,146 @@
+{
+  "Visa-Free Countries": [
+    {
+      "city": "Kathmandu",
+      "state": "Bagmati",
+      "country": "Nepal",
+      "price": "₹21,577",
+      "description": "Capital city of Nepal known for mountains and temples",
+      "image": {
+        "uri": "https://www.andbeyond.com/wp-content/uploads/sites/5/nepal-village.jpg"
+      }
+    },
+    {
+      "city": "Doha",
+      "state": "Doha",
+      "country": "Qatar",
+      "price": "₹24,159",
+      "description": "Modern city with stunning architecture and museums",
+      "image": {
+        "uri": "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/555000/555257-qatar.jpg"
+      }
+    },
+    {
+      "city": "Bali",
+      "state": "Bali",
+      "country": "Indonesia",
+      "price": "₹26,541",
+      "description": "Island paradise known for beaches, temples and nightlife",
+      "image": {
+        "uri": "https://www.holidify.com/images/bgImages/BALI.jpg"
+      }
+    },
+    {
+      "city": "Port Louis",
+      "state": "Port Louis District",
+      "country": "Mauritius",
+      "price": "₹46,930",
+      "description": "Beautiful island with beaches, coral reefs and lagoons",
+      "image": {
+        "uri": "https://bigthink.com/wp-content/uploads/2022/02/1_8nBTmy5qQlhq-YhYsB4wzw.jpg"
+      }
+    },
+    {
+      "city": "Malé",
+      "state": "Kaafu Atoll",
+      "country": "Maldives",
+      "price": "₹39,000",
+      "description": "Popular for luxury resorts, crystal clear water, and scuba diving",
+      "image": {
+        "uri": "https://media.istockphoto.com/id/538010535/photo/maldivian-capital-from-above.jpg?s=612x612&w=0&k=20&c=d3S2dA405UKYQieCVkACNvTMbFYDBL9NYxyInFZqgac="
+      }
+    },
+    {
+      "city": "Seri Begawan",
+      "state": "Brunei-Muara",
+      "country": "Brunei",
+      "price": "₹41,350",
+      "description": "Capital with grand mosques and royal palace architecture",
+      "image": {
+        "uri": "https://media.istockphoto.com/id/613767294/photo/sultan-omar-ali-saifuddin-mosque-brunei.jpg?s=612x612&w=0&k=20&c=8lWZ2DQxazZe1DfZCeJm76QxIMvVk_OKCX7w89BVSgY="
+      }
+    },
+    {
+      "city": "Kingston",
+      "state": "Surrey County",
+      "country": "Jamaica",
+      "price": "₹55,200",
+      "description": "Island nation famous for beaches, music and laid-back vibes",
+      "image": {
+        "uri": "https://media.istockphoto.com/id/617375808/photo/city-of-kingston-ontario-canada-at-sunrise.jpg?s=612x612&w=0&k=20&c=RamidXDt2fnm_CgqxDZsL3pUydltapRFCJDlb0jRnp8="
+      }
+    },
+    {
+      "city": "Nairobi",
+      "state": "Nairobi County",
+      "country": "Kenya",
+      "price": "₹48,700",
+      "description": "Known for national parks and wildlife safaris",
+      "image": {
+        "uri": "https://thumbs.dreamstime.com/b/nairobi-city-county-kenya-s-capital-night-sunset-sunrise-cityscapes-skyscrapers-skyline-east-africa-landscapes-panoramic-scenic-356945340.jpg"
+      }
+    },
+    {
+      "city": "Singapore",
+      "state": "Central Region",
+      "country": "Singapore",
+      "price": "₹32,800",
+      "description": "Clean and modern city-state with gardens, malls and food",
+      "image": {
+        "uri": "https://plus.unsplash.com/premium_photo-1697730373939-3ebcaa9d295e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8fHww"
+      }
+    },
+    {
+      "city": "Bangkok",
+      "state": "Bangkok",
+      "country": "Thailand",
+      "price": "₹29,999",
+      "description": "Vibrant city with temples, nightlife and shopping",
+      "image": {
+        "uri": "https://media.istockphoto.com/id/1477016740/photo/wat-arun-temple-bangkok-during-sunset-in-thailand.jpg?s=612x612&w=0&k=20&c=5lcKk51cPycXKYpxRUFBXSK7nJr0MbUcuoLrCyrmwp0="
+      }
+    }
+  ],
+  "Visa-Required Countries": [
+    {
+      "city": "New York",
+      "state": "New York",
+      "country": "USA",
+      "price": "₹85,320",
+      "description": "Bustling city with skyscrapers and global influence",
+      "image": {
+        "uri": "https://www.gokitetours.com/wp-content/uploads/2023/12/Visit-USA.webp"
+      }
+    },
+    {
+      "city": "London",
+      "state": "England",
+      "country": "United Kingdom",
+      "price": "₹78,200",
+      "description": "Historic and modern capital known for Big Ben and royalty",
+      "image": {
+        "uri": "https://i.natgeofe.com/k/9413af87-986a-4d3a-9f9f-7436f1717578/Stonehenge_UK_KIDS_0223-crop.jpg?wp=1&w=1084.125&h=611.625"
+      }
+    },
+    {
+      "city": "Sydney",
+      "state": "New South Wales",
+      "country": "Australia",
+      "price": "₹92,150",
+      "description": "Harbor city with the Opera House and Bondi Beach",
+      "image": {
+        "uri": "https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb"
+      }
+    },
+    {
+      "city": "Vancouver",
+      "state": "British Columbia",
+      "country": "Canada",
+      "price": "₹88,000",
+      "description": "Scenic coastal city surrounded by mountains",
+      "image": {
+        "uri": "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/216000/216226-British-Columbia.jpg"
+      }
+    }
+  ]
+}

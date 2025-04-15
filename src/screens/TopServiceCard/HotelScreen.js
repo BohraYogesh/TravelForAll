@@ -15,8 +15,10 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useTheme } from '../../context/theme';
 
 const HotelScreen = () => {
+  const {colors} = useTheme();
   const [destination, setDestination] = useState('');
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
@@ -27,40 +29,41 @@ const HotelScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.bg}]}>
       {/* Destination Input */}
-      <View style={styles.inputRow}>
+      <View style={[styles.inputRow, {backgroundColor: colors.subbg}]}>
         <Icon name="search" size={responsiveFontSize(2)} style={styles.icon} />
         <TextInput
           placeholder="Destination"
+          placeholderTextColor={colors.secondary}
           value={destination}
           onChangeText={setDestination}
-          style={styles.textInput}
+          style={[styles.textInput, {color: colors.text}]}
         />
       </View>
 
       {/* Date Pickers */}
-      <View style={styles.dateRow}>
+      <View style={[styles.dateRow]}>
         <TouchableOpacity
-          style={styles.dateBox}
+          style={[styles.dateBox, {backgroundColor: colors.subbg}]}
           onPress={() => setShowCheckIn(true)}>
           <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
             <View>
-              <Icon name="calendar-alt" size={responsiveFontSize(2.8)} />
+              <Icon name="calendar-alt" size={responsiveFontSize(2.8)} color={colors.text}/>
             </View>
             <View style={{justifyContent: 'center'}}>
               <Text style={styles.dateText}>Check in</Text>
-              <Text style={styles.dateValue}>{checkInDate.toDateString()}</Text>
+              <Text style={[styles.dateValue, {color:colors.text}]}>{checkInDate.toDateString()}</Text>
             </View>
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity
           activeOpacity={1}
-          style={styles.dateBox}
+          style={[styles.dateBox, {backgroundColor: colors.subbg}]}
           onPress={() => setShowCheckOut(true)}>
-          <Text style={styles.dateText}>Check out</Text>
-          <Text style={styles.dateValue}>{checkOutDate.toDateString()}</Text>
+          <Text style={[styles.dateText]}>Check out</Text>
+          <Text style={[styles.dateValue, {color:colors.text}]}>{checkOutDate.toDateString()}</Text>
         </TouchableOpacity>
       </View>
 
@@ -92,56 +95,56 @@ const HotelScreen = () => {
       {/* Guests & Rooms */}
       <TouchableOpacity
         activeOpacity={1}
-        style={styles.inputRow}
+        style={[styles.inputRow, {backgroundColor: colors.subbg}]}
         onPress={() => setModalVisible(true)}>
         <Icon
           name="door-open"
           size={responsiveFontSize(2)}
-          style={styles.icon}
+          style={[styles.icon, {color: colors.text}]}
         />
         <Text
-          style={styles.textInput}>{`${guests} Guests in ${rooms} Room`}</Text>
+          style={[styles.textInput, {color:colors.text}]}>{`${guests} Guests in ${rooms} Room`}</Text>
       </TouchableOpacity>
 
       <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalBox}>
-            <Text style={styles.modalTitle}>Guests & Rooms</Text>
+        <View style={[styles.modalContainer]}>
+          <View style={[styles.modalBox, {backgroundColor:colors.bg}]}>
+            <Text style={[styles.modalTitle, {color:colors.text}]}>Guests & Rooms</Text>
 
             <View style={styles.counterRow}>
-              <Text style={styles.labelText}>Guests:</Text>
+              <Text style={[styles.labelText, {color:colors.text}]}>Guests:</Text>
               <View style={styles.counter}>
                 <TouchableOpacity
                 activeOpacity={0.8}
-                  style={styles.counterButton}
+                  style={[styles.counterButton, {backgroundColor:colors.button}]}
                   onPress={() => guests > 1 && setGuests(guests - 1)}>
-                  <Text style={styles.counterButtonText}>-</Text>
+                  <Text style={[styles.counterButtonText, {color:colors.text}]}>-</Text>
                 </TouchableOpacity>
-                <Text style={styles.counterValue}>{guests}</Text>
+                <Text style={[styles.counterValue, {color:colors.text}]}>{guests}</Text>
                 <TouchableOpacity
                 activeOpacity={0.8}
-                  style={styles.counterButton}
+                  style={[styles.counterButton, {backgroundColor:colors.button} ]}
                   onPress={() => setGuests(guests + 1)}>
-                  <Text style={styles.counterButtonText}>+</Text>
+                  <Text style={[styles.counterButtonText, {color:colors.text}]}>+</Text>
                 </TouchableOpacity>
               </View>
             </View>
 
             <View style={styles.counterRow}>
-              <Text style={styles.labelText}>Rooms:</Text>
+              <Text style={[styles.labelText, {color:colors.text}]}>Rooms:</Text>
               <View style={styles.counter}>
                 <TouchableOpacity
                 activeOpacity={0.8}
-                  style={styles.counterButton}
+                  style={[styles.counterButton, {backgroundColor:colors.button}]}
                   onPress={() => rooms > 1 && setRooms(rooms - 1)}>
-                  <Text style={styles.counterButtonText}>-</Text>
+                  <Text style={[styles.counterButtonText, {color:colors.text}]}>-</Text>
                 </TouchableOpacity>
-                <Text style={styles.counterValue}>{rooms}</Text>
+                <Text style={[styles.counterValue, {color:colors.text}]}>{rooms}</Text>
                 <TouchableOpacity
                 activeOpacity={0.8}
-                  style={styles.counterButton}
+                  style={[styles.counterButton, {backgroundColor:colors.button}]}
                   onPress={() => setRooms(rooms + 1)}>
-                  <Text style={styles.counterButtonText}>+</Text>
+                  <Text style={[styles.counterButtonText, {color:colors.text}]}>+</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -173,10 +176,12 @@ const styles = StyleSheet.create({
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F7F7F7',
-    borderRadius: responsiveWidth(10),
-    padding: responsiveWidth(3),
-    marginBottom: responsiveHeight(2),
+    backgroundColor: '#fff',
+    borderRadius: responsiveWidth(8),
+    paddingLeft: responsiveWidth(3),
+    paddingHorizontal: responsiveWidth(2),
+    marginBottom: responsiveHeight(1.5),
+    height: responsiveHeight(6),
   },
   icon: {
     marginRight: responsiveWidth(3),

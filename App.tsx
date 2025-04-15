@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ThemeProvider, useTheme } from './src/context/theme'; // ✅ THIS IS CORRECT
+import { ThemeProvider, useTheme } from './src/context/theme'; 
 
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
@@ -29,6 +29,8 @@ import PopularDestinationScreen from './src/screens/PopularDestinationScreen';
 import ExploreCategoryScreen from './src/components/TravelCategory/ExploreCategoryScreen';
 import VisaFreeCountry from './src/components/TravelCategory/VisaFreeCountry/VisaFreeCountry';
 import CityDetailScreen from './src/components/CityDetailScreen';
+import LoginScreen from './src/auth/LoginScreen';
+import SignupScreen from './src/auth/SignupScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -47,13 +49,13 @@ function HomeStack() {
 }
 
 function MainTabs() {
-  const { colors } = useTheme(); // ✅ get theme colors
+  const { colors } = useTheme(); 
 
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarStyle: { backgroundColor: colors.bg}, // ✅
+        tabBarStyle: { backgroundColor: colors.bg}, 
         tabBarIcon: ({ color, size, focused }) => {
           let iconName;
 
@@ -108,13 +110,15 @@ function AppStack() {
       <Stack.Screen name="ExploreCategoryScreen" component={ExploreCategoryScreen} />
       <Stack.Screen name="VisaFreeCountry" component={VisaFreeCountry} options={{ title: 'Visa Free Country' }} />
       <Stack.Screen name="CityDetail" component={CityDetailScreen} />
+      <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
+      <Stack.Screen name='SignUp' component={SignupScreen} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
 }
 
-// 👇 App component wrapped in ThemeProvider and using useTheme
+
 function MainApp() {
-  const { theme } = useTheme(); // ⬅️ get theme state
+  const { theme } = useTheme(); 
 
   return (
     <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -127,7 +131,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <ThemeProvider>
-        <MainApp /> {/* ✅ Use theme-aware NavigationContainer inside here */}
+        <MainApp /> 
       </ThemeProvider>
     </GestureHandlerRootView>
   );
