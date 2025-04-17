@@ -37,22 +37,12 @@ const visaRequiredData = [
   },
 ];
 
-export default function Visaon({ navigation }) {
+export default function Visaon() {
   const { colors} = useTheme();
   const renderCard = ({ item }) => (
     <TouchableOpacity
       activeOpacity={1}
-      style={styles.cardWrapper}
-      onPress={() =>
-        navigation.navigate('CityDetailScreen', {
-          city: item.country,
-          state: '',
-          country: item.country,
-          price: item.price,
-          description: 'Explore the beauty of ' + item.country,
-          image: item.image,
-        })
-      }>
+      style={styles.cardWrapper}>
       <ImageBackground
         source={{ uri: item.image }}
         style={styles.imageBackground}

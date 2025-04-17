@@ -14,23 +14,24 @@ import ExploreScreen from './src/screens/ExploreScreen';
 import FlightScreen from './src/screens/TopServiceCard/FlightScreen';
 import HotelScreen from './src/screens/TopServiceCard/HotelScreen';
 import ProfileInfoScreen from './src/screens/Profile/ProfileInfoScreen';
-import MyTripScreen from './src/screens/MyTripScreen';
-import Where2GoScreen from './src/screens/Where2GoScreen';
+import MyTripScreen from './src/screens/MyTripScreen/MyTripScreen';
+import Where2GoScreen from './src/screens/Where2GoScreen/Where2GoScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
-import TalkToUsScreen from './src/screens/TalkToUsScreen';
-import HotelBooking from './src/screens/MyTrip/HotelBooking/HotelBooking';
-import FlightBooking from './src/screens/MyTrip/FlightBooking/FlightBooking';
-import AccountSecurity from './src/screens/AccountSecurity/AccountSecurity';
-import Termsconditions from './src/screens/AccountSecurity/Terms&conditions';
-import Privacypolicy from './src/screens/AccountSecurity/Privacy&policy';
+import TalkToUsScreen from './src/screens/TalkToUsScreen/TalkToUsScreen';
+import HotelBooking from './src/screens/Profile/MyTrip/HotelBooking/HotelBooking';
+import FlightBooking from './src/screens/Profile/MyTrip/FlightBooking/FlightBooking';
+import AccountSecurity from './src/screens/Profile/AccountSecurity/AccountSecurity';
+import Termsconditions from './src/screens/Profile/AccountSecurity/Terms&conditions';
+import Privacypolicy from './src/screens/Profile/AccountSecurity/Privacy&policy';
 import GemDetailScreen from './src/screens/Home/GemDetailScreen';
-import Notification from './src/screens/Notifications/Notification';
+import Notification from './src/screens/Profile/Notifications/Notification';
 import PopularDestinationScreen from './src/screens/PopularDestinationScreen';
 import ExploreCategoryScreen from './src/components/TravelCategory/ExploreCategoryScreen';
 import VisaFreeCountry from './src/components/TravelCategory/VisaFreeCountry/VisaFreeCountry';
 import CityDetailScreen from './src/components/CityDetailScreen';
 import LoginScreen from './src/auth/LoginScreen';
 import SignupScreen from './src/auth/SignupScreen';
+import HotelDetailsScreen from './src/screens/Where2GoScreen/HotelDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -110,6 +111,7 @@ function AppStack() {
       <Stack.Screen name="ExploreCategoryScreen" component={ExploreCategoryScreen} />
       <Stack.Screen name="VisaFreeCountry" component={VisaFreeCountry} options={{ title: 'Visa Free Country' }} />
       <Stack.Screen name="CityDetail" component={CityDetailScreen} />
+      <Stack.Screen name='HotelDetails' component={HotelDetailsScreen}/>
       <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
       <Stack.Screen name='SignUp' component={SignupScreen} options={{ headerShown: false }}/>
     </Stack.Navigator>

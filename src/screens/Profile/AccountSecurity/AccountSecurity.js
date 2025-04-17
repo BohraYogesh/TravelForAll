@@ -13,7 +13,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {useTheme} from '../../context/theme'; 
+import {useTheme} from '../../../context/theme'; 
 
 export default function AccountSecurity() {
   const navigation = useNavigation();

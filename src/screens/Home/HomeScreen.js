@@ -158,6 +158,7 @@ export default function Home() {
         {/* Date Pickers */}
         <View style={[styles.dateRow]}>
           <TouchableOpacity
+          activeOpacity={1}
             style={[styles.dateBox, {backgroundColor: colors.subbg}]}
             onPress={() => setShowCheckIn(true)}>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>

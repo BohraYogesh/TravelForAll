@@ -376,7 +376,7 @@ const SettingsScreen = () => {
             {/* WhatsApp */}
           <TouchableOpacity
             style={[styles.helpItem, {backgroundColor: colors.subbg}]}
-            onPress={() => Linking.openURL('https://wa.me/7823812240')}
+            onPress={() => Linking.openURL('https://wa.me/9352642793')}
             activeOpacity={1}>
             <FontAwesome
               name="whatsapp"
@@ -387,14 +387,14 @@ const SettingsScreen = () => {
               WhatsApp
             </Text>
             <Text style={[styles.phoneText, {color: colors.text}]}>
-              +91 7823812240
+              +91 9352642793
             </Text>
           </TouchableOpacity>
           
           {/* Phone */}
           <TouchableOpacity
             style={[styles.helpItem, {backgroundColor: colors.subbg}]}
-            onPress={() => Linking.openURL('tel:7823812240')}
+            onPress={() => Linking.openURL('tel:9352642793')}
             activeOpacity={1}>
             <MaterialIcon
               name="phone-in-talk-outline"
@@ -403,7 +403,7 @@ const SettingsScreen = () => {
             />
             <Text style={[styles.helpText, {color: colors.text}]}>CALL US</Text>
             <Text style={[styles.phoneText, {color: colors.text}]}>
-              +917823812240
+              +919352642793
             </Text>
           </TouchableOpacity>
         </View>

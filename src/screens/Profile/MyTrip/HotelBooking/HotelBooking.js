@@ -14,7 +14,7 @@ import {
 import Upcoming from './Upcoming';
 import Past from './Past';
 import Cancelled from './Cancelled';
-import { useTheme } from '../../../context/theme';
+import { useTheme } from '../../../../context/theme';
 import { useNavigation } from '@react-navigation/native';
 
 export default function HotelBooking() {

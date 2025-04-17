@@ -5,7 +5,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../../context/theme';
+import { useTheme } from '../../../../context/theme';
 
 export default function Upcoming() {
   const { colors} = useTheme();

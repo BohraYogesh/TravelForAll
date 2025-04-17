@@ -1,0 +1,400 @@
+[
+  {
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "hotels": [
+      {
+        "name": "Taj Jai Mahal Palace",
+        "price": 10000,
+        "rating": 5.0,
+        "location": {
+          "city": "Jaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://www.luxurylifestylemag.co.uk/wp-content/uploads/2023/09/Taj-Jaipur.jpg"
+        }
+      },
+      {
+        "name": "ITC Rajputana",
+        "price": 8000,
+        "rating": 4.6,
+        "location": {
+          "city": "Jaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://www.itchotels.com/content/dam/itchotels/in/umbrella/itc/hotels/itcrajputana-jaipur/images/overview/headmast-desktop/Night-shot-poolside.jpg"
+        }
+      },
+      {
+        "name": "Hotel ABC",
+        "price": 2000,
+        "rating": 4.7,
+        "location": {
+          "city": "Jaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://q-xx.bstatic.com/xdata/images/hotel/max500/524680561.jpg?k=2e1e291ab61a7545e846e058d99b5fa19c6584927d16017281a2081e2655ab4a&o="
+        }
+      },
+      {
+        "name": "Hotel Jaipur Palace",
+        "price": 3500,
+        "rating": 4.3,
+        "location": {
+          "city": "Jaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://media.istockphoto.com/id/490555943/photo/indian-hotel-resort-evening-scene.jpg?s=612x612&w=0&k=20&c=Kdxdri8dOvSchwNXzV1uYQcXGAI8CD0BKSi7gkxPzKI="
+        }
+      },
+      {
+        "name": "Hotel XYZ",
+        "price": 1000,
+        "rating": 4.5,
+        "location": {
+          "city": "Jaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/480966785.jpg?k=f307a01d990e8db296a6099f2b72a563de14996645c512c9dc9ff10a6a944a57&o=&hp=1"
+        }
+      }
+    ]
+  },
+
+  {
+    "city": "Udaipur",
+    "state": "Rajasthan",
+    "hotels": [
+      {
+        "name": "The Oberoi Udaivilas",
+        "price": 12000,
+        "rating": 5.0,
+        "location": {
+          "city": "Udaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://www.oberoihotels.com/-/media/oberoi-hotels/website-images/The-Oberoi-Udaivilas-udaipur/Dining/detail/Restaurant-1.jpg?bc=White&h=407&w=724&extension=webp&hash=F6B009439215B8160540AD1801E58CAC"
+        }
+      },
+      {
+        "name": "Leela Palace Udaipur",
+        "price": 9500,
+        "rating": 4.8,
+        "location": {
+          "city": "Udaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://thumbs.dreamstime.com/b/lakefront-elegance-leela-palace-udaipur-asia-s-premier-luxury-destination-experience-epitome-lakeside-elegance-309539454.jpg"
+        }
+      },
+      {
+        "name": "Lake Pichola Hotel",
+        "price": 5000,
+        "rating": 4.7,
+        "location": {
+          "city": "Udaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://pix10.agoda.net/hotelImages/439/43937/43937_17040917500052252595.jpg?ca=6&ce=1&s=414x232&ar=16x9"
+        }
+      },
+      {
+        "name": "Jagat Niwas Palace",
+        "price": 3500,
+        "rating": 4.4,
+        "location": {
+          "city": "Udaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://daahy6akrtcj2.cloudfront.net/hotelsinudaipur.co.in/photos/1449199500.jpg"
+        }
+      },
+      {
+        "name": "Hotel 123",
+        "price": 1500,
+        "rating": 4.3,
+        "location": {
+          "city": "Udaipur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://media.istockphoto.com/id/514102692/photo/udaipur-city-palace-in-rajasthan-state-of-india.jpg?s=612x612&w=0&k=20&c=bYRDPOuf6nFgghl6VAnCn__22SFyu_atC_fiSCzVNtY="
+        }
+      }
+    ]
+  },
+  
+  {
+    "city": "Jodhpur",
+    "state": "Rajasthan",
+    "hotels": [
+      {
+        "name": "Umaid Bhawan Palace",
+        "price": 15000,
+        "rating": 5.0,
+        "location": {
+          "city": "Jodhpur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://media.istockphoto.com/id/106378672/photo/umaid-bhawan-palace.jpg?s=612x612&w=0&k=20&c=nE6g40Akll7B6z_kHb7PO5bAg8HtYzNhd1lYIQJGQ1A="
+        }
+      },
+      {
+        "name": "Taj Hari Mahal",
+        "price": 12000,
+        "rating": 4.9,
+        "location": {
+          "city": "Jodhpur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://www.capertravelindia.com/images/rajasthan-hotels-6.jpg"
+        }
+      },
+      {
+        "name": "Ratan Vilas",
+        "price": 6000,
+        "rating": 4.7,
+        "location": {
+          "city": "Jodhpur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://www.ratanvilas.com/wp-content/uploads/2024/04/Ratan-Vilas-day1_1323F.jpg"
+        }
+      },
+      {
+        "name": "Mandore Guest House",
+        "price": 2500,
+        "rating": 4.5,
+        "location": {
+          "city": "Jodhpur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://q-xx.bstatic.com/xdata/images/hotel/max500/605117031.jpg?k=f6bb04e94eb47a64e971e64ecdee84edbc5e6d9db8cb1daf80d46a9a16307872&o="
+        }
+      },
+      {
+        "name": "Ajit Bhawan",
+        "price": 8000,
+        "rating": 4.6,
+        "location": {
+          "city": "Jodhpur",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://r1imghtlak.mmtcdn.com/4858dfe6265d11eb8b190242ac110002.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "city": "Pushkar",
+    "state": "Rajasthan",
+    "hotels": [
+      {
+        "name": "The Westin Pushkar Resort & Spa",
+        "price": 9000,
+        "rating": 4.7,
+        "location": {
+        "city": "Pushkar",
+        "state": "Rajasthan"
+      },
+        "image": {
+          "uri": "https://cache.marriott.com/content/dam/marriott-renditions/JAIPU/jaipu-outdoor-pool-8664-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1200px:*"
+        }
+      },
+      {
+        "name": "Pushkar Palace",
+        "price": 3500,
+        "rating": 4.3,
+        "location": {
+          "city": "Pushkar",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://r1imghtlak.mmtcdn.com/d3ea54fd-c5fc-4018-b5a1-22456e299993.png"
+        }
+      },
+      {
+        "name": "Hotel Pushkar Fort",
+        "price": 4000,
+        "rating": 4.2,
+        "location": {
+          "city": "Pushkar",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/b1/d9/9c/regenta-resort-pushkar.jpg?w=900&h=500&s=1"
+        }
+      },
+      {
+        "name": "Ananta Spa & Resort",
+        "price": 8000,
+        "rating": 4.6,
+        "location": {
+          "city": "Pushkar",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/501478651.jpg?k=7b4d97568f14f39aaa1a147ad385c23a5f88f5ae9be965620d5f90e1cbc0b10b&o=&hp=1"
+        }
+      },
+      {
+        "name": "The Pushkar Bagh",
+        "price": 3000,
+        "rating": 4.1,
+        "location": {
+          "city": "Pushkar",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/d4/fd/00/caption.jpg?w=1200&h=-1&s=1"
+        }
+      }
+    ]
+  },
+  {
+    "city": "Bikaner",
+    "state": "Rajasthan",
+    "hotels": [
+      {
+        "name": "The Desert Resort",
+        "price": 7000,
+        "rating": 4.7,
+        "location": {
+          "city": "Bikaner",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cdn0.weddingwire.in/vendor/2461/3_2/960/jpg/overview-1_15_352461-160942549251265.webp"
+        }
+      },
+      {
+        "name": "Vesta Bikaner Palace",
+        "price": 8000,
+        "rating": 4.6,
+        "location": {
+          "city": "Bikaner",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42040700.jpg?k=102adaf902d7ec06912272f63f61d784c1ebc63e2a506ec54edb4ffa1a539244&o=&hp=1"
+        }
+      },
+      {
+        "name": "Karni Bhawan Palace",
+        "price": 6000,
+        "rating": 4.5,
+        "location": {
+          "city": "Bikaner",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/28/90/4a/karni-bhawan-palace.jpg?w=700&h=-1&s=1"
+        }
+      },
+      {
+        "name": "Laxmi Niwas Palace",
+        "price": 5000,
+        "rating": 4.4,
+        "location": {
+          "city": "Bikaner",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://www.seawatersports.com/images/places/laxmi-niwas-palace.png"
+        }
+      },
+      {
+        "name": "Heritage Resort",
+        "price": 4000,
+        "rating": 4.3,
+        "location": {
+          "city": "Bikaner",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/526906106.jpg?k=6113ef956c305caefc1939d5fcd6d19bdf70d597630e57a62a0a36d475138ce4&o=&hp=1"
+        }
+      }
+    ]
+  },
+  {
+    "city": "Jaisalmer",
+    "state": "Rajasthan",
+    "hotels": [
+      {
+        "name": "Suryagarh Jaisalmer",
+        "price": 12000,
+        "rating": 5.0,
+        "location": {
+          "city": "Jaisalmer",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://i0.wp.com/traveldiaryparnashree.com/wp-content/uploads/2018/12/Halwai-Breakfast.jpg?resize=800%2C534&ssl=1"
+        }
+      },
+      {
+        "name": "Hotel Garh Jaisal",
+        "price": 3500,
+        "rating": 4.2,
+        "location": {
+          "city": "Jaisalmer",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/51873811.jpg?k=0888fe08f22a8c388902de55241ee453466f38c6b543f0d05fc6b7c8fade3944&o=&hp=1"
+        }
+      },
+      {
+        "name": "Desert Palace Jaisalmer",
+        "price": 8000,
+        "rating": 4.5,
+        "location": {
+          "city": "Jaisalmer",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cdn0.weddingwire.in/vendor/6394/3_2/960/jpg/010_15_136394-157881768863543.jpeg"
+        }
+      },
+      {
+        "name": "The Golden House",
+        "price": 5000,
+        "rating": 4.4,
+        "location": {
+          "city": "Jaisalmer",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-r7YnppSm2lH_51AMBKd8mcHp0XXX4vcdng&sg"
+        }
+      },
+      {
+        "name": "Jaisalmer Marriott Resort & Spa",
+        "price": 15000,
+        "rating": 5.0,
+        "location": {
+          "city": "Jaisalmer",
+          "state": "Rajasthan"
+        },
+        "image": {
+          "uri": "https://cdn0.weddingwire.in/vendor/1018/3_2/960/jpg/01_15_131018.jpeg"
+        }
+      }
+    ]
+  }
+]

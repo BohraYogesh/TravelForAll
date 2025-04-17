@@ -5,14 +5,14 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../../context/theme';
+import { useTheme } from '../../../../context/theme';
 
-export default function Past() {
+export default function Cancelled() {
   const { colors} = useTheme();
   return (
     <View style={[styles.container, {backgroundColor: colors.bg}]}>
-      <Text style={[styles.text, {color:colors.text}]}>No Past Trips</Text>
-      <Text style={styles.subtext}>Your past bookings will be shown here.</Text>
+      <Text style={[styles.text, {color:colors.text}]}>No Cancelled Trips</Text>
+      <Text style={styles.subtext}>Looks good! You don't have any cancelld booking yet.</Text>
     </View>
   );
 }

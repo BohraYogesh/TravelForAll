@@ -3,9 +3,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
-import TalkToUsScreen from '../screens/TalkToUsScreen';
-import MyTripScreen from '../screens/MyTripScreen';
-import Where2GoScreen from '../screens/Where2GoScreen';
+import TalkToUsScreen from '../screens/TalkToUsScreen/TalkToUsScreen';
+import MyTripScreen from '../screens/MyTripScreen/MyTripScreen';
+import Where2GoScreen from '../screens/Where2GoScreen/Where2GoScreen';
 import HomeStackScreen from '../screens/HomeStackScreen'; // 👈 Stack integrated here
 
 const Tab = createBottomTabNavigator();

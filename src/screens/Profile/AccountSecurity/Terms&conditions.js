@@ -5,7 +5,7 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../context/theme'; 
+import { useTheme } from '../../../context/theme'; 
 
 export default function Termsconditions() {
   const { colors } = useTheme(); 

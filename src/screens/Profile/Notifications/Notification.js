@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 // import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTheme } from '../../context/theme';
+import { useTheme } from '../../../context/theme';
 
 export default function Notification() {
   const {colors} = useTheme();

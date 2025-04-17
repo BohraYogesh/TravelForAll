@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     backgroundColor: '#f97316',
-    paddingVertical: responsiveHeight(2),
+    paddingVertical: responsiveHeight(1.2), 
     borderRadius: responsiveWidth(10),
     marginTop: responsiveHeight(4),
     alignItems: 'center',
@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  
   modalContainer: {
     flex: 1,
     backgroundColor: '#000000aa',

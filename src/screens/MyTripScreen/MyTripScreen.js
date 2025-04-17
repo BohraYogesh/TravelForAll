@@ -11,9 +11,9 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import FlightBooking from '../screens/MyTrip/FlightBooking/FlightBooking';
-import HotelBooking from './MyTrip/HotelBooking/HotelBooking';
-import { useTheme } from '../context/theme';
+import FlightBooking from '../MyTripScreen/FlightBookingTrip';
+import HotelBooking from '../MyTripScreen/HotelBookingTrip';
+import { useTheme } from '../../context/theme';
 
 
 export default function MyTripScreen({navigation}) {
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // height: responsiveHeight(100)
   },
   // tabBox:{height: responsiveHeight(50)},
   tabContainer: {
