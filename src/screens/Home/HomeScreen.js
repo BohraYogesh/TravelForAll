@@ -136,7 +136,7 @@ export default function Home() {
         ))}
       </View>
 
-      {/* <TravelMenuGrid /> */}
+      <TravelMenuGrid />
 
       {/* Destination Input */}
       <View style={{paddingHorizontal: 15, marginTop: responsiveHeight(2)}}>

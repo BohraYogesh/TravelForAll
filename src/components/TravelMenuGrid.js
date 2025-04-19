@@ -12,45 +12,51 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-const numColumns = 3;
+// Theme hook
+import { useTheme } from '../context/theme';
 
-
-// Dummy icons – replace with actual icons
-// import FlightsIcon from '../../assets/flights.png';
-// import HotelsIcon from '../../assets/hotels.png';
+// Icon imports
 import VisaIcon from '../assets/mobile.png';
 import TrainIcon from '../assets/train.png';
 import EsimIcon from '../assets/mobile.png';
 import TaxiIcon from '../assets/car.png';
 import BusIcon from '../assets/bus.png';
+import HotelIcon from '../assets/hotel1.png';
 import WorkIcon from '../assets/aircraft.png';
 
+// Grid data
 const items = [
-  {label: 'Business Travel', icon: WorkIcon},
-  {label: 'e-Visa', icon: VisaIcon},
-  {label: 'Trains', icon: TrainIcon},
-  {label: 'eSIM', icon: EsimIcon},
-  {label: 'Airport Transfers', icon: TaxiIcon},
-  {label: 'Buses', icon: BusIcon},
+  { label: 'Flights', icon: WorkIcon },
+  { label: 'Hotels', icon: HotelIcon },
+  { label: 'Trains', icon: TrainIcon },
+  { label: 'Buses', icon: BusIcon },
+  { label: 'Cabs', icon: TaxiIcon },
+  { label: 'e-Visa', icon: VisaIcon },
+  { label: 'eSIM', icon: EsimIcon },
 ];
 
 const TravelMenuGrid = () => {
+  const { colors } = useTheme();
+
   return (
     <FlatList
       data={items}
       keyExtractor={(item, index) => index.toString()}
-      numColumns={numColumns}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.container}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <View style={styles.item}>
-          <View style={styles.iconWrapper}>
+          <View style={[styles.iconWrapper, { backgroundColor: '#FEECEB' }]}>
             <Image
               source={item.icon}
-              style={[styles.icon, {tintColor: '#f97316'}]}
+              style={[styles.icon, { tintColor:'#f97316' }]}
               resizeMode="contain"
             />
           </View>
-          <Text style={styles.label}>{item.label}</Text>
+          <Text style={[styles.label, { color: colors?.text || '#333' }]}>
+            {item.label}
+          </Text>
         </View>
       )}
     />
@@ -61,28 +67,25 @@ export default TravelMenuGrid;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
     paddingTop: 10,
-    alignItems: 'center',
   },
   item: {
     alignItems: 'center',
-    marginVertical: 14,
-    width: responsiveWidth(30),
+    // marginHorizontal: responsiveWidth(0.5),
+    width: responsiveWidth(25),
   },
   iconWrapper: {
-    backgroundColor: '#FEECEB',
-    padding: 16,
+    padding: responsiveWidth(2),
     borderRadius: 50,
     marginBottom: 8,
   },
   icon: {
-    width: 30,
-    height: 30,
+    width: responsiveWidth(8),
+    height: responsiveHeight(4),
   },
   label: {
-    fontSize: 13,
-    color: '#333',
+    fontSize: responsiveFontSize(1.5),
     textAlign: 'center',
   },
 });

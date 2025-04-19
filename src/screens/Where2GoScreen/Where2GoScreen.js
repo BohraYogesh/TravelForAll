@@ -57,7 +57,7 @@ const Where2GoHotelsScreen = () => {
           <Text style={styles.rating}>⭐ {item.rating}</Text>
           <TouchableOpacity
             activeOpacity={1}
-            style={[styles.button, { backgroundColor: colors.primary }]}
+            style={[styles.button, { backgroundColor: '#387c87' }]}
             onPress={() => navigation.navigate('HotelDetails', { hotel: item })}
           >
             <Text style={styles.buttonText}>Book Now</Text>
@@ -121,7 +121,7 @@ const Where2GoHotelsScreen = () => {
               styles.categoryButton,
               {
                 backgroundColor:
-                  selectedCity === city ? colors.primary : colors.card,
+                  selectedCity === city ? '#387c87' : colors.card,
                 borderColor: colors.border,
               },
             ]}

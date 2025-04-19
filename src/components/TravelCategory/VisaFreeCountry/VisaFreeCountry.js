@@ -20,8 +20,8 @@ export default function VisaFreeCountry({navigation}) {
   const [current, setCurrent] = useState('VisaFree');
 
   const tabs = [
-    {key: 'VisaFree', label: 'Visa Free'},
-    {key: 'VisaOn', label: 'Visa On'},
+    {key: 'VisaFree', label: 'Domestic'},
+    {key: 'VisaOn', label: 'International'},
   ];
 
   return (

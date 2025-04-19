@@ -7,15 +7,14 @@ import {
   FlatList,
   StyleSheet,
   Keyboard,
+  TouchableWithoutFeedback,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
-import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../../context/theme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export default function TalkToUsScreen() {
   const [messages, setMessages] = useState([
@@ -25,6 +24,7 @@ export default function TalkToUsScreen() {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const flatListRef = useRef();
+  const [keyboardVisible, setKeyboardVisible] = useState(false);  
 
   const handleNewChat = () => {
     setMessages([{ text: 'Hi! How can I assist you today?', sender: 'bot' }]);
@@ -32,19 +32,14 @@ export default function TalkToUsScreen() {
   };
 
   const responses = {
-    'hello': 'Hello! How can I assist you today?',
-    'hi': 'Hi there! What would you like to know?',
-    'hey': 'Hey! How can I help you?',
+    hello: 'Hello! How can I assist you today?',
+    hi: 'Hi there! What would you like to know?',
+    hey: 'Hey! How can I help you?',
     'thank you': 'You’re welcome!',
-    'thanks': 'Glad I could help!',
-    'tell me tourist places in rajasthan':
-      'Jaipur, Udaipur, Jodhpur, Jaisalmer, and Mount Abu are popular tourist destinations in Rajasthan.',
-    'what is famous in udaipur':
-      'City Palace, Lake Pichola, and Fateh Sagar Lake are famous attractions in Udaipur.',
-    'what food is famous in rajasthan':
-      'Dal Baati Churma, Gatte ki Sabzi, and Laal Maas are some of the most popular dishes in Rajasthan.',
-    'tell me about rajasthan history':
-      'Rajasthan has a rich Rajput history with legendary rulers like Maharana Pratap and Prithviraj Chauhan.',
+    thanks: 'Glad I could help!',
+    rajasthan: 'Rajasthan is known for its rich Rajput history, beautiful palaces, and desert landscapes. Some popular cities include Jaipur, Udaipur, Jodhpur, and Jaisalmer.',
+    pune: 'Pune is a vibrant city in Maharashtra, known for its historical landmarks, educational institutions, and pleasant weather. It is also called the "Oxford of the East."',
+    udaipur: 'Udaipur is a beautiful city in Rajasthan, famous for its stunning lakes, palaces, and temples. The City Palace and Lake Pichola are popular attractions here.',
   };
 
   const sendMessage = () => {
@@ -55,20 +50,26 @@ export default function TalkToUsScreen() {
     const lowerInput = input.toLowerCase().trim();
     setInput('');
 
-    const matchedQuestion = Object.keys(responses).find(q =>
+    
+    setMessages(prev => [...prev, { text: 'bot is typing...', sender: 'bot' }]);
+
+    
+    const matchedResponse = Object.keys(responses).find(q =>
       lowerInput.includes(q),
     );
 
-    if (matchedQuestion) {
-      const reply = responses[matchedQuestion];
-      setMessages(prev => [...prev, { text: reply, sender: 'bot' }]);
-    } else {
-      const fallback = {
-        text: "I'm not sure about that. Try asking something related to Rajasthan.",
-        sender: 'bot',
-      };
-      setMessages(prev => [...prev, fallback]);
-    }
+ 
+    setTimeout(() => {
+      const botResponse = matchedResponse
+        ? responses[matchedResponse]
+        : "I'm having trouble understanding that. Could you please try greeting me with 'Hi' or 'Hello'?";
+
+    
+      setMessages(prev => [
+        ...prev.filter(msg => msg.text !== 'bot is typing...'), 
+        { text: botResponse, sender: 'bot' },
+      ]);
+    }, 800);
   };
 
   const renderItem = ({ item }) => {
@@ -112,73 +113,90 @@ export default function TalkToUsScreen() {
   };
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      navigation.setOptions({ tabBarStyle: { display: 'none' } });
-    });
-
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      navigation.setOptions({ tabBarStyle: { display: 'flex' } });
-    });
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, [navigation]);
-
-  useEffect(() => {
     if (flatListRef.current) {
       flatListRef.current.scrollToEnd({ animated: true });
     }
-  }, [messages]);
+
+    // Monitor keyboard visibility changes
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true);
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false);
+      },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      {/* New Chat Button at Top */}
-      <View style={styles.newChatButtonContainer}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={handleNewChat}
-          style={[styles.newChatButton, { backgroundColor: colors.primary }]}>
-          <Text style={{ color: '#fff', fontSize: responsiveFontSize(1.8) }}>
-            New Chat
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
+          {/* Fixed Header and New Chat Button */}
+          <View style={styles.newChatButtonContainer}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={handleNewChat}
+              style={[styles.newChatButton, { backgroundColor: colors.primary }]}>
+              <Text style={{ color: '#fff', fontSize: responsiveFontSize(1.8) }}>
+                New Chat
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-      {/* Messages List */}
-      <FlatList
-        ref={flatListRef}
-        data={messages}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-        contentContainerStyle={styles.chatContainer}
-        showsVerticalScrollIndicator={false}
-        style={{ flex: 1 }}
-      />
+          {/* Scrollable Messages and Input */}
+          <ScrollView
+            contentContainerStyle={styles.scrollContainer}
+            style={{ flex: 1 }}
+            keyboardShouldPersistTaps="handled">
+            {/* Messages List */}
+            <FlatList
+              ref={flatListRef}
+              data={messages}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={renderItem}
+              showsVerticalScrollIndicator={false}
+              style={{ flex: 1 }}
+            />
 
-      {/* Input Box */}
-      <View style={[styles.inputContainer, { borderColor: colors.border }]}>
-        <TextInput
-          value={input}
-          onChangeText={setInput}
-          placeholder="Type a message..."
-          placeholderTextColor={colors.placeholder}
-          style={[
-            styles.input,
-            { color: colors.text, borderColor: colors.border },
-          ]}
-        />
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={sendMessage}
-          style={[styles.sendButton, { backgroundColor: '#097C70' }]}>
-          <Text style={{ color: '#fff', fontSize: responsiveFontSize(1.8) }}>
-            Send
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+            {/* Input Box */}
+            <View
+              style={[
+                styles.inputContainer,
+                {
+                  borderColor: colors.border,
+                  zIndex: keyboardVisible ? 10 : 0, // Set zIndex when keyboard is visible
+                },
+              ]}>
+              <TextInput
+                value={input}
+                onChangeText={setInput}
+                placeholder="Type a message..."
+                placeholderTextColor={colors.placeholder}
+                style={[styles.input, { color: colors.text, borderColor: colors.border }]}
+              />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={sendMessage}
+                style={[styles.sendButton, { backgroundColor: '#097C70' }]}>
+                <Text style={{ color: '#fff', fontSize: responsiveFontSize(1.8) }}>
+                  Send
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </View>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
   );
 }
 
@@ -188,7 +206,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(3),
     paddingTop: responsiveHeight(2),
   },
-  chatContainer: {
+  scrollContainer: {
+    flexGrow: 1,
     paddingBottom: responsiveHeight(2),
   },
   messageContainer: {

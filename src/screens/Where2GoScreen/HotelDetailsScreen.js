@@ -59,12 +59,12 @@ const HotelDetailsScreen = () => {
 
       {/* Bottom fixed footer */}
       <View style={[styles.footerBar, { backgroundColor: colors.card }]}>
-        <Text style={[styles.footerPrice, { color: colors.primary }]}>
+        <Text style={[styles.footerPrice, { color: '#387c87' }]}>
           ₹{hotel.price} / night
         </Text>
         <TouchableOpacity
         activeOpacity={1}
-          style={[styles.bookButton, { backgroundColor: colors.primary }]}
+          style={[styles.bookButton, { backgroundColor: '#387c87' }]}
           onPress={openModal}
         >
           <Text style={styles.bookButtonText}>Book Room</Text>

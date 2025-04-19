@@ -32,6 +32,10 @@ import CityDetailScreen from './src/components/CityDetailScreen';
 import LoginScreen from './src/auth/LoginScreen';
 import SignupScreen from './src/auth/SignupScreen';
 import HotelDetailsScreen from './src/screens/Where2GoScreen/HotelDetailsScreen';
+import DestinationDetails from './src/components/TravelCategory/VisaFreeCountry/DestinationDetails';
+import BookingDetails from './src/components/TravelCategory/VisaFreeCountry/BookingDetails';
+import PaymentDetails from './src/components/TravelCategory/VisaFreeCountry/PaymentDetails';
+import FinalPayment from './src/components/TravelCategory/FinalPayment';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -88,7 +92,7 @@ function MainTabs() {
       <Tab.Screen name="My Booking" component={MyTripScreen} />
       <Tab.Screen name="Where2Go" component={Where2GoScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Talk To Us" component={TalkToUsScreen} />
+      <Tab.Screen name="Talk To Us" component={TalkToUsScreen} options={{headerShown: true}}/>
     </Tab.Navigator>
   );
 }
@@ -112,6 +116,10 @@ function AppStack() {
       <Stack.Screen name="VisaFreeCountry" component={VisaFreeCountry} options={{ title: 'Visa Free Country' }} />
       <Stack.Screen name="CityDetail" component={CityDetailScreen} />
       <Stack.Screen name='HotelDetails' component={HotelDetailsScreen}/>
+      <Stack.Screen name='DescriptionDetails' component={DestinationDetails}/>
+      <Stack.Screen name='BookingDetails' component={BookingDetails}/>
+      <Stack.Screen name='PaymentDetails' component={PaymentDetails}/>
+      <Stack.Screen name='FinalPayment' component={FinalPayment}/>
       <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
       <Stack.Screen name='SignUp' component={SignupScreen} options={{ headerShown: false }}/>
     </Stack.Navigator>
