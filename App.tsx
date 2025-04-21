@@ -1,12 +1,18 @@
 import 'react-native-reanimated';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {StyleSheet} from 'react-native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ThemeProvider, useTheme } from './src/context/theme'; 
+import {ThemeProvider, useTheme} from './src/context/theme';
+import { Provider as PaperProvider } from 'react-native-paper';
+
 
 // Screens
 import HomeScreen from './src/screens/Home/HomeScreen';
@@ -46,7 +52,7 @@ function HomeStack() {
       <Stack.Screen
         name="HomeMain"
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen name="Explore" component={ExploreScreen} />
     </Stack.Navigator>
@@ -54,14 +60,14 @@ function HomeStack() {
 }
 
 function MainTabs() {
-  const { colors } = useTheme(); 
+  const {colors} = useTheme();
 
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         headerShown: false,
-        tabBarStyle: { backgroundColor: colors.bg}, 
-        tabBarIcon: ({ color, size, focused }) => {
+        tabBarStyle: {backgroundColor: colors.bg},
+        tabBarIcon: ({color, size, focused}) => {
           let iconName;
 
           switch (route.name) {
@@ -86,49 +92,114 @@ function MainTabs() {
         },
         tabBarActiveTintColor: '#F97316',
         tabBarInactiveTintColor: 'gray',
-      })}
-    >
+      })}>
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="My Booking" component={MyTripScreen} />
       <Tab.Screen name="Where2Go" component={Where2GoScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Talk To Us" component={TalkToUsScreen} options={{headerShown: true}}/>
+      <Tab.Screen
+        name="Talk To Us"
+        component={TalkToUsScreen}
+        options={{headerShown: true}}
+      />
     </Tab.Navigator>
   );
 }
 
 function AppStack() {
   return (
-    <Stack.Navigator screenOptions={{ animation: 'none' }}>
-      <Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
-      <Stack.Screen name="ProfileInfo" component={ProfileInfoScreen} options={{ title: 'Profile Info' }} />
-      <Stack.Screen name="HotelBooking" component={HotelBooking} options={{ title: 'Hotel Booking' }} />
-      <Stack.Screen name="FlightBooking" component={FlightBooking} options={{ title: 'Flight Booking' }} />
-      <Stack.Screen name="Flight" component={FlightScreen} options={{ title: 'Flight Search' }} />
-      <Stack.Screen name="Hotel" component={HotelScreen} options={{ title: 'Hotel Search' }} />
-      <Stack.Screen name="Account&Security" component={AccountSecurity} options={{ title: 'Account & Security' }} />
-      <Stack.Screen name="TermsAndConditions" component={Termsconditions} options={{ title: 'Terms & Conditions' }} />
-      <Stack.Screen name="Privacy" component={Privacypolicy} options={{ title: 'Privacy' }} />
-      <Stack.Screen name="GemDetailScreen" component={GemDetailScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Notification" component={Notification} options={{ title: 'Notification' }} />
-      <Stack.Screen name="PopulorDestination" component={PopularDestinationScreen} options={{ title: 'Popular Destination' }} />
-      <Stack.Screen name="ExploreCategoryScreen" component={ExploreCategoryScreen} />
-      <Stack.Screen name="VisaFreeCountry" component={VisaFreeCountry} options={{ title: 'Visa Free Country' }} />
+    <Stack.Navigator screenOptions={{animation: 'none'}}>
+      <Stack.Screen
+        name="MainTabs"
+        component={MainTabs}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ProfileInfo"
+        component={ProfileInfoScreen}
+        options={{title: 'Profile Info'}}
+      />
+      <Stack.Screen
+        name="HotelBooking"
+        component={HotelBooking}
+        options={{title: 'Hotel Booking'}}
+      />
+      <Stack.Screen
+        name="FlightBooking"
+        component={FlightBooking}
+        options={{title: 'Flight Booking'}}
+      />
+      <Stack.Screen
+        name="Flight"
+        component={FlightScreen}
+        options={{title: 'Flight Search'}}
+      />
+      <Stack.Screen
+        name="Hotel"
+        component={HotelScreen}
+        options={{title: 'Hotel Search'}}
+      />
+      <Stack.Screen
+        name="Account&Security"
+        component={AccountSecurity}
+        options={{title: 'Account & Security'}}
+      />
+      <Stack.Screen
+        name="TermsAndConditions"
+        component={Termsconditions}
+        options={{title: 'Terms & Conditions'}}
+      />
+      <Stack.Screen
+        name="Privacy"
+        component={Privacypolicy}
+        options={{title: 'Privacy'}}
+      />
+      <Stack.Screen
+        name="GemDetailScreen"
+        component={GemDetailScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{title: 'Notification'}}
+      />
+      <Stack.Screen
+        name="PopulorDestination"
+        component={PopularDestinationScreen}
+        options={{title: 'Popular Destination'}}
+      />
+      <Stack.Screen
+        name="ExploreCategoryScreen"
+        component={ExploreCategoryScreen}
+      />
+      <Stack.Screen
+        name="VisaFreeCountry"
+        component={VisaFreeCountry}
+        options={{title: 'Visa Free Country'}}
+      />
       <Stack.Screen name="CityDetail" component={CityDetailScreen} />
-      <Stack.Screen name='HotelDetails' component={HotelDetailsScreen}/>
-      <Stack.Screen name='DescriptionDetails' component={DestinationDetails}/>
-      <Stack.Screen name='BookingDetails' component={BookingDetails}/>
-      <Stack.Screen name='PaymentDetails' component={PaymentDetails}/>
-      <Stack.Screen name='FinalPayment' component={FinalPayment}/>
-      <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name='SignUp' component={SignupScreen} options={{ headerShown: false }}/>
+      <Stack.Screen name="HotelDetails" component={HotelDetailsScreen} />
+      <Stack.Screen name="DescriptionDetails" component={DestinationDetails} />
+      <Stack.Screen name="BookingDetails" component={BookingDetails} />
+      <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
+      <Stack.Screen name="FinalPayment" component={FinalPayment} />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignupScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }
 
-
 function MainApp() {
-  const { theme } = useTheme(); 
+  const {theme} = useTheme();
 
   return (
     <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -141,7 +212,9 @@ export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <ThemeProvider>
-        <MainApp /> 
+        <PaperProvider>
+          <MainApp />
+        </PaperProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

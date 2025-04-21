@@ -10,6 +10,7 @@ import {
   Modal,
   FlatList,
 } from 'react-native';
+
 import {
   responsiveHeight,
   responsiveWidth,
@@ -244,10 +245,9 @@ const CityDetailScreen = ({route, navigation}) => {
     };
 
     const travelerOptions = Array.from({length: 12}, (_, i) => i + 1);
-    const cleanPrice = parseInt(price.replace(/,/g, '')); 
+    const cleanPrice = parseInt(price.replace(/,/g, ''));
     const totalPrice = parseInt(travelers) * parseInt(cleanPrice);
     const formattedTotalPrice = totalPrice.toLocaleString();
-
 
     return (
       <View style={[styles.bookingCard, {backgroundColor: colors.card}]}>
@@ -301,22 +301,25 @@ const CityDetailScreen = ({route, navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        <Modal visible={showTravelerModal} transparent animationType="fade">
+        <Modal visible={showTravelerModal}  transparent animationType="fade">
           <TouchableOpacity
-            style={styles.modalOverlay}
+            activeOpacity={1}
+            style={[styles.modalOverlay, {backgroundColor: colors.subbg}]}
             onPress={() => setShowTravelerModal(false)}>
-            <View style={styles.modalContent}>
+            <View style={[styles.modalContent, {backgroundColor: colors.card}]}>
               <FlatList
                 data={travelerOptions}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={item => item.toString()}
                 renderItem={({item}) => (
                   <TouchableOpacity
+                    activeOpacity={1}
                     style={styles.optionItem}
                     onPress={() => {
                       setTravelers(item);
                       setShowTravelerModal(false);
                     }}>
-                    <Text style={styles.optionText}>
+                    <Text style={[styles.optionText, {color: colors.text}]}>
                       {item} Traveler{item > 1 ? 's' : ''}
                     </Text>
                   </TouchableOpacity>
@@ -352,11 +355,16 @@ const CityDetailScreen = ({route, navigation}) => {
         </View>
 
         {/* Actions */}
-        <TouchableOpacity style={styles.bookBtn}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            navigation.navigate('BookingDetails', {city: city});
+          }}
+          style={styles.bookBtn}>
           <Text style={styles.bookBtnText}>Book Now</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.wishlistBtn}>
+        <TouchableOpacity activeOpacity={1} style={styles.wishlistBtn}>
           <Feather name="heart" size={18} color={colors.text} />
           <Text style={[styles.wishlistText, {color: colors.text}]}>
             {' '}
@@ -537,6 +545,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
     paddingHorizontal: 20,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: '50%',
   },
   modalContent: {
     backgroundColor: '#fff',
