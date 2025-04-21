@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import {useTheme} from '../../../context/theme';
 import {
@@ -14,16 +15,45 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
 
+// Function to format numbers in Indian currency style
+const formatIndianCurrency = amount => {
+  const x = amount.toString();
+  const lastThree = x.substring(x.length - 3);
+  const otherNumbers = x.substring(0, x.length - 3);
+  return otherNumbers !== ''
+    ? otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
+    : lastThree;
+};
+
 export default function PaymentDetails({route}) {
   const navigation = useNavigation();
   const {colors} = useTheme();
   const {package: packageName, duration, travelers, amount} = route.params;
 
   const [expiry, setExpiry] = React.useState('');
+  const [cvv, setCvv] = React.useState('');
+  const [cardNumber, setCardNumber] = React.useState('');
+  const [cardholderName, setCardholderName] = React.useState('');
+  const [errors, setErrors] = React.useState({});
 
   // Calculate total amount
   const sanitizedAmount = amount.replace(/,/g, '');
   const totalAmount = parseInt(travelers) * parseInt(sanitizedAmount);
+
+  const handleCardNumberChange = text => {
+    let formatted = text.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
+    if (formatted.length > 4) {
+      formatted = formatted.slice(0, 4) + ' ' + formatted.slice(4);
+    }
+    if (formatted.length > 9) {
+      formatted = formatted.slice(0, 9) + ' ' + formatted.slice(9);
+    }
+    if (formatted.length > 14) {
+      formatted = formatted.slice(0, 14) + ' ' + formatted.slice(14);
+    }
+    setCardNumber(formatted.slice(0, 19)); // Limit to 16 digits with spaces
+    if (errors.cardNumber) setErrors({...errors, cardNumber: false}); // Reset error on change
+  };
 
   const handleExpiryChange = text => {
     let formatted = text.replace(/[^0-9]/g, '');
@@ -31,6 +61,39 @@ export default function PaymentDetails({route}) {
       formatted = formatted.slice(0, 2) + '/' + formatted.slice(2);
     }
     setExpiry(formatted.slice(0, 5));
+    if (errors.expiry) setErrors({...errors, expiry: false}); // Reset error on change
+  };
+
+  const handleCvvChange = text => {
+    setCvv(text.replace(/[^0-9]/g, '').slice(0, 4));  // Restrict to 4 digits max
+    if (errors.cvv) setErrors({...errors, cvv: false}); // Reset error on change
+  };
+
+  const handleCardholderNameChange = text => {
+    setCardholderName(text);
+    if (errors.cardholderName) setErrors({...errors, cardholderName: false}); // Reset error on change
+  };
+
+  const handleProceed = () => {
+    const newErrors = {};
+    if (!expiry.trim()) newErrors.expiry = true; // Check if expiry date is filled
+    if (!cvv.trim()) newErrors.cvv = true; // Check if CVV is filled
+    if (!cardNumber.trim()) newErrors.cardNumber = true; // Check if card number is filled
+    if (!cardholderName.trim()) newErrors.cardholderName = true; // Check if cardholder name is filled
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      Alert.alert('Missing Details', 'Please fill in all required fields.');
+      return;
+    }
+
+    navigation.navigate('FinalPayment', {
+      package: packageName,
+      duration,
+      travelers,
+      amount: totalAmount,
+    });
   };
 
   return (
@@ -55,11 +118,11 @@ export default function PaymentDetails({route}) {
           <Text style={{color: colors.text}}>{travelers}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={[styles.totalLabel, {color: colors.text}]}>
+          <Text style={[styles.totalLabel, {color: colors.text}]} >
             Total Amount:
           </Text>
-          <Text style={[styles.totalAmount, {color: colors.primary}]}>
-            ₹{totalAmount}
+          <Text style={[styles.totalAmount, {color: colors.primary}]} >
+            ₹ {formatIndianCurrency(totalAmount)}
           </Text>
         </View>
       </View>
@@ -69,8 +132,15 @@ export default function PaymentDetails({route}) {
       <TextInput
         placeholder="1234 5678 9012 3456"
         placeholderTextColor="#aaa"
-        style={[styles.input, {color: colors.text}]}
+        style={[
+          styles.input,
+          {color: colors.text},
+          errors.cardNumber && styles.errorInput, // Red border if error
+        ]}
         keyboardType="numeric"
+        maxLength={19} // Maximum length including spaces
+        onChangeText={handleCardNumberChange} // Use the handler for formatting
+        value={cardNumber} // Set the state variable for Card Number
       />
 
       {/* Expiry Date and CVV */}
@@ -80,7 +150,12 @@ export default function PaymentDetails({route}) {
           <TextInput
             placeholder="MM/YY"
             placeholderTextColor="#aaa"
-            style={[styles.input, styles.halfInput, {color: colors.text}]}
+            style={[
+              styles.input,
+              styles.halfInput,
+              errors.expiry && styles.errorInput, // Red border if error
+              {color: colors.text},
+            ]}
             keyboardType="numeric"
             maxLength={5}
             onChangeText={handleExpiryChange}
@@ -93,9 +168,16 @@ export default function PaymentDetails({route}) {
           <TextInput
             placeholder="CVV"
             placeholderTextColor="#aaa"
-            style={[styles.input, styles.halfInput, {color: colors.text}]}
+            style={[
+              styles.input,
+              styles.halfInput,
+              errors.cvv && styles.errorInput, // Red border if error
+              {color: colors.text},
+            ]}
             keyboardType="numeric"
             maxLength={4}
+            onChangeText={handleCvvChange}
+            value={cvv}
             secureTextEntry
           />
         </View>
@@ -106,21 +188,20 @@ export default function PaymentDetails({route}) {
       <TextInput
         placeholder="Enter your name"
         placeholderTextColor="#aaa"
-        style={[styles.input, {color: colors.text}]}
+        style={[
+          styles.input,
+          {color: colors.text},
+          errors.cardholderName && styles.errorInput, // Red border if error
+        ]}
+        value={cardholderName}
+        onChangeText={handleCardholderNameChange}
       />
 
       {/* Payment Button */}
       <TouchableOpacity
         activeOpacity={1}
         style={[styles.payButton, {backgroundColor: '#387c87'}]}
-        onPress={() =>
-          navigation.navigate('FinalPayment', {
-            package: packageName,
-            duration,
-            travelers,
-            amount: totalAmount,
-          })
-        }>
+        onPress={handleProceed}>
         <Text style={styles.payText}>Complete Payment</Text>
       </TouchableOpacity>
     </View>
@@ -176,10 +257,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(3),
     fontSize: responsiveFontSize(2),
     marginBottom: responsiveHeight(2),
-    color: '#000',
   },
   halfInput: {
     width: '100%',
+  },
+  errorInput: {
+    borderColor: 'red',
   },
   payButton: {
     paddingVertical: responsiveHeight(1.8),

@@ -8,6 +8,16 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
+// Format number to Indian currency format
+const formatIndianCurrency = amount => {
+  const x = amount.toString();
+  const lastThree = x.substring(x.length - 3);
+  const otherNumbers = x.substring(0, x.length - 3);
+  return otherNumbers !== ''
+    ? otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
+    : lastThree;
+};
+
 export default function FinalPayment({route}) {
   const navigation = useNavigation();
   const {colors} = useTheme();
@@ -36,14 +46,12 @@ export default function FinalPayment({route}) {
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
           Booking Summary
         </Text>
-        {[
-          ['Transaction ID:', transactionId],
+        {[['Transaction ID:', transactionId],
           ['Package:', packageName],
           ['Duration:', duration],
           ['Travelers:', travelers],
           ['Travel Date:', travelDate],
-          ['Booked by:', bookedBy],
-        ].map(([label, value], index) => (
+          ['Booked by:', bookedBy]].map(([label, value], index) => (
           <View style={styles.row} key={index}>
             <Text style={{color: colors.text}}>{label}</Text>
             <Text style={{color: colors.text}}>{value}</Text>
@@ -55,7 +63,7 @@ export default function FinalPayment({route}) {
             Total Amount:
           </Text>
           <Text style={[styles.totalAmount, {color: colors.primary}]}>
-            {amount}
+            ₹{formatIndianCurrency(amount)}
           </Text>
         </View>
       </View>

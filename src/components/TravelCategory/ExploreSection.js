@@ -18,17 +18,7 @@ import { useTheme } from '../../context/theme';
 
 const exploreData = [
   {
-    title: 'Popular Destinations',
-    destinations: 87,
-    price: '₹4,233',
-    images: [
-      'https://www.holidify.com/images/bgImages/ROME.jpg',
-      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
-      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg',
-    ],
-  },
-  {
-    title: 'Visa-free Countries',
+    title: 'Destinations',
     destinations: 60,
     price: '₹17,875',
     images: [
@@ -37,6 +27,17 @@ const exploreData = [
       'https://www.chaseforadventure.com/wp-content/uploads/2023/07/Things-to-do-in-Krabi.webp',
     ],
   },
+  {
+    title: 'Popular Packages',
+    destinations: 87,
+    price: '₹4,233',
+    images: [
+      'https://www.holidify.com/images/bgImages/ROME.jpg',
+      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
+      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg',
+    ],
+  },
+  
   {
     title: 'Weekend Getaways',
     destinations: 3,
@@ -94,12 +95,12 @@ const ExploreSection = () => {
           <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            if (item.title === 'Popular Destinations') {
+            if (item.title === 'Popular Packages') {
               navigation.navigate('PopulorDestination', {
                 category: item.title,
                 image: item.images[0],
               });
-            } else if (item.title === 'Visa-free Countries') {
+            } else if (item.title === 'Destinations') {
               navigation.navigate('VisaFreeCountry', {
                 category: item.title,
                 image: item.images[0],

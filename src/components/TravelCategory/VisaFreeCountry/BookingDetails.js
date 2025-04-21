@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,102 +6,158 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
+  Alert,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {useRoute} from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {useNavigation} from '@react-navigation/native';
-
-import {useTheme} from '../../../context/theme';
+import { useTheme } from '../../../context/theme';
 
 export default function BookingDetails() {
   const navigation = useNavigation();
-
   const route = useRoute();
-  const {description} = route.params || {}; // Add fallback in case description is undefined
-  const {colors} = useTheme();
+  const { description } = route.params || {};
+  const { colors } = useTheme();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [travelers, setTravelers] = useState('1');
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null); // Date is initially null
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const onChangeDate = (event, selectedDate) => {
     setShowDatePicker(false);
     if (selectedDate) {
       setDate(selectedDate);
+      if (errors.date) {
+        setErrors(prev => ({ ...prev, date: false })); // Remove error for date
+      }
     }
   };
 
-  const formattedDate = date.toLocaleDateString();
+  const formattedDate = date ? date.toLocaleDateString() : '';
+
+  const handleProceed = () => {
+    const newErrors = {};
+
+    // Validate fields
+    if (!fullName.trim()) newErrors.fullName = true;
+    if (!email.trim()) newErrors.email = true;
+    if (!date) newErrors.date = true;
+
+    // Validate travelers: ensure it's not empty and not less than 1
+    if (!travelers || parseInt(travelers) < 1) newErrors.travelers = true;
+
+    setErrors(newErrors);
+
+    // If there are validation errors, show an alert
+    if (Object.keys(newErrors).length > 0) {
+      Alert.alert('Missing Details', 'Please fill in all required fields.');
+      return;
+    }
+
+    navigation.navigate('PaymentDetails', {
+      package: description?.country || 'N/A',
+      duration: '5 days',
+      travelers,
+      amount: description?.price || '0',
+      travelDate: formattedDate,
+      bookedBy: fullName,
+    });
+  };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.bg}]}>
-      <Text style={[styles.heading, {color: colors.text}]}>
+    <View style={[styles.container, { backgroundColor: colors.bg }]}>
+      <Text style={[styles.heading, { color: colors.text }]}>
         Booking Details
       </Text>
 
       {/* Package Card */}
-      <View style={[styles.packageCard, {backgroundColor: colors.subbg}]}>
-        <Text style={[styles.packageTitle, {color: colors.text}]}>
+      <View style={[styles.packageCard, { backgroundColor: colors.subbg }]}>
+        <Text style={[styles.packageTitle, { color: colors.text }]}>
           {description?.country || 'No Country Available'}
         </Text>
-        {/* <Text style={styles.packageTitle}>
-          {description?.des || 'No Description Available'}
-        </Text> */}
-        <Text style={[styles.packageDays, {color: colors.text}]}>5 days</Text>
-        <Text style={[styles.packagePrice, {color: colors.primary}]}>
-        ₹ {description?.price || 'N/A'}
+        <Text style={[styles.packageDays, { color: colors.text }]}>5 days</Text>
+        <Text style={[styles.packagePrice, { color: colors.primary }]}>
+          ₹ {description?.price || 'N/A'}
         </Text>
       </View>
 
       {/* Input Fields */}
-      <Text style={[styles.label, {color: colors.text}]}>Full Name*</Text>
+      <Text style={[styles.label, { color: colors.text }]}>Full Name*</Text>
       <TextInput
         placeholder="Enter your name"
         placeholderTextColor="#aaa"
-        style={[styles.input, {color: colors.text}]}
+        style={[
+          styles.input,
+          { color: colors.text },
+          errors.fullName && styles.errorInput,
+        ]}
         value={fullName}
-        onChangeText={setFullName}
+        onChangeText={text => {
+          setFullName(text);
+          if (errors.fullName) setErrors(prev => ({ ...prev, fullName: false }));
+        }}
       />
 
-      <Text style={[styles.label, {color: colors.text}]}>Email Address*</Text>
+      <Text style={[styles.label, { color: colors.text }]}>Email Address*</Text>
       <TextInput
         placeholder="Enter your email"
         placeholderTextColor="#aaa"
-        style={[styles.input, {color: colors.text}]}
+        style={[
+          styles.input,
+          { color: colors.text },
+          errors.email && styles.errorInput,
+        ]}
         keyboardType="email-address"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={text => {
+          setEmail(text);
+          if (errors.email) setErrors(prev => ({ ...prev, email: false }));
+        }}
       />
 
-      <Text style={[styles.label, {color: colors.text}]}>
+      <Text style={[styles.label, { color: colors.text }]}>
         Number of Travelers
       </Text>
       <TextInput
         placeholder="1"
         placeholderTextColor="#aaa"
-        style={[styles.input, {color: colors.text}]}
+        style={[
+          styles.input,
+          { color: colors.text },
+          errors.travelers && styles.errorInput, // Add error style for travelers
+        ]}
         keyboardType="numeric"
         value={travelers}
-        onChangeText={setTravelers}
+        onChangeText={text => {
+          setTravelers(text);
+          if (errors.travelers) setErrors(prev => ({ ...prev, travelers: false }));
+        }}
       />
 
-      <Text style={[styles.label, {color: colors.text}]}>Travel Date*</Text>
+      <Text style={[styles.label, { color: colors.text }]}>Travel Date*</Text>
       <TouchableOpacity
+        activeOpacity={1}
         onPress={() => setShowDatePicker(true)}
-        style={styles.input}>
-        <Text style={{color: '#aaa'}}>{formattedDate}</Text>
+        style={[
+          styles.input,
+          errors.date && styles.errorInput, // Add error style for date
+        ]}
+      >
+        <Text style={{ color: '#aaa' }}>
+          {formattedDate || new Date().toLocaleDateString()}
+        </Text>
       </TouchableOpacity>
 
       {showDatePicker && (
         <DateTimePicker
-          value={date}
+          value={date || new Date()} // If date is null, default to today
           mode="date"
           display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           onChange={onChangeDate}
@@ -112,14 +168,8 @@ export default function BookingDetails() {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.paymentButton}
-        onPress={() => {
-          navigation.navigate('PaymentDetails', {
-            package: description?.country || 'N/A',
-            duration: '5 days',
-            travelers,
-            amount: description?.price || '0',
-          });
-        }}>
+        onPress={handleProceed}
+      >
         <Text style={styles.paymentText}>Proceed to Payment</Text>
       </TouchableOpacity>
     </View>
@@ -137,7 +187,6 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(2),
   },
   packageCard: {
-    backgroundColor: '#f8f4ff',
     padding: responsiveHeight(2),
     borderRadius: responsiveWidth(2),
     marginBottom: responsiveHeight(3),
@@ -152,7 +201,6 @@ const styles = StyleSheet.create({
   },
   packagePrice: {
     fontSize: responsiveFontSize(2.2),
-    color: 'purple',
     fontWeight: 'bold',
     marginTop: responsiveHeight(1),
   },
@@ -167,7 +215,9 @@ const styles = StyleSheet.create({
     padding: responsiveHeight(1.5),
     marginBottom: responsiveHeight(2),
     fontSize: responsiveFontSize(2),
-    color: '#000',
+  },
+  errorInput: {
+    borderColor: '#D22B2B',
   },
   paymentButton: {
     backgroundColor: '#387c87',
