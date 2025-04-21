@@ -42,6 +42,7 @@ import DestinationDetails from './src/components/TravelCategory/VisaFreeCountry/
 import BookingDetails from './src/components/TravelCategory/VisaFreeCountry/BookingDetails';
 import PaymentDetails from './src/components/TravelCategory/VisaFreeCountry/PaymentDetails';
 import FinalPayment from './src/components/TravelCategory/FinalPayment';
+import SearchScreen from './src/screens/Home/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -180,6 +181,7 @@ function AppStack() {
       />
       <Stack.Screen name="CityDetail" component={CityDetailScreen} />
       <Stack.Screen name="HotelDetails" component={HotelDetailsScreen} />
+      <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="DescriptionDetails" component={DestinationDetails} />
       <Stack.Screen name="BookingDetails" component={BookingDetails} />
       <Stack.Screen name="PaymentDetails" component={PaymentDetails} />

@@ -9,6 +9,7 @@ import {
   Platform,
   Modal,
   FlatList,
+  Alert
 } from 'react-native';
 
 import {
@@ -301,7 +302,7 @@ const CityDetailScreen = ({route, navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        <Modal visible={showTravelerModal}  transparent animationType="fade">
+        <Modal visible={showTravelerModal} transparent animationType="fade">
           <TouchableOpacity
             activeOpacity={1}
             style={[styles.modalOverlay, {backgroundColor: colors.subbg}]}
@@ -358,8 +359,17 @@ const CityDetailScreen = ({route, navigation}) => {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            navigation.navigate('BookingDetails', {city: city});
+            Alert.alert('Success', 'Booking Successful!');
           }}
+          // onPress={() => {
+          //   console.log('City:', city);
+          //   console.log('Price:', price);
+          //   navigation.navigate('BookingDetails', {
+          //     description,
+          //     city,
+          //     price,
+          //   });
+          // }}
           style={styles.bookBtn}>
           <Text style={styles.bookBtnText}>Book Now</Text>
         </TouchableOpacity>

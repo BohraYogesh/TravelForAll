@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,19 +9,22 @@ import {
   Alert,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../../context/theme';
+import {useTheme} from '../../../context/theme';
 
 export default function BookingDetails() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { description } = route.params || {};
-  const { colors } = useTheme();
+  const { city, price, description } = route.params || {};
+
+  console.log('City from params:', city);
+  console.log('Price from params:', price);
+  const {colors} = useTheme();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,7 +38,7 @@ export default function BookingDetails() {
     if (selectedDate) {
       setDate(selectedDate);
       if (errors.date) {
-        setErrors(prev => ({ ...prev, date: false })); // Remove error for date
+        setErrors(prev => ({...prev, date: false})); // Remove error for date
       }
     }
   };
@@ -72,57 +75,57 @@ export default function BookingDetails() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bg }]}>
-      <Text style={[styles.heading, { color: colors.text }]}>
+    <View style={[styles.container, {backgroundColor: colors.bg}]}>
+      <Text style={[styles.heading, {color: colors.text}]}>
         Booking Details
       </Text>
 
       {/* Package Card */}
-      <View style={[styles.packageCard, { backgroundColor: colors.subbg }]}>
-        <Text style={[styles.packageTitle, { color: colors.text }]}>
-          {description?.country || 'No Country Available'}
+      <View style={[styles.packageCard, {backgroundColor: colors.subbg}]}>
+        <Text style={[styles.packageTitle, {color: colors.text}]}>
+          {description?.country || city || 'No Country Available'}
         </Text>
-        <Text style={[styles.packageDays, { color: colors.text }]}>5 days</Text>
-        <Text style={[styles.packagePrice, { color: colors.primary }]}>
-          ₹ {description?.price || 'N/A'}
+        <Text style={[styles.packageDays, {color: colors.text}]}>5 days</Text>
+        <Text style={[styles.packagePrice, {color: colors.primary}]}>
+          ₹ {description?.price || price || 'N/A'}
         </Text>
       </View>
 
       {/* Input Fields */}
-      <Text style={[styles.label, { color: colors.text }]}>Full Name*</Text>
+      <Text style={[styles.label, {color: colors.text}]}>Full Name*</Text>
       <TextInput
         placeholder="Enter your name"
         placeholderTextColor="#aaa"
         style={[
           styles.input,
-          { color: colors.text },
+          {color: colors.text},
           errors.fullName && styles.errorInput,
         ]}
         value={fullName}
         onChangeText={text => {
           setFullName(text);
-          if (errors.fullName) setErrors(prev => ({ ...prev, fullName: false }));
+          if (errors.fullName) setErrors(prev => ({...prev, fullName: false}));
         }}
       />
 
-      <Text style={[styles.label, { color: colors.text }]}>Email Address*</Text>
+      <Text style={[styles.label, {color: colors.text}]}>Email Address*</Text>
       <TextInput
         placeholder="Enter your email"
         placeholderTextColor="#aaa"
         style={[
           styles.input,
-          { color: colors.text },
+          {color: colors.text},
           errors.email && styles.errorInput,
         ]}
         keyboardType="email-address"
         value={email}
         onChangeText={text => {
           setEmail(text);
-          if (errors.email) setErrors(prev => ({ ...prev, email: false }));
+          if (errors.email) setErrors(prev => ({...prev, email: false}));
         }}
       />
 
-      <Text style={[styles.label, { color: colors.text }]}>
+      <Text style={[styles.label, {color: colors.text}]}>
         Number of Travelers
       </Text>
       <TextInput
@@ -130,27 +133,27 @@ export default function BookingDetails() {
         placeholderTextColor="#aaa"
         style={[
           styles.input,
-          { color: colors.text },
+          {color: colors.text},
           errors.travelers && styles.errorInput, // Add error style for travelers
         ]}
         keyboardType="numeric"
         value={travelers}
         onChangeText={text => {
           setTravelers(text);
-          if (errors.travelers) setErrors(prev => ({ ...prev, travelers: false }));
+          if (errors.travelers)
+            setErrors(prev => ({...prev, travelers: false}));
         }}
       />
 
-      <Text style={[styles.label, { color: colors.text }]}>Travel Date*</Text>
+      <Text style={[styles.label, {color: colors.text}]}>Travel Date*</Text>
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => setShowDatePicker(true)}
         style={[
           styles.input,
           errors.date && styles.errorInput, // Add error style for date
-        ]}
-      >
-        <Text style={{ color: '#aaa' }}>
+        ]}>
+        <Text style={{color: '#aaa'}}>
           {formattedDate || new Date().toLocaleDateString()}
         </Text>
       </TouchableOpacity>
@@ -168,8 +171,7 @@ export default function BookingDetails() {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.paymentButton}
-        onPress={handleProceed}
-      >
+        onPress={handleProceed}>
         <Text style={styles.paymentText}>Proceed to Payment</Text>
       </TouchableOpacity>
     </View>

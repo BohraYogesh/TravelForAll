@@ -279,7 +279,7 @@ export default function Home() {
 
         {/* Search Button */}
         <View style={{alignItems: 'center'}}>
-          <TouchableOpacity activeOpacity={1} style={styles.searchButton}>
+          <TouchableOpacity onPress={() => navigation.navigate('SearchScreen')} activeOpacity={1} style={styles.searchButton}>
             <Icon
               name="search"
               size={responsiveFontSize(2)}
