@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   Platform,
   ActivityIndicator,
 } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -16,7 +16,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../context/theme';
+import {useTheme} from '../../context/theme';
 
 const SearchScreen = () => {
   const route = useRoute();
@@ -27,10 +27,14 @@ const SearchScreen = () => {
     rooms: paramRooms,
   } = route.params || {};
 
-  const { colors } = useTheme();
+  const {colors} = useTheme();
 
-  const [checkInDate, setCheckInDate] = useState(paramCheckIn ? new Date(paramCheckIn) : new Date());
-  const [checkOutDate, setCheckOutDate] = useState(paramCheckOut ? new Date(paramCheckOut) : new Date());
+  const [checkInDate, setCheckInDate] = useState(
+    paramCheckIn ? new Date(paramCheckIn) : new Date(),
+  );
+  const [checkOutDate, setCheckOutDate] = useState(
+    paramCheckOut ? new Date(paramCheckOut) : new Date(),
+  );
   const [guests, setGuests] = useState(paramGuests || 1);
   const [rooms, setRooms] = useState(paramRooms || 1);
   const [showCheckIn, setShowCheckIn] = useState(false);
@@ -46,20 +50,23 @@ const SearchScreen = () => {
   }, []);
 
   return (
-    <View style={{ padding: responsiveWidth(5) }}>
+    <View style={{padding: responsiveWidth(5)}}>
       {/* Date Row */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         {/* Check In */}
         <TouchableOpacity
           activeOpacity={1}
-          style={[styles.dateBox, { backgroundColor: colors.subbg }]}
-          onPress={() => setShowCheckIn(true)}
-        >
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-            <Icon name="calendar-alt" size={responsiveFontSize(2.8)} color={colors.text} />
+          style={[styles.dateBox, {backgroundColor: colors.subbg}]}
+          onPress={() => setShowCheckIn(true)}>
+          <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+            <Icon
+              name="calendar-alt"
+              size={responsiveFontSize(2.8)}
+              color={colors.text}
+            />
             <View>
               <Text style={styles.dateText}>Check in</Text>
-              <Text style={[styles.dateValue, { color: colors.text }]}>
+              <Text style={[styles.dateValue, {color: colors.text}]}>
                 {checkInDate.toDateString()}
               </Text>
             </View>
@@ -69,11 +76,10 @@ const SearchScreen = () => {
         {/* Check Out */}
         <TouchableOpacity
           activeOpacity={1}
-          style={[styles.dateBox, { backgroundColor: colors.subbg }]}
-          onPress={() => setShowCheckOut(true)}
-        >
+          style={[styles.dateBox, {backgroundColor: colors.subbg}]}
+          onPress={() => setShowCheckOut(true)}>
           <Text style={styles.dateText}>Check out</Text>
-          <Text style={[styles.dateValue, { color: colors.text }]}>
+          <Text style={[styles.dateValue, {color: colors.text}]}>
             {checkOutDate.toDateString()}
           </Text>
         </TouchableOpacity>
@@ -108,11 +114,14 @@ const SearchScreen = () => {
       {/* Guests & Rooms */}
       <TouchableOpacity
         activeOpacity={1}
-        style={[styles.inputRow, { backgroundColor: colors.subbg }]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Icon name="door-open" size={responsiveFontSize(2)} style={styles.icon} />
-        <Text style={[styles.textInput, { color: colors.text }]}>
+        style={[styles.inputRow, {backgroundColor: colors.subbg}]}
+        onPress={() => setModalVisible(true)}>
+        <Icon
+          name="door-open"
+          size={responsiveFontSize(2)}
+          style={styles.icon}
+        />
+        <Text style={[styles.textInput, {color: colors.text}]}>
           {`${guests} Guests in ${rooms} Room`}
         </Text>
       </TouchableOpacity>
@@ -120,45 +129,75 @@ const SearchScreen = () => {
       {/* Guests/Rooms Modal */}
       <Modal visible={modalVisible} transparent animationType="slide">
         <View style={styles.modalContainer}>
-          <View style={[styles.modalBox, { backgroundColor: colors.bg }]}>
-            <Text style={[styles.modalTitle, { color: colors.text }]}>Guests & Rooms</Text>
+          <View style={[styles.modalBox, {backgroundColor: colors.bg}]}>
+            <Text style={[styles.modalTitle, {color: colors.text}]}>
+              Guests & Rooms
+            </Text>
 
             {/* Guests Counter */}
             <View style={styles.counterRow}>
-              <Text style={[styles.labelText, { color: colors.text }]}>Guests:</Text>
+              <Text style={[styles.labelText, {color: colors.text}]}>
+                Guests:
+              </Text>
               <View style={styles.counter}>
                 <TouchableOpacity
-                  style={[styles.counterButton, { backgroundColor: colors.button }]}
-                  onPress={() => guests > 1 && setGuests(guests - 1)}
-                >
-                  <Text style={[styles.counterButtonText, { color: colors.text }]}>-</Text>
+                  style={[
+                    styles.counterButton,
+                    {backgroundColor: colors.button},
+                  ]}
+                  onPress={() => guests > 1 && setGuests(guests - 1)}>
+                  <Text
+                    style={[styles.counterButtonText, {color: colors.text}]}>
+                    -
+                  </Text>
                 </TouchableOpacity>
-                <Text style={[styles.counterValue, { color: colors.text }]}>{guests}</Text>
+                <Text style={[styles.counterValue, {color: colors.text}]}>
+                  {guests}
+                </Text>
                 <TouchableOpacity
-                  style={[styles.counterButton, { backgroundColor: colors.button }]}
-                  onPress={() => setGuests(guests + 1)}
-                >
-                  <Text style={[styles.counterButtonText, { color: colors.text }]}>+</Text>
+                  style={[
+                    styles.counterButton,
+                    {backgroundColor: colors.button},
+                  ]}
+                  onPress={() => setGuests(guests + 1)}>
+                  <Text
+                    style={[styles.counterButtonText, {color: colors.text}]}>
+                    +
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
 
             {/* Rooms Counter */}
             <View style={styles.counterRow}>
-              <Text style={[styles.labelText, { color: colors.text }]}>Rooms:</Text>
+              <Text style={[styles.labelText, {color: colors.text}]}>
+                Rooms:
+              </Text>
               <View style={styles.counter}>
                 <TouchableOpacity
-                  style={[styles.counterButton, { backgroundColor: colors.button }]}
-                  onPress={() => rooms > 1 && setRooms(rooms - 1)}
-                >
-                  <Text style={[styles.counterButtonText, { color: colors.text }]}>-</Text>
+                  style={[
+                    styles.counterButton,
+                    {backgroundColor: colors.button},
+                  ]}
+                  onPress={() => rooms > 1 && setRooms(rooms - 1)}>
+                  <Text
+                    style={[styles.counterButtonText, {color: colors.text}]}>
+                    -
+                  </Text>
                 </TouchableOpacity>
-                <Text style={[styles.counterValue, { color: colors.text }]}>{rooms}</Text>
+                <Text style={[styles.counterValue, {color: colors.text}]}>
+                  {rooms}
+                </Text>
                 <TouchableOpacity
-                  style={[styles.counterButton, { backgroundColor: colors.button }]}
-                  onPress={() => setRooms(rooms + 1)}
-                >
-                  <Text style={[styles.counterButtonText, { color: colors.text }]}>+</Text>
+                  style={[
+                    styles.counterButton,
+                    {backgroundColor: colors.button},
+                  ]}
+                  onPress={() => setRooms(rooms + 1)}>
+                  <Text
+                    style={[styles.counterButtonText, {color: colors.text}]}>
+                    +
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -166,8 +205,7 @@ const SearchScreen = () => {
             <TouchableOpacity
               activeOpacity={1}
               style={styles.doneButton}
-              onPress={() => setModalVisible(false)}
-            >
+              onPress={() => setModalVisible(false)}>
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
           </View>
