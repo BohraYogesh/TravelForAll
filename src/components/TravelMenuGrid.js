@@ -11,11 +11,8 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-
-// Theme hook
+import {useTranslation} from 'react-i18next';
 import { useTheme } from '../context/theme';
-
-// Icon imports
 import VisaIcon from '../assets/mobile.png';
 import TrainIcon from '../assets/train.png';
 import EsimIcon from '../assets/mobile.png';
@@ -24,19 +21,21 @@ import BusIcon from '../assets/bus.png';
 import HotelIcon from '../assets/hotel1.png';
 import WorkIcon from '../assets/aircraft.png';
 
-// Grid data
-const items = [
-  { label: 'Flights', icon: WorkIcon },
-  { label: 'Hotels', icon: HotelIcon },
-  { label: 'Trains', icon: TrainIcon },
-  { label: 'Buses', icon: BusIcon },
-  { label: 'Cabs', icon: TaxiIcon },
-  { label: 'e-Visa', icon: VisaIcon },
-  { label: 'eSIM', icon: EsimIcon },
-];
+
 
 const TravelMenuGrid = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
+
+  const items = [
+    { label: t('Flights'), icon: WorkIcon },
+    { label: t('Hotels'), icon: HotelIcon },
+    { label: t('Trains'), icon: TrainIcon },
+    { label: t('Buses'), icon: BusIcon },
+    { label: t('Cabs'), icon: TaxiIcon },
+    { label: t('e-Visa'), icon: VisaIcon },
+    { label: t('eSIM'), icon: EsimIcon },
+  ];
 
   return (
     <FlatList

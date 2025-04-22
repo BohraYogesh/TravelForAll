@@ -14,10 +14,10 @@ import {
   responsiveHeight,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../context/theme'; // Adjust path accordingly
+import { useTheme } from '../../../context/theme'; 
 
 const FlightBooking = () => {
-  const { colors } = useTheme(); // Access theme colors
+  const { colors } = useTheme(); 
   const [tripType, setTripType] = useState('one-way');
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);

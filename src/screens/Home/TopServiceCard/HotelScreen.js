@@ -15,7 +15,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../context/theme';
+import { useTheme } from '../../../context/theme';
 
 const HotelScreen = () => {
   const {colors} = useTheme();

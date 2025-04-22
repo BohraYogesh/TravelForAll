@@ -20,9 +20,11 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Feather from 'react-native-vector-icons/Feather';
 import {useTheme} from '../context/theme';
+// import i18n from '../constants/Language';
 
 const CityDetailScreen = ({route, navigation}) => {
   const {colors} = useTheme();
+  // const { t } = useTranslation();
   const {city, state, country, price, description, image} = route.params;
   const [activeTab, setActiveTab] = useState('Overview');
 

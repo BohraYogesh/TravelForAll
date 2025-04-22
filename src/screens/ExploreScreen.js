@@ -16,16 +16,14 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import PopularDestination from '../components/PopularDestination';
-import popularindiacities from '../components/popular_indian_cities.json';
+// import popularindiacities from '../components/popular_indian_cities.json';
 import {useTheme} from '../context/theme';
 import VisaFreeRegions from '../components/data/Visa.json';
 
 export default function ExploreScreen() {
   const {colors} = useTheme();
   const navigation = useNavigation();
-
   const visaFree = VisaFreeRegions['Visa-Free Countries'];
-  // Group data into columns of 2 rows
   const groupedData = [];
   for (let i = 0; i < visaFree.length; i += 2) {
     groupedData.push([visaFree[i], visaFree[i + 1]].filter(Boolean));
@@ -84,7 +82,10 @@ export default function ExploreScreen() {
                   <ImageBackground
                     source={{uri: city.image.uri}}
                     style={styles.image}
-                    imageStyle={{borderTopLeftRadius: responsiveWidth(2), borderTopRightRadius: responsiveWidth(2)}}>
+                    imageStyle={{
+                      borderTopLeftRadius: responsiveWidth(2),
+                      borderTopRightRadius: responsiveWidth(2),
+                    }}>
                     <View style={styles.overlay}>
                       <Text style={styles.city}>{city.city}</Text>
                       <Text style={styles.country}>{city.country}</Text>

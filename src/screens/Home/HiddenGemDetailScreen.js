@@ -65,7 +65,7 @@ const hotels = [
   },
 ];
 
-const GemDetailScreen = () => {
+const HiddenGemDetailScreen = () => {
   const {colors} = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
@@ -244,4 +244,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GemDetailScreen;
+export default HiddenGemDetailScreen;

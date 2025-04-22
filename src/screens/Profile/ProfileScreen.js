@@ -20,17 +20,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../context/theme';
-
-const themeOptions = [
-  {id: 'light', name: 'Light', icon: 'white-balance-sunny'},
-  {id: 'dark', name: 'Dark', icon: 'weather-night'},
-  {id: 'system', name: 'System Default', icon: 'theme-light-dark'},
-];
-
-const languageOptions = [
-  {id: 'en', name: 'English', icon: 'alpha-e-circle-outline'},
-  {id: 'hi', name: 'Hindi', icon: 'alpha-h-circle-outline'},
-];
+import {useTranslation} from 'react-i18next';
 
 const currencyOptions = [
   {
@@ -73,10 +63,9 @@ const currencyOptions = [
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
-  // const [selectedTheme, setSelectedTheme] = useState('system');
-  // const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
   const {theme, setTheme} = useTheme();
+  const { t, i18n } = useTranslation();
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
@@ -90,10 +79,24 @@ const SettingsScreen = () => {
   const [searchText, setSearchText] = useState('');
   const {colors} = useTheme();
 
-  const handleLanguageChange = lang => {
-    setSelectedLanguage(lang);
-    setLanguageModalVisible(false);
+  const handleLanguageChange = (id) => {
+    setSelectedLanguage(id);
+    i18n.changeLanguage(id); 
+    setLanguageModalVisible(false); 
   };
+
+  const languageOptions = [
+    {id: 'en', name: `${t('English')}`, icon: 'alpha-e-circle-outline'},
+    {id: 'hi', name: `${t('Hindi')}`, icon: 'alpha-h-circle-outline'},
+  ];
+
+
+  const themeOptions = [
+    {id: 'light', name: t('Light'), icon: 'white-balance-sunny'},
+    {id: 'dark', name: t('Dark'), icon: 'weather-night'},
+    {id: 'system', name: t('System Default'), icon: 'theme-light-dark'},
+  ];
+
 
   const getThemeLabel = id => {
     const found = themeOptions.find(theme => theme.id === id);
@@ -142,7 +145,7 @@ const SettingsScreen = () => {
       <View>
         {/* My Profile */}
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
-          My Profile
+          {t('My Profile')}
         </Text>
         <TouchableOpacity
           style={styles.row}
@@ -154,7 +157,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-            Personal Info
+            {t('Personal Info')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -174,7 +177,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-            Preferred Payment Method
+            {t('Preferred Payment Method')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -187,7 +190,7 @@ const SettingsScreen = () => {
 
         {/* My Trips */}
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
-          My Trips
+          {t('My Trips')}
         </Text>
         {/* Hotel Bookings */}
         <TouchableOpacity
@@ -200,7 +203,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-            Hotel Bookings
+            {t('Hotel Bookings')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -220,7 +223,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-            Flight Bookings
+            {t('Flight Bookings')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -233,7 +236,7 @@ const SettingsScreen = () => {
 
         {/* Settings */}
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
-          Settings
+          {t('Settings')}
         </Text>
 
         {/* Appearance */}
@@ -246,7 +249,7 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color: colors.text}]}>Theme</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>{t('Theme')}</Text>
           <Text style={[styles.statusText, {color: colors.text}]}>
             {getThemeLabel(theme)}
           </Text>
@@ -267,7 +270,7 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color: colors.text}]}>Language</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>{t('Language')}</Text>
           <Text style={[styles.statusText, {color: colors.text}]}>
             {getLanguageLabel(selectedLanguage)}
           </Text>
@@ -288,7 +291,7 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color: colors.text}]}>Currency</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>{t('Currency')}</Text>
           <Text style={[styles.statusText, {color: colors.text}]}>
             {getCurrencyLabel(selectedCurrency)}
           </Text>
@@ -310,7 +313,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-            Notifications
+           {t('Notifications')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -330,7 +333,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-            Account & Security
+            {t('Account & Security')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -343,7 +346,7 @@ const SettingsScreen = () => {
 
         {/* Help Center */}
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
-          Help Center
+          {t('Help Center')}
         </Text>
 
         {/* FAQs */}
@@ -356,7 +359,7 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color: colors.text}]}>FAQs</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>{t('FAQs')}</Text>
           </TouchableOpacity>
 
           {/* Chat with Us */}
@@ -369,7 +372,7 @@ const SettingsScreen = () => {
               color={colors.text}
             />
             <Text style={[styles.helpText, {color: colors.text}]}>
-              Chat with Us
+              {t('Chat with Us')}
             </Text>
           </TouchableOpacity>
 
@@ -384,7 +387,7 @@ const SettingsScreen = () => {
               color="#25D366"
             />
             <Text style={[styles.helpText, {color: colors.text}]}>
-              WhatsApp
+              {t('WhatsApp')}
             </Text>
             <Text style={[styles.phoneText, {color: colors.text}]}>
               +91 9352642793
@@ -401,7 +404,7 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color: colors.text}]}>CALL US</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>{t('CALL US')}</Text>
             <Text style={[styles.phoneText, {color: colors.text}]}>
               +919352642793
             </Text>
@@ -415,7 +418,7 @@ const SettingsScreen = () => {
             Alert.alert('Logout', 'Are you sure you want to logout?')
           }
           activeOpacity={1}>
-          <Text style={[styles.logoutText]}>Logout</Text>
+          <Text style={[styles.logoutText]}>{t('Logout')}</Text>
         </TouchableOpacity>
       </View>
 

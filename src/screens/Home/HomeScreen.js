@@ -25,8 +25,9 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useTheme } from '../../context/theme';
-
+import {useTheme} from '../../context/theme';
+import i18n from '../../constants/Language';
+import {useTranslation} from 'react-i18next';
 
 const data = [
   {
@@ -59,11 +60,6 @@ const data = [
   },
 ];
 
-const cardsData = [
-  {label: 'Flights', icon: FlightsIcon, screen: 'Flight'},
-  {label: 'Hotels', icon: HotelsIcon, screen: 'Hotel'},
-];
-
 export default function Home() {
   const navigation = useNavigation();
   const [destination, setDestination] = useState('');
@@ -75,7 +71,12 @@ export default function Home() {
   const [rooms, setRooms] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const {colors} = useTheme();
+  const {t, i18n} = useTranslation();
 
+  const cardsData = [
+    {label: `${t('Flights')}`, icon: FlightsIcon, screen: 'Flight'},
+    {label: `${t('Hotels')}`, icon: HotelsIcon, screen: 'Hotel'},
+  ];
 
   const renderItem = ({item}) => (
     <TouchableOpacity
@@ -83,7 +84,7 @@ export default function Home() {
       onPress={() => navigation.navigate('GemDetailScreen', {item})}
       style={[styles.card, {backgroundColor: colors.subbg}]}>
       <Image source={item.image} style={styles.image} />
-      <Text style={[styles.title, {color:colors.text}]}>{item.title}</Text>
+      <Text style={[styles.title, {color: colors.text}]}>{item.title}</Text>
     </TouchableOpacity>
   );
 
@@ -131,7 +132,9 @@ export default function Home() {
               style={[styles.iconss, {tintColor: '#f97316'}]}
               resizeMode="contain"
             />
-            <Text style={[styles.labelss, {color: colors.text}]}>{card.label}</Text>
+            <Text style={[styles.labelss, {color: colors.text}]}>
+              {card.label}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -151,23 +154,27 @@ export default function Home() {
             placeholderTextColor="#888"
             value={destination}
             onChangeText={setDestination}
-            style={[styles.textInput, {color:colors.text}]}
+            style={[styles.textInput, {color: colors.text}]}
           />
         </View>
 
         {/* Date Pickers */}
         <View style={[styles.dateRow]}>
           <TouchableOpacity
-          activeOpacity={1}
+            activeOpacity={1}
             style={[styles.dateBox, {backgroundColor: colors.subbg}]}
             onPress={() => setShowCheckIn(true)}>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
               <View>
-                <Icon name="calendar-alt" size={responsiveFontSize(2.8)} style={{color: colors.text}} />
+                <Icon
+                  name="calendar-alt"
+                  size={responsiveFontSize(2.8)}
+                  style={{color: colors.text}}
+                />
               </View>
               <View style={{justifyContent: 'center'}}>
                 <Text style={styles.dateText}>Check in</Text>
-                <Text style={[styles.dateValue, {color:colors.text}]}>
+                <Text style={[styles.dateValue, {color: colors.text}]}>
                   {checkInDate.toDateString()}
                 </Text>
               </View>
@@ -179,7 +186,9 @@ export default function Home() {
             style={[styles.dateBox, {backgroundColor: colors.subbg}]}
             onPress={() => setShowCheckOut(true)}>
             <Text style={styles.dateText}>Check out</Text>
-            <Text style={[styles.dateValue, {color:colors.text}]}>{checkOutDate.toDateString()}</Text>
+            <Text style={[styles.dateValue, {color: colors.text}]}>
+              {checkOutDate.toDateString()}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -219,50 +228,85 @@ export default function Home() {
             style={styles.icon}
           />
           <Text
-            style={
-              [styles.textInput, {color: colors.text}]
-            }>{`${guests} Guests in ${rooms} Room`}</Text>
+            style={[
+              styles.textInput,
+              {color: colors.text},
+            ]}>{`${guests} Guests in ${rooms} Room`}</Text>
         </TouchableOpacity>
 
         <Modal visible={modalVisible} transparent animationType="slide">
           <View style={styles.modalContainer}>
             <View style={[styles.modalBox, {backgroundColor: colors.bg}]}>
-              <Text style={[styles.modalTitle, {color:colors.text}]}>Guests & Rooms</Text>
+              <Text style={[styles.modalTitle, {color: colors.text}]}>
+                Guests & Rooms
+              </Text>
 
               <View style={styles.counterRow}>
-                <Text style={[styles.labelText, {color:colors.text}]}>Guests:</Text>
+                <Text style={[styles.labelText, {color: colors.text}]}>
+                  Guests:
+                </Text>
                 <View style={styles.counter}>
                   <TouchableOpacity
                     activeOpacity={1}
-                    style={[styles.counterButton, {backgroundColor:colors.button}]}
+                    style={[
+                      styles.counterButton,
+                      {backgroundColor: colors.button},
+                    ]}
                     onPress={() => guests > 1 && setGuests(guests - 1)}>
-                    <Text style={[styles.counterButtonText, {color:colors.text}]}>-</Text>
+                    <Text
+                      style={[styles.counterButtonText, {color: colors.text}]}>
+                      -
+                    </Text>
                   </TouchableOpacity>
-                  <Text style={[styles.counterValue, {color:colors.text}]}>{guests}</Text>
+                  <Text style={[styles.counterValue, {color: colors.text}]}>
+                    {guests}
+                  </Text>
                   <TouchableOpacity
                     activeOpacity={1}
-                    style={[styles.counterButton, {backgroundColor:colors.button}]}
+                    style={[
+                      styles.counterButton,
+                      {backgroundColor: colors.button},
+                    ]}
                     onPress={() => setGuests(guests + 1)}>
-                    <Text style={[styles.counterButtonText, {color:colors.text}]}>+</Text>
+                    <Text
+                      style={[styles.counterButtonText, {color: colors.text}]}>
+                      +
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
 
               <View style={styles.counterRow}>
-                <Text style={[styles.labelText, {color:colors.text}]}>Rooms:</Text>
+                <Text style={[styles.labelText, {color: colors.text}]}>
+                  Rooms:
+                </Text>
                 <View style={styles.counter}>
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    style={[styles.counterButton, {backgroundColor:colors.button}]}
+                    style={[
+                      styles.counterButton,
+                      {backgroundColor: colors.button},
+                    ]}
                     onPress={() => rooms > 1 && setRooms(rooms - 1)}>
-                    <Text style={[styles.counterButtonText, {color:colors.text}]}>-</Text>
+                    <Text
+                      style={[styles.counterButtonText, {color: colors.text}]}>
+                      -
+                    </Text>
                   </TouchableOpacity>
-                  <Text style={[styles.counterValue, {color:colors.text}]}>{rooms}</Text>
+                  <Text style={[styles.counterValue, {color: colors.text}]}>
+                    {rooms}
+                  </Text>
                   <TouchableOpacity
                     activeOpacity={0.8}
-                    style={[styles.counterButton, {backgroundColor:colors.button}]}
+                    style={[
+                      styles.counterButton,
+                      {backgroundColor: colors.button},
+                    ]}
                     onPress={() => setRooms(rooms + 1)}>
-                    <Text style={[styles.counterButtonText, {color:colors.text}]}>+</Text>
+                    <Text
+                      style={[styles.counterButtonText, {color: colors.text}]}>
+                      +
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -279,7 +323,10 @@ export default function Home() {
 
         {/* Search Button */}
         <View style={{alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('SearchScreen')} activeOpacity={1} style={styles.searchButton}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SearchScreen')}
+            activeOpacity={1}
+            style={styles.searchButton}>
             <Icon
               name="search"
               size={responsiveFontSize(2)}
@@ -295,7 +342,7 @@ export default function Home() {
 
       {/* Hidden Gems Section */}
       <View style={styles.container}>
-        <Text style={[styles.heading, {color:colors.text}]}>Hidden Gems</Text>
+        <Text style={[styles.heading, {color: colors.text}]}>Hidden Gems</Text>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -461,13 +508,11 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     color: '#000',
   },
-
   counter: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: responsiveWidth(4),
   },
-
   counterButton: {
     backgroundColor: '#f0f0f0',
     paddingHorizontal: responsiveWidth(4),
@@ -476,19 +521,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   counterButtonText: {
     fontSize: responsiveFontSize(2.5),
     fontWeight: 'bold',
     color: '#000',
   },
-
   counterValue: {
     fontSize: responsiveFontSize(2.2),
     fontWeight: 'bold',
     color: '#000',
   },
-
   doneButton: {
     backgroundColor: '#f97316',
     marginTop: responsiveHeight(3),
@@ -496,7 +538,6 @@ const styles = StyleSheet.create({
     borderRadius: responsiveWidth(3),
     alignItems: 'center',
   },
-
   doneButtonText: {
     color: '#fff',
     fontSize: responsiveFontSize(2),

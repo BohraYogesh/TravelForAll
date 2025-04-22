@@ -17,8 +17,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 // Screens
 import HomeScreen from './src/screens/Home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
-import FlightScreen from './src/screens/TopServiceCard/FlightScreen';
-import HotelScreen from './src/screens/TopServiceCard/HotelScreen';
+import FlightScreen from './src/screens/Home/TopServiceCard/FlightScreen';
+import HotelScreen from './src/screens/Home/TopServiceCard/HotelScreen';
 import ProfileInfoScreen from './src/screens/Profile/ProfileInfoScreen';
 import MyTripScreen from './src/screens/MyTripScreen/MyTripScreen';
 import Where2GoScreen from './src/screens/Where2GoScreen/Where2GoScreen';
@@ -29,7 +29,7 @@ import FlightBooking from './src/screens/Profile/MyTrip/FlightBooking/FlightBook
 import AccountSecurity from './src/screens/Profile/AccountSecurity/AccountSecurity';
 import Termsconditions from './src/screens/Profile/AccountSecurity/Terms&conditions';
 import Privacypolicy from './src/screens/Profile/AccountSecurity/Privacy&policy';
-import GemDetailScreen from './src/screens/Home/GemDetailScreen';
+import HiddenGemDetailScreen from './src/screens/Home/HiddenGemDetailScreen';
 import Notification from './src/screens/Profile/Notifications/Notification';
 import PopularDestinationScreen from './src/screens/PopularDestinationScreen';
 import ExploreCategoryScreen from './src/components/TravelCategory/ExploreCategoryScreen';
@@ -43,6 +43,7 @@ import BookingDetails from './src/components/TravelCategory/VisaFreeCountry/Book
 import PaymentDetails from './src/components/TravelCategory/VisaFreeCountry/PaymentDetails';
 import FinalPayment from './src/components/TravelCategory/FinalPayment';
 import SearchScreen from './src/screens/Home/SearchScreen';
+import {useTranslation} from 'react-i18next';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -62,6 +63,7 @@ function HomeStack() {
 
 function MainTabs() {
   const {colors} = useTheme();
+  const {t} = useTranslation();
 
   return (
     <Tab.Navigator
@@ -93,6 +95,7 @@ function MainTabs() {
         },
         tabBarActiveTintColor: '#F97316',
         tabBarInactiveTintColor: 'gray',
+        tabBarLabel: t(route.name),
       })}>
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="My Booking" component={MyTripScreen} />
@@ -156,8 +159,8 @@ function AppStack() {
         options={{title: 'Privacy'}}
       />
       <Stack.Screen
-        name="GemDetailScreen"
-        component={GemDetailScreen}
+        name="HiddenGemDetailScreen"
+        component={HiddenGemDetailScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
