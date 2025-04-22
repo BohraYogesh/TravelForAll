@@ -6,15 +6,14 @@ import {
   DefaultTheme,
   DarkTheme,
 } from '@react-navigation/native';
+import {StatusBar} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ThemeProvider, useTheme} from './src/context/theme';
-import { Provider as PaperProvider } from 'react-native-paper';
+import {Provider as PaperProvider} from 'react-native-paper';
 
-
-// Screens
 import HomeScreen from './src/screens/Home/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import FlightScreen from './src/screens/Home/TopServiceCard/FlightScreen';
@@ -207,9 +206,15 @@ function MainApp() {
   const {theme} = useTheme();
 
   return (
-    <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AppStack />
-    </NavigationContainer>
+    <>
+      <StatusBar
+        barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={theme === 'dark' ? '#000000' : '#f97316'}
+      />
+      <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
+        <AppStack />
+      </NavigationContainer>
+    </>
   );
 }
 

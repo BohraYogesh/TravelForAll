@@ -6,8 +6,6 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-
-// Dummy icons – replace with your assets
 import FlightsIcon from '../assets/plane.png';
 import HotelsIcon from '../assets/hotel.png';
 

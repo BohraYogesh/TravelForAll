@@ -15,8 +15,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useTheme} from '../context/theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
-
+import {useNavigation} from '@react-navigation/native';
 
 export default function SignupScreen() {
   const {colors} = useTheme();
@@ -49,7 +48,7 @@ export default function SignupScreen() {
       setEmailBorderColor('red');
       valid = false;
     } else {
-      setEmailBorderColor('#ccc'); 
+      setEmailBorderColor('#ccc');
     }
 
     // Name Validation
@@ -57,7 +56,7 @@ export default function SignupScreen() {
       setFirstNameBorderColor('red');
       valid = false;
     } else {
-      setFirstNameBorderColor('#ccc'); 
+      setFirstNameBorderColor('#ccc');
     }
 
     if (!lastName) {
@@ -72,14 +71,14 @@ export default function SignupScreen() {
       setPasswordBorderColor('red');
       valid = false;
     } else {
-      setPasswordBorderColor('#ccc'); 
+      setPasswordBorderColor('#ccc');
     }
 
     if (!confirmPassword) {
       setConfirmPasswordBorderColor('red');
       valid = false;
     } else {
-      setConfirmPasswordBorderColor('#ccc'); 
+      setConfirmPasswordBorderColor('#ccc');
     }
 
     // Password Match Check
@@ -90,7 +89,6 @@ export default function SignupScreen() {
       return;
     }
 
-    
     if (!valid) {
       Alert.alert('Error', 'Please fill in all fields correctly');
       return;
@@ -134,7 +132,7 @@ export default function SignupScreen() {
             value={firstName}
             onChangeText={text => {
               setFirstName(text);
-              setFirstNameBorderColor('#ccc'); // Reset border color when text changes
+              setFirstNameBorderColor('#ccc');
             }}
           />
           <TextInput
@@ -151,7 +149,7 @@ export default function SignupScreen() {
             value={lastName}
             onChangeText={text => {
               setLastName(text);
-              setLastNameBorderColor('#ccc'); // Reset border color when text changes
+              setLastNameBorderColor('#ccc');
             }}
           />
         </View>
@@ -170,7 +168,7 @@ export default function SignupScreen() {
           value={email}
           onChangeText={text => {
             setEmail(text);
-            setEmailBorderColor('#ccc'); // Reset border color when text changes
+            setEmailBorderColor('#ccc');
           }}
         />
 
@@ -190,11 +188,11 @@ export default function SignupScreen() {
             value={password}
             onChangeText={text => {
               setPassword(text);
-              setPasswordBorderColor('#ccc'); // Reset border color when text changes
+              setPasswordBorderColor('#ccc');
             }}
           />
           <TouchableOpacity
-          activeOpacity={1}
+            activeOpacity={1}
             onPress={() => setPasswordVisible(!passwordVisible)}
             style={styles.icon}>
             <Icon
@@ -221,11 +219,11 @@ export default function SignupScreen() {
             value={confirmPassword}
             onChangeText={text => {
               setConfirmPassword(text);
-              setConfirmPasswordBorderColor('#ccc'); // Reset border color when text changes
+              setConfirmPasswordBorderColor('#ccc');
             }}
           />
           <TouchableOpacity
-          activeOpacity={1}
+            activeOpacity={1}
             onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
             style={styles.icon}>
             <Icon
@@ -245,7 +243,7 @@ export default function SignupScreen() {
               styles.checkbox,
               {borderColor: isChecked ? colors.primary : colors.text},
             ]}>
-            {isChecked && <Icon name="check" size={10} color='#097C70' />}
+            {isChecked && <Icon name="check" size={10} color="#097C70" />}
           </View>
 
           <Text style={[styles.checkboxLabel, {color: colors.text}]}>
@@ -276,8 +274,8 @@ export default function SignupScreen() {
             </Text>
           </View>
           <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => navigation.navigate('Login')}>
+            activeOpacity={1}
+            onPress={() => navigation.navigate('Login')}>
             <Text style={styles.link}> Sign in</Text>
           </TouchableOpacity>
         </View>
@@ -291,7 +289,7 @@ const styles = StyleSheet.create({
     padding: responsiveWidth(5),
     paddingTop: responsiveHeight(6),
     flex: 1,
-    justifyContent:'center'
+    justifyContent: 'center',
   },
   title: {
     fontSize: responsiveWidth(7),
@@ -315,7 +313,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderWidth: 1,
     borderColor: '#ccc',
-    marginRight: responsiveWidth(3), // Adding space between First and Last Name fields
+    marginRight: responsiveWidth(3),
   },
   fullInput: {
     width: '100%',
