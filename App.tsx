@@ -44,6 +44,11 @@ import FinalPayment from './src/components/TravelCategory/FinalPayment';
 import SearchScreen from './src/screens/Home/SearchScreen';
 import {useTranslation} from 'react-i18next';
 import WishlistScreen from './src/screens/Profile/MyTrip/WishlistScreen/WishlistScreen';
+import EsimScreen from './src/components/TravelCategory/TravelMenuGrid/EsimScreen';
+import TrainsScreen from './src/components/TravelCategory/TravelMenuGrid/TrainsScreen';
+import BusesScreen from './src/components/TravelCategory/TravelMenuGrid/BusesScreen';
+import CabsScreen from './src/components/TravelCategory/TravelMenuGrid/CabsScreen';
+import VisaScreen from './src/components/TravelCategory/TravelMenuGrid/VisaScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -144,6 +149,31 @@ function AppStack() {
         options={{title: 'Hotel Search'}}
       />
       <Stack.Screen
+        name="Trains"
+        component={TrainsScreen}
+        options={{title: 'Trains'}}
+      />
+      <Stack.Screen
+        name="Buses"
+        component={BusesScreen}
+        options={{title: 'Buses'}}
+      />
+      <Stack.Screen
+        name="Cabs"
+        component={CabsScreen}
+        options={{title: 'Cabs'}}
+      />
+      <Stack.Screen
+        name="Visa"
+        component={VisaScreen}
+        options={{title: 'Visa'}}
+      />
+      <Stack.Screen
+        name="Esim"
+        component={EsimScreen}
+        options={{title: 'E-sim'}}
+      />
+      <Stack.Screen
         name="Account&Security"
         component={AccountSecurity}
         options={{title: 'Account & Security'}}
@@ -212,7 +242,7 @@ function MainApp() {
     <>
       <StatusBar
         barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={theme === 'dark' ? '#000000' : '#f97316'}
+        backgroundColor={theme === 'dark' ? '#000000' : '#ffffff'}
       />
       <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
         <AppStack />

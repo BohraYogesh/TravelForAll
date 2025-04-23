@@ -12,7 +12,7 @@ import {
   Modal,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import TravelMenuGrid from '../../components/TravelMenuGrid';
+import TravelMenuGrid from '../../components/TravelCategory/TravelMenuGrid/TravelMenuGrid';
 import ExploreSection from '../../components/TravelCategory/ExploreSection';
 import PopularDestination from '../../components/PopularDestination';
 import FlightsIcon from '../../assets/plane.png';

@@ -5,37 +5,43 @@ import {
   Image,
   StyleSheet,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {useTranslation} from 'react-i18next';
-import { useTheme } from '../context/theme';
-import VisaIcon from '../assets/mobile.png';
-import TrainIcon from '../assets/train.png';
-import EsimIcon from '../assets/mobile.png';
-import TaxiIcon from '../assets/car.png';
-import BusIcon from '../assets/bus.png';
-import HotelIcon from '../assets/hotel1.png';
-import WorkIcon from '../assets/aircraft.png';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../../context/theme';
+import { useNavigation } from '@react-navigation/native'; 
 
-
+import VisaIcon from '../../../assets/mobile.png';
+import TrainIcon from '../../../assets/train.png';
+import EsimIcon from '../../../assets/mobile.png';
+import TaxiIcon from '../../../assets/car.png';
+import BusIcon from '../../../assets/bus.png';
+import HotelIcon from '../../../assets/hotel1.png';
+import WorkIcon from '../../../assets/aircraft.png';
 
 const TravelMenuGrid = () => {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation(); 
 
   const items = [
-    { label: t('Flights'), icon: WorkIcon },
-    { label: t('Hotels'), icon: HotelIcon },
-    { label: t('Trains'), icon: TrainIcon },
-    { label: t('Buses'), icon: BusIcon },
-    { label: t('Cabs'), icon: TaxiIcon },
-    { label: t('e-Visa'), icon: VisaIcon },
-    { label: t('eSIM'), icon: EsimIcon },
+    { label: t('Flights'), icon: WorkIcon, screen: 'Flight' },
+    { label: t('Hotels'), icon: HotelIcon, screen: 'Hotel' },
+    { label: t('Trains'), icon: TrainIcon, screen: 'Trains' },
+    { label: t('Buses'), icon: BusIcon, screen: 'Buses' },
+    { label: t('Cabs'), icon: TaxiIcon, screen: 'Cabs' },
+    { label: t('e-Visa'), icon: VisaIcon, screen: 'Visa' },
+    { label: t('e-Sim'), icon: EsimIcon, screen: 'Esim' },
   ];
+
+  const handlePress = (screen) => {
+    navigation.navigate(screen);
+  };
 
   return (
     <FlatList
@@ -45,18 +51,18 @@ const TravelMenuGrid = () => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.container}
       renderItem={({ item }) => (
-        <View style={styles.item}>
+        <TouchableOpacity activeOpacity={1} style={styles.item} onPress={() => handlePress(item.screen)}>
           <View style={[styles.iconWrapper, { backgroundColor: '#FEECEB' }]}>
             <Image
               source={item.icon}
-              style={[styles.icon, { tintColor:'#f97316' }]}
+              style={[styles.icon, { tintColor: '#f97316' }]}
               resizeMode="contain"
             />
           </View>
           <Text style={[styles.label, { color: colors?.text || '#333' }]}>
             {item.label}
           </Text>
-        </View>
+        </TouchableOpacity>
       )}
     />
   );
@@ -71,7 +77,6 @@ const styles = StyleSheet.create({
   },
   item: {
     alignItems: 'center',
-    // marginHorizontal: responsiveWidth(0.5),
     width: responsiveWidth(25),
   },
   iconWrapper: {
