@@ -9,7 +9,7 @@ import {
   Platform,
   Modal,
   FlatList,
-  Alert
+  Alert,
 } from 'react-native';
 
 import {
@@ -19,6 +19,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {useTheme} from '../context/theme';
 // import i18n from '../constants/Language';
 
@@ -238,13 +241,53 @@ const CityDetailScreen = ({route, navigation}) => {
     const {colors} = useTheme();
     const [selectedDate, setSelectedDate] = useState(null);
     const [showDatePicker, setShowDatePicker] = useState(false);
-
+    const [isWishlisted, setIsWishlisted] = useState(false);
     const [travelers, setTravelers] = useState(1);
     const [showTravelerModal, setShowTravelerModal] = useState(false);
 
     const handleDateChange = (event, date) => {
       setShowDatePicker(false);
       if (date) setSelectedDate(date.toDateString());
+    };
+
+    useEffect(() => {
+      const loadWishlist = async () => {
+        try {
+          const data = await AsyncStorage.getItem('wishlist');
+          const wishlist = data ? JSON.parse(data) : [];
+          const already = wishlist.find(i => i.id === description.id);
+          setIsWishlisted(!!already);
+        } catch (e) {
+          console.error('Error loading wishlist:', e);
+        }
+      };
+
+      loadWishlist();
+    }, [description.id]);
+
+    const toggleWishlist = async () => {
+      try {
+        const data = await AsyncStorage.getItem('wishlist');
+        const wishlist = data ? JSON.parse(data) : [];
+
+        let updatedWishlist;
+
+        if (isWishlisted) {
+          // Remove from wishlist
+          updatedWishlist = wishlist.filter(i => i.id !== description.id);
+        } else {
+          // Add to wishlist
+          updatedWishlist = [...wishlist, description];
+        }
+
+        // Update AsyncStorage with the new list
+        await AsyncStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+
+        // Update local state
+        setIsWishlisted(prevState => !prevState); // Flip the state
+      } catch (e) {
+        console.error('Error updating wishlist:', e);
+      }
     };
 
     const travelerOptions = Array.from({length: 12}, (_, i) => i + 1);
@@ -361,26 +404,28 @@ const CityDetailScreen = ({route, navigation}) => {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            Alert.alert('Success', 'Booking Successful!');
+            navigation.navigate('BookingDetails', {
+              description,
+              city,
+              travelers,
+              price: formattedTotalPrice,
+            });
           }}
-          // onPress={() => {
-          //   console.log('City:', city);
-          //   console.log('Price:', price);
-          //   navigation.navigate('BookingDetails', {
-          //     description,
-          //     city,
-          //     price,
-          //   });
-          // }}
           style={styles.bookBtn}>
           <Text style={styles.bookBtnText}>Book Now</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={1} style={styles.wishlistBtn}>
-          <Feather name="heart" size={18} color={colors.text} />
+        <TouchableOpacity
+          activeOpacity={1}
+          style={styles.wishlistBtn}
+          onPress={toggleWishlist}>
+          <FontAwesome
+            name={isWishlisted ? 'heart' : 'heart-o'}
+            size={18}
+            color={isWishlisted ? '#1abc9c' : colors.text}
+          />
           <Text style={[styles.wishlistText, {color: colors.text}]}>
-            {' '}
-            Add to Wishlist
+            {isWishlisted ? ' Wishlisted' : ' Add to Wishlist'}
           </Text>
         </TouchableOpacity>
 
@@ -546,7 +591,6 @@ const styles = StyleSheet.create({
     padding: responsiveWidth(4),
     margin: responsiveWidth(4),
     backgroundColor: '#fff',
-    elevation: 4,
   },
   pricePerPerson: {
     fontSize: responsiveFontSize(3),
@@ -578,7 +622,7 @@ const styles = StyleSheet.create({
     borderColor: '#eee',
   },
   optionText: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     color: '#333',
   },
 

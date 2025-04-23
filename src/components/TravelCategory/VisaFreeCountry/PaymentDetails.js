@@ -15,7 +15,6 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
 
-// Function to format numbers in Indian currency style
 const formatIndianCurrency = amount => {
   const x = amount.toString();
   const lastThree = x.substring(x.length - 3);
@@ -29,6 +28,7 @@ export default function PaymentDetails({route}) {
   const navigation = useNavigation();
   const {colors} = useTheme();
   const {package: packageName, duration, travelers, amount} = route.params;
+  console.log('Amount:', route.params?.amount);
 
   const [expiry, setExpiry] = React.useState('');
   const [cvv, setCvv] = React.useState('');
@@ -36,12 +36,11 @@ export default function PaymentDetails({route}) {
   const [cardholderName, setCardholderName] = React.useState('');
   const [errors, setErrors] = React.useState({});
 
-  // Calculate total amount
   const sanitizedAmount = amount.replace(/,/g, '');
   const totalAmount = parseInt(travelers) * parseInt(sanitizedAmount);
 
   const handleCardNumberChange = text => {
-    let formatted = text.replace(/[^0-9]/g, ''); // Remove any non-numeric characters
+    let formatted = text.replace(/[^0-9]/g, '');
     if (formatted.length > 4) {
       formatted = formatted.slice(0, 4) + ' ' + formatted.slice(4);
     }
@@ -51,8 +50,8 @@ export default function PaymentDetails({route}) {
     if (formatted.length > 14) {
       formatted = formatted.slice(0, 14) + ' ' + formatted.slice(14);
     }
-    setCardNumber(formatted.slice(0, 19)); // Limit to 16 digits with spaces
-    if (errors.cardNumber) setErrors({...errors, cardNumber: false}); // Reset error on change
+    setCardNumber(formatted.slice(0, 19)); 
+    if (errors.cardNumber) setErrors({...errors, cardNumber: false}); 
   };
 
   const handleExpiryChange = text => {
@@ -61,25 +60,25 @@ export default function PaymentDetails({route}) {
       formatted = formatted.slice(0, 2) + '/' + formatted.slice(2);
     }
     setExpiry(formatted.slice(0, 5));
-    if (errors.expiry) setErrors({...errors, expiry: false}); // Reset error on change
+    if (errors.expiry) setErrors({...errors, expiry: false});
   };
 
   const handleCvvChange = text => {
-    setCvv(text.replace(/[^0-9]/g, '').slice(0, 4));  // Restrict to 4 digits max
-    if (errors.cvv) setErrors({...errors, cvv: false}); // Reset error on change
+    setCvv(text.replace(/[^0-9]/g, '').slice(0, 4)); 
+    if (errors.cvv) setErrors({...errors, cvv: false}); 
   };
 
   const handleCardholderNameChange = text => {
     setCardholderName(text);
-    if (errors.cardholderName) setErrors({...errors, cardholderName: false}); // Reset error on change
+    if (errors.cardholderName) setErrors({...errors, cardholderName: false}); 
   };
 
   const handleProceed = () => {
     const newErrors = {};
-    if (!expiry.trim()) newErrors.expiry = true; // Check if expiry date is filled
-    if (!cvv.trim()) newErrors.cvv = true; // Check if CVV is filled
-    if (!cardNumber.trim()) newErrors.cardNumber = true; // Check if card number is filled
-    if (!cardholderName.trim()) newErrors.cardholderName = true; // Check if cardholder name is filled
+    if (!expiry.trim()) newErrors.expiry = true; 
+    if (!cvv.trim()) newErrors.cvv = true; 
+    if (!cardNumber.trim()) newErrors.cardNumber = true; 
+    if (!cardholderName.trim()) newErrors.cardholderName = true;
 
     setErrors(newErrors);
 
@@ -92,7 +91,7 @@ export default function PaymentDetails({route}) {
       package: packageName,
       duration,
       travelers,
-      amount: totalAmount,
+      amount: sanitizedAmount,
     });
   };
 
@@ -122,7 +121,7 @@ export default function PaymentDetails({route}) {
             Total Amount:
           </Text>
           <Text style={[styles.totalAmount, {color: colors.primary}]} >
-            ₹ {formatIndianCurrency(totalAmount)}
+            ₹ {formatIndianCurrency(sanitizedAmount)}
           </Text>
         </View>
       </View>
@@ -135,12 +134,12 @@ export default function PaymentDetails({route}) {
         style={[
           styles.input,
           {color: colors.text},
-          errors.cardNumber && styles.errorInput, // Red border if error
+          errors.cardNumber && styles.errorInput, 
         ]}
         keyboardType="numeric"
-        maxLength={19} // Maximum length including spaces
-        onChangeText={handleCardNumberChange} // Use the handler for formatting
-        value={cardNumber} // Set the state variable for Card Number
+        maxLength={19} 
+        onChangeText={handleCardNumberChange}
+        value={cardNumber} 
       />
 
       {/* Expiry Date and CVV */}
@@ -153,7 +152,7 @@ export default function PaymentDetails({route}) {
             style={[
               styles.input,
               styles.halfInput,
-              errors.expiry && styles.errorInput, // Red border if error
+              errors.expiry && styles.errorInput, 
               {color: colors.text},
             ]}
             keyboardType="numeric"
@@ -171,7 +170,7 @@ export default function PaymentDetails({route}) {
             style={[
               styles.input,
               styles.halfInput,
-              errors.cvv && styles.errorInput, // Red border if error
+              errors.cvv && styles.errorInput,
               {color: colors.text},
             ]}
             keyboardType="numeric"
@@ -191,7 +190,7 @@ export default function PaymentDetails({route}) {
         style={[
           styles.input,
           {color: colors.text},
-          errors.cardholderName && styles.errorInput, // Red border if error
+          errors.cardholderName && styles.errorInput, 
         ]}
         value={cardholderName}
         onChangeText={handleCardholderNameChange}

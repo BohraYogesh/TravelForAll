@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   categoryButton: {
     paddingVertical: responsiveHeight(1),
     paddingHorizontal: responsiveWidth(4),
-    borderRadius: responsiveWidth(5),
+    borderRadius: responsiveWidth(2),
     marginRight: responsiveWidth(2),
     borderWidth: 1,
     borderColor: '#387c87',

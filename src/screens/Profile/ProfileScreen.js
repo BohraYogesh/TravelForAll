@@ -192,6 +192,27 @@ const SettingsScreen = () => {
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
           {t('My Trips')}
         </Text>
+
+        {/* WishList */}
+        {/* <TouchableOpacity
+          style={styles.row}
+          activeOpacity={1}
+          onPress={() => navigation.navigate('Wishlist')}>
+          <MaterialIcon
+            name="heart-outline"
+            size={responsiveFontSize(3)}
+            color={colors.text}
+          />
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            {t('WishList')}
+          </Text>
+          <Icon
+            name="chevron-forward"
+            size={responsiveFontSize(2.2)}
+            color={colors.text}
+          />
+        </TouchableOpacity> */}
+
         {/* Hotel Bookings */}
         <TouchableOpacity
           style={styles.row}

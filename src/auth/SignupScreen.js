@@ -43,7 +43,6 @@ export default function SignupScreen() {
   const handleSignup = () => {
     let valid = true;
 
-    // Email Validation
     if (!email || !emailRegex.test(email)) {
       setEmailBorderColor('red');
       valid = false;
@@ -51,7 +50,6 @@ export default function SignupScreen() {
       setEmailBorderColor('#ccc');
     }
 
-    // Name Validation
     if (!firstName) {
       setFirstNameBorderColor('red');
       valid = false;
@@ -66,7 +64,6 @@ export default function SignupScreen() {
       setLastNameBorderColor('#ccc');
     }
 
-    // Password Validation
     if (!password) {
       setPasswordBorderColor('red');
       valid = false;
@@ -81,7 +78,6 @@ export default function SignupScreen() {
       setConfirmPasswordBorderColor('#ccc');
     }
 
-    // Password Match Check
     if (password && confirmPassword && password !== confirmPassword) {
       setPasswordBorderColor('red');
       setConfirmPasswordBorderColor('red');

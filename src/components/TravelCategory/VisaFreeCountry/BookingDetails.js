@@ -20,7 +20,7 @@ import {useTheme} from '../../../context/theme';
 export default function BookingDetails() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { city, price, description } = route.params || {};
+  const {city, price, description} = route.params || {};
 
   console.log('City from params:', city);
   console.log('Price from params:', price);
@@ -28,8 +28,13 @@ export default function BookingDetails() {
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [travelers, setTravelers] = useState('1');
-  const [date, setDate] = useState(null); // Date is initially null
+  const [travelers, settravelers] = useState(
+    route.params?.travelers?.toString() || '1',
+  );
+  console.log('Route Params:', route.params);
+  console.log('Travelers:', route.params?.travelers);
+
+  const [date, setDate] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -38,7 +43,7 @@ export default function BookingDetails() {
     if (selectedDate) {
       setDate(selectedDate);
       if (errors.date) {
-        setErrors(prev => ({...prev, date: false})); // Remove error for date
+        setErrors(prev => ({...prev, date: false}));
       }
     }
   };
@@ -48,27 +53,24 @@ export default function BookingDetails() {
   const handleProceed = () => {
     const newErrors = {};
 
-    // Validate fields
     if (!fullName.trim()) newErrors.fullName = true;
     if (!email.trim()) newErrors.email = true;
     if (!date) newErrors.date = true;
 
-    // Validate travelers: ensure it's not empty and not less than 1
     if (!travelers || parseInt(travelers) < 1) newErrors.travelers = true;
 
     setErrors(newErrors);
 
-    // If there are validation errors, show an alert
     if (Object.keys(newErrors).length > 0) {
       Alert.alert('Missing Details', 'Please fill in all required fields.');
       return;
     }
 
     navigation.navigate('PaymentDetails', {
-      package: description?.country || 'N/A',
+      package: description?.country || city,
       duration: '5 days',
       travelers,
-      amount: description?.price || '0',
+      amount: price || '0',
       travelDate: formattedDate,
       bookedBy: fullName,
     });
@@ -87,7 +89,7 @@ export default function BookingDetails() {
         </Text>
         <Text style={[styles.packageDays, {color: colors.text}]}>5 days</Text>
         <Text style={[styles.packagePrice, {color: colors.primary}]}>
-          ₹ {description?.price || price || 'N/A'}
+          ₹ { price || 'N/A'}
         </Text>
       </View>
 
@@ -126,7 +128,7 @@ export default function BookingDetails() {
       />
 
       <Text style={[styles.label, {color: colors.text}]}>
-        Number of Travelers
+        Number of travelers
       </Text>
       <TextInput
         placeholder="1"
@@ -134,12 +136,13 @@ export default function BookingDetails() {
         style={[
           styles.input,
           {color: colors.text},
-          errors.travelers && styles.errorInput, // Add error style for travelers
+          errors.travelers && styles.errorInput,
         ]}
         keyboardType="numeric"
         value={travelers}
+        editable={false}
         onChangeText={text => {
-          setTravelers(text);
+          settravelers(text);
           if (errors.travelers)
             setErrors(prev => ({...prev, travelers: false}));
         }}
@@ -149,10 +152,7 @@ export default function BookingDetails() {
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => setShowDatePicker(true)}
-        style={[
-          styles.input,
-          errors.date && styles.errorInput, // Add error style for date
-        ]}>
+        style={[styles.input, errors.date && styles.errorInput]}>
         <Text style={{color: '#aaa'}}>
           {formattedDate || new Date().toLocaleDateString()}
         </Text>
@@ -160,7 +160,8 @@ export default function BookingDetails() {
 
       {showDatePicker && (
         <DateTimePicker
-          value={date || new Date()} // If date is null, default to today
+          value={date || new Date()}
+          minimumDate={new Date()}
           mode="date"
           display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           onChange={onChangeDate}

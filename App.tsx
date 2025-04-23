@@ -43,6 +43,7 @@ import PaymentDetails from './src/components/TravelCategory/VisaFreeCountry/Paym
 import FinalPayment from './src/components/TravelCategory/FinalPayment';
 import SearchScreen from './src/screens/Home/SearchScreen';
 import {useTranslation} from 'react-i18next';
+import WishlistScreen from './src/screens/Profile/MyTrip/WishlistScreen/WishlistScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -181,6 +182,8 @@ function AppStack() {
         component={VisaFreeCountry}
         options={{title: 'Visa Free Country'}}
       />
+
+      <Stack.Screen name="Wishlist" component={WishlistScreen} />
       <Stack.Screen name="CityDetail" component={CityDetailScreen} />
       <Stack.Screen name="HotelDetails" component={HotelDetailsScreen} />
       <Stack.Screen name="SearchScreen" component={SearchScreen} />

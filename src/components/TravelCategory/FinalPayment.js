@@ -27,7 +27,7 @@ export default function FinalPayment({route}) {
     duration,
     travelers,
     amount,
-    travelDate = '4/18/2025',
+    travelDate = '4/22/2025',
     bookedBy = 'g',
     transactionId = 'air87hjcp99',
   } = route.params;
