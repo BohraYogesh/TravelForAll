@@ -206,6 +206,7 @@ function AppStack() {
       <Stack.Screen
         name="ExploreCategoryScreen"
         component={ExploreCategoryScreen}
+        options={{title: 'Explore Category'}}
       />
       <Stack.Screen
         name="VisaFreeCountry"
@@ -214,13 +215,41 @@ function AppStack() {
       />
 
       <Stack.Screen name="Wishlist" component={WishlistScreen} />
-      <Stack.Screen name="CityDetail" component={CityDetailScreen} />
-      <Stack.Screen name="HotelDetails" component={HotelDetailsScreen} />
-      <Stack.Screen name="SearchScreen" component={SearchScreen} />
-      <Stack.Screen name="DescriptionDetails" component={DestinationDetails} />
-      <Stack.Screen name="BookingDetails" component={BookingDetails} />
-      <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
-      <Stack.Screen name="FinalPayment" component={FinalPayment} />
+      <Stack.Screen
+        name="CityDetail"
+        component={CityDetailScreen}
+        options={{title: 'City Detail'}}
+      />
+      <Stack.Screen
+        name="HotelDetails"
+        component={HotelDetailsScreen}
+        options={{title: 'Hotel Details'}}
+      />
+      <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{title: 'Search Screen'}}
+      />
+      <Stack.Screen
+        name="DescriptionDetails"
+        component={DestinationDetails}
+        options={{title: 'Description Details'}}
+      />
+      <Stack.Screen
+        name="BookingDetails"
+        component={BookingDetails}
+        options={{title: 'Booking Details'}}
+      />
+      <Stack.Screen
+        name="PaymentDetails"
+        component={PaymentDetails}
+        options={{title: 'Payment Details'}}
+      />
+      <Stack.Screen
+        name="FinalPayment"
+        component={FinalPayment}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Login"
         component={LoginScreen}
