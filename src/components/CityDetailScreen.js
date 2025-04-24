@@ -28,7 +28,7 @@ import {useTheme} from '../context/theme';
 const CityDetailScreen = ({route, navigation}) => {
   const {colors} = useTheme();
   // const { t } = useTranslation();
-  const {city, state, country, price, description, image} = route.params;
+  const {id, city, state, country, price, description, image} = route.params;
   const [activeTab, setActiveTab] = useState('Overview');
 
   useEffect(() => {
@@ -255,7 +255,7 @@ const CityDetailScreen = ({route, navigation}) => {
         try {
           const data = await AsyncStorage.getItem('wishlist');
           const wishlist = data ? JSON.parse(data) : [];
-          const already = wishlist.find(i => i.id === description.id);
+          const already = wishlist.find(i => i.id === id);
           setIsWishlisted(!!already);
         } catch (e) {
           console.error('Error loading wishlist:', e);
@@ -263,7 +263,7 @@ const CityDetailScreen = ({route, navigation}) => {
       };
 
       loadWishlist();
-    }, [description.id]);
+    }, [id]);
 
     const toggleWishlist = async () => {
       try {
@@ -273,12 +273,16 @@ const CityDetailScreen = ({route, navigation}) => {
         let updatedWishlist;
 
         if (isWishlisted) {
-          updatedWishlist = wishlist.filter(i => i.id !== description.id);
+          updatedWishlist = wishlist.filter(i => i.id !== id);
         } else {
-          updatedWishlist = [...wishlist, description];
+          updatedWishlist = [
+            ...wishlist,
+            {id, city, state, country, price, description, image},
+          ];
         }
+
         await AsyncStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-        setIsWishlisted(prevState => !prevState); 
+        setIsWishlisted(prevState => !prevState);
       } catch (e) {
         console.error('Error updating wishlist:', e);
       }

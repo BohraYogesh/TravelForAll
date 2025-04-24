@@ -194,7 +194,7 @@ const SettingsScreen = () => {
         </Text>
 
         {/* WishList */}
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={styles.row}
           activeOpacity={1}
           onPress={() => navigation.navigate('Wishlist')}>
@@ -211,7 +211,7 @@ const SettingsScreen = () => {
             size={responsiveFontSize(2.2)}
             color={colors.text}
           />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         {/* Hotel Bookings */}
         <TouchableOpacity

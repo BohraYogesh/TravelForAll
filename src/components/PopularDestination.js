@@ -20,7 +20,7 @@ import {useTheme} from '../context/theme';
 export default function PopularDestination() {
   const {colors} = useTheme();
   const navigation = useNavigation();
-  
+
   const groupedData = [];
   for (let i = 0; i < popularindiacities.length; i += 2) {
     const first = popularindiacities[i];
@@ -75,6 +75,7 @@ export default function PopularDestination() {
                   ]}
                   onPress={() =>
                     navigation.navigate('CityDetail', {
+                      id: city.id,
                       city: city.city,
                       state: city.state,
                       country: city.country,
