@@ -27,8 +27,8 @@ export default function FinalPayment({route}) {
     duration,
     travelers,
     amount,
-    travelDate = '4/22/2025',
-    bookedBy = 'g',
+    travelDate,
+    bookedBy,
     transactionId = 'air87hjcp99',
   } = route.params;
 
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: responsiveWidth(5),
     alignItems: 'center',
+    // justifyContent:'center'
   },
   checkmark: {
     fontSize: responsiveFontSize(6),

@@ -27,7 +27,7 @@ const formatIndianCurrency = amount => {
 export default function PaymentDetails({route}) {
   const navigation = useNavigation();
   const {colors} = useTheme();
-  const {package: packageName, duration, travelers, amount} = route.params;
+  const {package: packageName, duration, travelers, amount, travelDate} = route.params;
   console.log('Amount:', route.params?.amount);
 
   const [expiry, setExpiry] = React.useState('');
@@ -91,6 +91,8 @@ export default function PaymentDetails({route}) {
       package: packageName,
       duration,
       travelers,
+      travelDate,
+      bookedBy: cardholderName,
       amount: sanitizedAmount,
     });
   };
