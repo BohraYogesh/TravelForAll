@@ -273,18 +273,12 @@ const CityDetailScreen = ({route, navigation}) => {
         let updatedWishlist;
 
         if (isWishlisted) {
-          // Remove from wishlist
           updatedWishlist = wishlist.filter(i => i.id !== description.id);
         } else {
-          // Add to wishlist
           updatedWishlist = [...wishlist, description];
         }
-
-        // Update AsyncStorage with the new list
         await AsyncStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-
-        // Update local state
-        setIsWishlisted(prevState => !prevState); // Flip the state
+        setIsWishlisted(prevState => !prevState); 
       } catch (e) {
         console.error('Error updating wishlist:', e);
       }

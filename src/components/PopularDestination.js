@@ -1,4 +1,3 @@
-// src/components/PopularDestinations.js
 import React from 'react';
 import {
   View,
@@ -21,8 +20,7 @@ import {useTheme} from '../context/theme';
 export default function PopularDestination() {
   const {colors} = useTheme();
   const navigation = useNavigation();
-
-  // Group data into columns of 2 rows
+  
   const groupedData = [];
   for (let i = 0; i < popularindiacities.length; i += 2) {
     const first = popularindiacities[i];
@@ -70,7 +68,7 @@ export default function PopularDestination() {
                     styles.card,
                     {
                       marginBottom:
-                        index !== item.length - 1 ? responsiveHeight(2) : 0, // 👈 conditional margin
+                        index !== item.length - 1 ? responsiveHeight(2) : 0, 
                       backgroundColor: colors.subbg,
                       borderRadius: responsiveWidth(2),
                     },
