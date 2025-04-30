@@ -31,7 +31,7 @@ import Privacypolicy from './src/screens/Profile/AccountSecurity/Privacy&policy'
 import HiddenGemDetailScreen from './src/screens/Home/HiddenGemDetailScreen';
 import Notification from './src/screens/Profile/Notifications/Notification';
 import PopularDestinationScreen from './src/screens/PopularDestinationScreen';
-import ExploreCategoryScreen from './src/components/TravelCategory/ExploreCategoryScreen';
+import ExploreCategoryScreen from './src/components/TravelCategory/ExploreCategory/ExploreCategoryScreen';
 import VisaFreeCountry from './src/components/TravelCategory/VisaFreeCountry/VisaFreeCountry';
 import CityDetailScreen from './src/components/CityDetailScreen';
 import LoginScreen from './src/auth/LoginScreen';
@@ -43,12 +43,14 @@ import PaymentDetails from './src/components/TravelCategory/VisaFreeCountry/Paym
 import FinalPayment from './src/components/TravelCategory/FinalPayment';
 import SearchScreen from './src/screens/Home/SearchScreen';
 import {useTranslation} from 'react-i18next';
+import {CurrencyProvider} from './src/context/CurrencyContext';
 import WishlistScreen from './src/screens/Profile/MyTrip/WishlistScreen/WishlistScreen';
 import EsimScreen from './src/components/TravelCategory/TravelMenuGrid/EsimScreen';
 import TrainsScreen from './src/components/TravelCategory/TravelMenuGrid/TrainsScreen';
 import BusesScreen from './src/components/TravelCategory/TravelMenuGrid/BusesScreen';
 import CabsScreen from './src/components/TravelCategory/TravelMenuGrid/CabsScreen';
 import VisaScreen from './src/components/TravelCategory/TravelMenuGrid/VisaScreen';
+import HiddenHotelDetails from './src/screens/Home/HiddenHotelDetails';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -118,6 +120,16 @@ function MainTabs() {
 function AppStack() {
   return (
     <Stack.Navigator screenOptions={{animation: 'none'}}>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignupScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="MainTabs"
         component={MainTabs}
@@ -194,6 +206,11 @@ function AppStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="HiddenHotelDetails"
+        component={HiddenHotelDetails}
+        options={{}}
+      />
+      <Stack.Screen
         name="Notification"
         component={Notification}
         options={{title: 'Notification'}}
@@ -250,16 +267,7 @@ function AppStack() {
         component={FinalPayment}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignupScreen}
-        options={{headerShown: false}}
-      />
+
     </Stack.Navigator>
   );
 }
@@ -283,11 +291,13 @@ function MainApp() {
 export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
-      <ThemeProvider>
-        <PaperProvider>
-          <MainApp />
-        </PaperProvider>
-      </ThemeProvider>
+      <CurrencyProvider>
+        <ThemeProvider>
+          <PaperProvider>
+            <MainApp />
+          </PaperProvider>
+        </ThemeProvider>
+      </CurrencyProvider>
     </GestureHandlerRootView>
   );
 }

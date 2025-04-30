@@ -16,6 +16,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import { useTheme } from '../context/theme';
 import { useNavigation } from '@react-navigation/native';
+import { loginUser } from '../api/api';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -29,15 +30,21 @@ const LoginScreen = () => {
   const isEmailEmpty = email.trim() === '';
   const isPasswordEmpty = password.trim() === '';
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     setIsSubmitted(true); 
 
-    
     if (isEmailEmpty || isPasswordEmpty) {
       Alert.alert('Please fill in both fields');
     } else {
-      
-      Alert.alert('Sign-in successful');
+      try {
+        const data = await loginUser(email, password);
+        if (data) {
+          // Alert.alert('Sign-in successful');
+          navigation.navigate('MainTabs'); 
+        }
+      } catch (error) {
+        Alert.alert('Login failed', error.message || 'Something went wrong');
+      }
     }
   };
 

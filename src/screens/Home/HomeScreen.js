@@ -28,37 +28,38 @@ import {
 import {useTheme} from '../../context/theme';
 import i18n from '../../constants/Language';
 import {useTranslation} from 'react-i18next';
+import HidenGem from './HidenGem.json'
 
-const data = [
-  {
-    id: 1,
-    title: 'Magnificent mountains and hill...',
-    image: {
-      uri: 'https://i.pinimg.com/736x/eb/06/ca/eb06caca7b3e5ede3f763b2343e9aa74.jpg',
-    },
-  },
-  {
-    id: 2,
-    title: 'Manali Calling',
-    image: {
-      uri: 'https://www.himachaltourspackage.org/images/shimla-tour3.jpg',
-    },
-  },
-  {
-    id: 3,
-    title: 'Luxury Hotel in Mussoorie',
-    image: {
-      uri: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/c2/cd/46/aerial-view.jpg?w=1200&h=-1&s=1',
-    },
-  },
-  {
-    id: 4,
-    title: 'Explore Nainital',
-    image: {
-      uri: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/30/3a/3c/mesmerizing.jpg?w=1200&h=-1&s=1',
-    },
-  },
-];
+// const data = [
+//   {
+//     id: 1,
+//     title: 'Magnificent mountains and hill...',
+//     image: {
+//       uri: 'https://i.pinimg.com/736x/eb/06/ca/eb06caca7b3e5ede3f763b2343e9aa74.jpg',
+//     },
+//   },
+//   {
+//     id: 2,
+//     title: 'Manali Calling',
+//     image: {
+//       uri: 'https://www.himachaltourspackage.org/images/shimla-tour3.jpg',
+//     },
+//   },
+//   {
+//     id: 3,
+//     title: 'Luxury Hotel in Mussoorie',
+//     image: {
+//       uri: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/c2/cd/46/aerial-view.jpg?w=1200&h=-1&s=1',
+//     },
+//   },
+//   {
+//     id: 4,
+//     title: 'Explore Nainital',
+//     image: {
+//       uri: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/30/3a/3c/mesmerizing.jpg?w=1200&h=-1&s=1',
+//     },
+//   },
+// ];
 
 export default function Home() {
   const navigation = useNavigation();
@@ -81,7 +82,7 @@ export default function Home() {
   const renderItem = ({item}) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigation.navigate('GemDetailScreen', {item})}
+      onPress={() => navigation.navigate('HiddenGemDetailScreen', {item})}
       style={[styles.card, {backgroundColor: colors.subbg}]}>
       <Image source={item.image} style={styles.image} />
       <Text style={[styles.title, {color: colors.text}]}>{item.title}</Text>
@@ -238,12 +239,12 @@ export default function Home() {
           <View style={styles.modalContainer}>
             <View style={[styles.modalBox, {backgroundColor: colors.bg}]}>
               <Text style={[styles.modalTitle, {color: colors.text}]}>
-                Guests & Rooms
+                {t('Guests & Rooms')}
               </Text>
 
               <View style={styles.counterRow}>
                 <Text style={[styles.labelText, {color: colors.text}]}>
-                  Guests:
+                  {t('Guests')}:
                 </Text>
                 <View style={styles.counter}>
                   <TouchableOpacity
@@ -278,7 +279,7 @@ export default function Home() {
 
               <View style={styles.counterRow}>
                 <Text style={[styles.labelText, {color: colors.text}]}>
-                  Rooms:
+                {t('Rooms')}:
                 </Text>
                 <View style={styles.counter}>
                   <TouchableOpacity
@@ -315,7 +316,7 @@ export default function Home() {
                 activeOpacity={1}
                 style={styles.doneButton}
                 onPress={() => setModalVisible(false)}>
-                <Text style={styles.doneButtonText}>Done</Text>
+                <Text style={styles.doneButtonText}>{t('Done')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -332,7 +333,7 @@ export default function Home() {
               size={responsiveFontSize(2)}
               style={{color: '#fff'}}
             />
-            <Text style={styles.searchButtonText}>Search</Text>
+            <Text style={styles.searchButtonText}>{t('Search')}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -342,9 +343,9 @@ export default function Home() {
 
       {/* Hidden Gems Section */}
       <View style={styles.container}>
-        <Text style={[styles.heading, {color: colors.text}]}>Hidden Gems</Text>
+        <Text style={[styles.heading, {color: colors.text}]}>{t('Hidden Gems')}</Text>
         <FlatList
-          data={data}
+          data={HidenGem.categories}
           renderItem={renderItem}
           horizontal
           keyExtractor={item => item.id.toString()}

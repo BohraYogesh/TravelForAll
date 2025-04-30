@@ -1,0 +1,220 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "title": "Magnificent Mountains",
+      "image": {
+        "uri": "https://i.pinimg.com/736x/eb/06/ca/eb06caca7b3e5ede3f763b2343e9aa74.jpg"
+      },
+      "destinations": [
+        {
+          "name": "Radisson Hotel Shimla",
+          "location": "Shimla City Center",
+          "rating": "8.2",
+          "status": "Very Good",
+          "reviews": "780 Reviews",
+          "image": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/445773682.jpg?k=0f35bfef4772be87015561f512a3ca0e3f2aa2d665e7bf70475d01c1edc67548&o=&hp=1",
+          "price": "7500"
+        },
+        {
+          "name": "The Oberoi Wildflower Hall",
+          "location": "Shimla",
+          "rating": "9.0",
+          "status": "Excellent",
+          "reviews": "1,200 Reviews",
+          "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/26/7b/ce/caption.jpg?w=900&h=500&s=1",
+          "price": "28000"
+        },
+        {
+          "name": "The Himalayan Resort & Spa",
+          "location": "Manali",
+          "rating": "9.1",
+          "status": "Excellent",
+          "reviews": "1,000 Reviews",
+          "image": "https://blog.staah.com/wp-content/uploads/2024/05/khyber.jpg",
+          "price": "12500"
+        },
+        {
+          "name": "Manali Inn",
+          "location": "Manali",
+          "rating": "8.0",
+          "status": "Very Good",
+          "reviews": "500 Reviews",
+          "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/c5/db/1d/the-manali-inn.jpg?w=900&h=500&s=1",
+          "price": "6000"
+        },
+        {
+          "name": "Snow Valley Resorts",
+          "location": "Manali",
+          "rating": "8.3",
+          "status": "Very Good",
+          "reviews": "400 Reviews",
+          "image": "https://www.snowvalleyresorts.com/wp-content/uploads/mana-394x394.jpg",
+          "price": "5500"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Manali Calling",
+      "image": {
+        "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/c2/cd/46/aerial-view.jpg?w=1200&h=-1&s=1"
+      },
+      "destinations": [
+        {
+          "name": "Manali Inn",
+          "location": "Manali",
+          "rating": "8.0",
+          "status": "Very Good",
+          "reviews": "500 Reviews",
+          "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/c5/db/1d/the-manali-inn.jpg?w=900&h=500&s=1",
+          "price": "6000"
+        },
+        {
+          "name": "The Himalayan Resort & Spa",
+          "location": "Manali",
+          "rating": "9.1",
+          "status": "Excellent",
+          "reviews": "1,000 Reviews",
+          "image": "https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/201209141526559876-397348b8abeb11ebb5050242ac110002.jpg",
+          "price": "12500"
+        },
+        {
+          "name": "The Naini Retreat",
+          "location": "Nainital",
+          "rating": "8.4",
+          "status": "Very Good",
+          "reviews": "600 Reviews",
+          "image": "https://media-cdn.tripadvisor.com/media/photo-s/0d/80/d2/94/bar-be-que.jpg",
+          "price": "7000"
+        },
+        {
+          "name": "Hotel New Shaheen",
+          "location": "Manali",
+          "rating": "8.2",
+          "status": "Good",
+          "reviews": "250 Reviews",
+          "image": "https://3.imimg.com/data3/IY/MI/MY-9524000/hotel-manali-inn-500x500.jpg",
+          "price": "4500"
+        },
+        {
+          "name": "Apple Paradise Resort",
+          "location": "Manali",
+          "rating": "8.0",
+          "status": "Very Good",
+          "reviews": "300 Reviews",
+          "image": "https://media-cdn.tripadvisor.com/media/photo-s/07/2e/d8/17/hotel-apple-paradise.jpg",
+          "price": "5500"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Luxury Hotel in Mussoorie",
+      "image": {
+        "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/c2/cd/46/aerial-view.jpg?w=1200&h=-1&s=1"
+      },
+      "destinations": [
+        {
+          "name": "The Claridges Nabha Residence",
+          "location": "Mussoorie",
+          "rating": "9.2",
+          "status": "Excellent",
+          "reviews": "600 Reviews",
+          "image": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/84587699.jpg?k=83bf6080839868f645c8dff90095e2be85f94be106c26acdbd0a5db4d3474b32&o=&hp=1",
+          "price": "18000"
+        },
+        {
+          "name": "Mussoorie Gateway Resort",
+          "location": "Mussoorie",
+          "rating": "8.4",
+          "status": "Very Good",
+          "reviews": "450 Reviews",
+          "image": "https://t.eucdn.in/hotels/lg/gateway-resort-mussoorie-6519388.webp",
+          "price": "8000"
+        },
+        {
+          "name": "Sterling Mussoorie",
+          "location": "Mussoorie",
+          "rating": "8.8",
+          "status": "Very Good",
+          "reviews": "500 Reviews",
+          "image": "https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/200701211400156626-0666c98e-1d6c-4939-b2ec-d85272d36e02.jpg",
+          "price": "7500"
+        },
+        {
+          "name": "The Savoy Mussoorie",
+          "location": "Mussoorie",
+          "rating": "9.0",
+          "status": "Excellent",
+          "reviews": "800 Reviews",
+          "image": "https://www.itchotels.com/content/dam/itchotels/in/umbrella/welcomHotel/hotels/welcomhotelthesavoy-mussoorie/images/overview-landing-page/headmast/desktop/WH-the-savoy.jpg",
+          "price": "15000"
+        },
+        {
+          "name": "JW Marriott Mussoorie Walnut Grove Resort & Spa",
+          "location": "Mussoorie",
+          "rating": "9.3",
+          "status": "Excellent",
+          "reviews": "1,200 Reviews",
+          "image": "https://cache.marriott.com/is/image/marriotts7prod/jw-dedjw-mussoorie-facade-37161:Wide-Hor?wid=375&fit=constrain",
+          "price": "22000"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Explore Nainital",
+      "image": {
+        "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/30/3a/3c/mesmerizing.jpg?w=1200&h=-1&s=1"
+      },
+      "destinations": [
+        {
+          "name": "The Naini Retreat",
+          "location": "Nainital",
+          "rating": "8.4",
+          "status": "Very Good",
+          "reviews": "600 Reviews",
+          "image": "https://media-cdn.tripadvisor.com/media/photo-s/0d/80/d2/94/bar-be-que.jpg",
+          "price": "7000"
+        },
+        {
+          "name": "Shervani Hilltop Nainital",
+          "location": "Nainital",
+          "rating": "8.6",
+          "status": "Very Good",
+          "reviews": "700 Reviews",
+          "image": "https://t.eucdn.in/hotels/lg/shervani-hilltop-nainital-2816435.webp",
+          "price": "8500"
+        },
+        {
+          "name": "Nainital Lake Resort",
+          "location": "Nainital",
+          "rating": "8.5",
+          "status": "Very Good",
+          "reviews": "550 Reviews",
+          "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/b0/ba/45/lake-view-hotels.jpg?w=1200&h=-1&s=1",
+          "price": "6800"
+        },
+        {
+          "name": "Hotel Himalaya",
+          "location": "Nainital",
+          "rating": "8.2",
+          "status": "Good",
+          "reviews": "400 Reviews",
+          "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/98/9a/2d/bird-eye-view-of-himalaya.jpg?w=900&h=500&s=1",
+          "price": "5500"
+        },
+        {
+          "name": "Vikram Vintage Inn",
+          "location": "Nainital",
+          "rating": "8.7",
+          "status": "Very Good",
+          "reviews": "650 Reviews",
+          "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/b7/06/24/facade.jpg?w=900&h=-1&s=1",
+          "price": "9000"
+        }
+      ]
+    }
+  ]
+}

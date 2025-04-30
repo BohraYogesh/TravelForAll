@@ -21,56 +21,63 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../context/theme';
 import {useTranslation} from 'react-i18next';
+import {useCurrency} from '../../context/CurrencyContext';
+
+// const currencyOptions = [
+//   {
+//     id: 'usd',
+//     name: 'US Dollar',
+//     symbol: 'USD',
+//     flag: 'https://flagcdn.com/w80/us.png',
+//   },
+//   {
+//     id: 'inr',
+//     name: 'Indian Rupee',
+//     symbol: 'INR',
+//     flag: 'https://flagcdn.com/w80/in.png',
+//   },
+//   {
+//     id: 'eur',
+//     name: 'Euro',
+//     symbol: 'EUR',
+//     flag: 'https://flagcdn.com/w80/eu.png',
+//   },
+//   {
+//     id: 'gbp',
+//     name: 'British Pound',
+//     symbol: 'GBP',
+//     flag: 'https://flagcdn.com/w80/gb.png',
+//   },
+//   {
+//     id: 'jpy',
+//     name: 'Japanese Yen',
+//     symbol: 'JPY',
+//     flag: 'https://flagcdn.com/w80/jp.png',
+//   },
+//   {
+//     id: 'aed',
+//     name: 'UAE Dirham',
+//     symbol: 'AED',
+//     flag: 'https://flagcdn.com/w80/ae.png',
+//   },
+// ];
 
 const currencyOptions = [
-  {
-    id: 'usd',
-    name: 'US Dollar',
-    symbol: 'USD',
-    flag: 'https://flagcdn.com/w80/us.png',
-  },
-  {
-    id: 'inr',
-    name: 'Indian Rupee',
-    symbol: 'INR',
-    flag: 'https://flagcdn.com/w80/in.png',
-  },
-  {
-    id: 'eur',
-    name: 'Euro',
-    symbol: 'EUR',
-    flag: 'https://flagcdn.com/w80/eu.png',
-  },
-  {
-    id: 'gbp',
-    name: 'British Pound',
-    symbol: 'GBP',
-    flag: 'https://flagcdn.com/w80/gb.png',
-  },
-  {
-    id: 'jpy',
-    name: 'Japanese Yen',
-    symbol: 'JPY',
-    flag: 'https://flagcdn.com/w80/jp.png',
-  },
-  {
-    id: 'aed',
-    name: 'UAE Dirham',
-    symbol: 'AED',
-    flag: 'https://flagcdn.com/w80/ae.png',
-  },
+  { id: 'INR', symbol: '₹', name: 'Indian Rupee' },
+  { id: 'USD', symbol: '$', name: 'US Dollar' },
+  // Add more currencies as needed
 ];
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
   const {theme, setTheme} = useTheme();
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
 
-  const [selectedCurrency, setSelectedCurrency] = useState('inr');
+  const { selectedCurrency, setSelectedCurrency } = useCurrency();
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
 
   const [selectedPayment, setSelectedPayment] = useState(false);
@@ -79,10 +86,10 @@ const SettingsScreen = () => {
   const [searchText, setSearchText] = useState('');
   const {colors} = useTheme();
 
-  const handleLanguageChange = (id) => {
+  const handleLanguageChange = id => {
     setSelectedLanguage(id);
-    i18n.changeLanguage(id); 
-    setLanguageModalVisible(false); 
+    i18n.changeLanguage(id);
+    setLanguageModalVisible(false);
   };
 
   const languageOptions = [
@@ -90,13 +97,11 @@ const SettingsScreen = () => {
     {id: 'hi', name: `${t('Hindi')}`, icon: 'alpha-h-circle-outline'},
   ];
 
-
   const themeOptions = [
     {id: 'light', name: t('Light'), icon: 'white-balance-sunny'},
     {id: 'dark', name: t('Dark'), icon: 'weather-night'},
     {id: 'system', name: t('System Default'), icon: 'theme-light-dark'},
   ];
-
 
   const getThemeLabel = id => {
     const found = themeOptions.find(theme => theme.id === id);
@@ -270,7 +275,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color: colors.text}]}>{t('Theme')}</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            {t('Theme')}
+          </Text>
           <Text style={[styles.statusText, {color: colors.text}]}>
             {getThemeLabel(theme)}
           </Text>
@@ -291,7 +298,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color: colors.text}]}>{t('Language')}</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            {t('Language')}
+          </Text>
           <Text style={[styles.statusText, {color: colors.text}]}>
             {getLanguageLabel(selectedLanguage)}
           </Text>
@@ -312,7 +321,9 @@ const SettingsScreen = () => {
             size={responsiveFontSize(3)}
             color={colors.text}
           />
-          <Text style={[styles.rowText, {color: colors.text}]}>{t('Currency')}</Text>
+          <Text style={[styles.rowText, {color: colors.text}]}>
+            {t('Currency')}
+          </Text>
           <Text style={[styles.statusText, {color: colors.text}]}>
             {getCurrencyLabel(selectedCurrency)}
           </Text>
@@ -334,7 +345,7 @@ const SettingsScreen = () => {
             color={colors.text}
           />
           <Text style={[styles.rowText, {color: colors.text}]}>
-           {t('Notifications')}
+            {t('Notifications')}
           </Text>
           <Icon
             name="chevron-forward"
@@ -380,13 +391,16 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color: colors.text}]}>{t('FAQs')}</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>
+              {t('FAQs')}
+            </Text>
           </TouchableOpacity>
 
           {/* Chat with Us */}
           <TouchableOpacity
             style={[styles.helpItem, {backgroundColor: colors.subbg}]}
-            activeOpacity={1} onPress={() => navigation.navigate('Talk To Us')}>
+            activeOpacity={1}
+            onPress={() => navigation.navigate('Talk To Us')}>
             <MaterialIcon
               name="chat-outline"
               size={responsiveFontSize(3)}
@@ -397,7 +411,7 @@ const SettingsScreen = () => {
             </Text>
           </TouchableOpacity>
 
-            {/* WhatsApp */}
+          {/* WhatsApp */}
           <TouchableOpacity
             style={[styles.helpItem, {backgroundColor: colors.subbg}]}
             onPress={() => Linking.openURL('https://wa.me/9352642793')}
@@ -414,7 +428,7 @@ const SettingsScreen = () => {
               +91 9352642793
             </Text>
           </TouchableOpacity>
-          
+
           {/* Phone */}
           <TouchableOpacity
             style={[styles.helpItem, {backgroundColor: colors.subbg}]}
@@ -425,7 +439,9 @@ const SettingsScreen = () => {
               size={responsiveFontSize(3)}
               color={colors.text}
             />
-            <Text style={[styles.helpText, {color: colors.text}]}>{t('CALL US')}</Text>
+            <Text style={[styles.helpText, {color: colors.text}]}>
+              {t('CALL US')}
+            </Text>
             <Text style={[styles.phoneText, {color: colors.text}]}>
               +919352642793
             </Text>

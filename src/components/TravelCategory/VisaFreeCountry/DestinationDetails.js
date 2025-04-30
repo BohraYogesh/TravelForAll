@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,96 +14,126 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {useTheme} from '../../../context/theme';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import { useTheme } from '../../../context/theme';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useCurrency } from '../../../context/CurrencyContext'; 
 
 export default function DescriptionDetails() {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   const navigation = useNavigation();
+  const { selectedCurrency } = useCurrency();
   const route = useRoute();
-  const {description} = route.params;
+  const { description, price } = route.params;
+
   const [error, setError] = useState(false);
   const [travelers, setTravelers] = useState(1);
   const [showTravelerModal, setShowTravelerModal] = useState(false);
-  const travelerOptions = Array.from({length: 12}, (_, i) => i + 1);
-  const cleanPrice = parseInt(description?.price.replace(/,/g, ''));
-  const totalPrice = parseInt(travelers) * parseInt(cleanPrice);
+  const travelerOptions = Array.from({ length: 12 }, (_, i) => i + 1);
+
+
+  const cleanPrice = parseFloat(price.replace(/,/g, ''));
+  const totalPrice = travelers * cleanPrice;
+
   const formattedTotalPrice = totalPrice.toLocaleString();
 
   const handleBooking = () => {
-    if (!travelers || travelers < 1) {
+    if (travelers < 1) {
       setError(true);
     } else {
       setError(false);
       navigation.navigate('BookingDetails', {
-        description: description,
-        travelers: travelers,
+        description,
+        travelers,
         price: formattedTotalPrice,
       });
     }
   };
 
+  const getCurrencySymbol = () => {
+    switch (selectedCurrency) {
+      case 'USD':
+        return '$';
+      case 'INR':
+        return '₹';
+      default:
+        return '';
+    }
+  };
+
+  const getFormattedPrice = () => {
+    if (selectedCurrency === 'USD') {
+      return totalPrice.toFixed(2); 
+    } else if (selectedCurrency === 'INR') {
+      return formattedTotalPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+    return formattedTotalPrice;
+  };
+
   return (
-    <View style={[styles.container, {backgroundColor: colors.bg}]}>
+    <View style={[styles.container, { backgroundColor: colors.bg }]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Image source={{uri: description.image}} style={styles.image} />
+        <Image source={{ uri: description.image }} style={styles.image} />
         <View style={styles.content}>
-          <Text style={[styles.title, {color: colors.text}]}>
-            {description.country}
+          <Text style={[styles.title, { color: colors.text }]}>
+            {description.city}
           </Text>
-          <Text style={[styles.description, {color: colors.secondary}]}>
+          <Text style={[styles.description, { color: colors.secondary }]}>
             {description.des}
           </Text>
-          <Text style={[styles.category, {color: colors.secondary}]}>
+          <Text style={[styles.category, { color: colors.secondary }]}>
             Category: {description.category}
           </Text>
-          <Text style={[styles.priceInfo, {color: colors.primary}]}>
-            ₹ {description.price} / person
+          <Text style={[styles.priceInfo, { color: colors.primary }]}>
+            {getCurrencySymbol()} {price} / person
           </Text>
 
           {/* Inclusions Section */}
           <View style={styles.inclusionsSection}>
-            <Text style={[styles.inclusionsTitle, {color: colors.text}]}>
+            <Text style={[styles.inclusionsTitle, { color: colors.text }]}>
               Inclusions
             </Text>
             <View style={styles.inclusionList}>
-              <Text style={[styles.inclusionItem, {color: colors.secondary}]}>
+              <Text style={[styles.inclusionItem, { color: colors.secondary }]}>
                 • Accommodation
               </Text>
-              <Text style={[styles.inclusionItem, {color: colors.secondary}]}>
+              <Text style={[styles.inclusionItem, { color: colors.secondary }]}>
                 • Guided Tours
               </Text>
-              <Text style={[styles.inclusionItem, {color: colors.secondary}]}>
+              <Text style={[styles.inclusionItem, { color: colors.secondary }]}>
                 • Equipment
               </Text>
-              <Text style={[styles.inclusionItem, {color: colors.secondary}]}>
+              <Text style={[styles.inclusionItem, { color: colors.secondary }]}>
                 • Meals
               </Text>
             </View>
           </View>
-          <Text style={[styles.bookingLabel, {color: colors.text}]}>
+
+          {/* Traveler Count Section */}
+          <Text style={[styles.bookingLabel, { color: colors.text }]}>
             Number of Travelers
           </Text>
           <TouchableOpacity
             activeOpacity={1}
-            style={[styles.dropdown, {borderColor: colors.border}]}
+            style={[styles.dropdown, { borderColor: colors.border }]}
             onPress={() => setShowTravelerModal(true)}>
-            <Text style={[styles.dropdownText, {color: colors.text}]}>
+            <Text style={[styles.dropdownText, { color: colors.text }]}>
               {travelers} Traveler{travelers > 1 ? 's' : ''}
             </Text>
           </TouchableOpacity>
+
+          {/* Traveler Selection Modal */}
           <Modal visible={showTravelerModal} transparent animationType="fade">
             <TouchableOpacity
               activeOpacity={1}
-              style={[styles.modalOverlay, {backgroundColor: colors.subbg}]}
+              style={[styles.modalOverlay, { backgroundColor: colors.subbg }]}
               onPress={() => setShowTravelerModal(false)}>
               <View
-                style={[styles.modalContent, {backgroundColor: colors.card}]}>
+                style={[styles.modalContent, { backgroundColor: colors.card }]} >
                 <FlatList
                   data={travelerOptions}
                   showsVerticalScrollIndicator={false}
-                  keyExtractor={item => item.toString()}
-                  renderItem={({item}) => (
+                  keyExtractor={(item) => item.toString()}
+                  renderItem={({ item }) => (
                     <TouchableOpacity
                       activeOpacity={1}
                       style={styles.optionItem}
@@ -111,7 +141,7 @@ export default function DescriptionDetails() {
                         setTravelers(item);
                         setShowTravelerModal(false);
                       }}>
-                      <Text style={[styles.optionText, {color: colors.text}]}>
+                      <Text style={[styles.optionText, { color: colors.text }]}>
                         {item} Traveler{item > 1 ? 's' : ''}
                       </Text>
                     </TouchableOpacity>
@@ -124,9 +154,9 @@ export default function DescriptionDetails() {
       </ScrollView>
 
       {/* Bottom Price & Book Now */}
-      <View style={[styles.bottomBar, {backgroundColor: colors.subbg}]}>
-        <Text style={[styles.price, {color: colors.primary}]}>
-          ₹ {formattedTotalPrice}
+      <View style={[styles.bottomBar, { backgroundColor: colors.subbg }]}>
+        <Text style={[styles.price, { color: colors.primary }]}>
+          {getCurrencySymbol()} {getFormattedPrice()}
         </Text>
         <TouchableOpacity
           style={styles.bookButton}
@@ -146,8 +176,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: responsiveHeight(30),
-    // borderBottomLeftRadius: responsiveWidth(4),
-    // borderBottomRightRadius: responsiveWidth(4),
   },
   content: {
     padding: responsiveWidth(4),
@@ -169,7 +197,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(1.8),
     fontWeight: 'bold',
     marginTop: responsiveHeight(0.5),
-  },  
+  },
   inclusionsSection: {
     marginTop: responsiveHeight(1),
     paddingVertical: responsiveHeight(1),

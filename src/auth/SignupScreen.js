@@ -16,6 +16,7 @@ import {
 import {useTheme} from '../context/theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
+import {signUpUser} from '../api/api'; // Adjust the path as needed
 
 export default function SignupScreen() {
   const {colors} = useTheme();
@@ -40,7 +41,7 @@ export default function SignupScreen() {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     let valid = true;
 
     if (!email || !emailRegex.test(email)) {
@@ -98,7 +99,25 @@ export default function SignupScreen() {
       return;
     }
 
-    Alert.alert('Success', 'Account created successfully!');
+    try {
+      // Call the signupUser function
+      const response = await signUpUser(
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+      );
+
+      // If successful, show success message
+      // Alert.alert('Success', 'Account created successfully!');
+
+      // Optionally, navigate to another screen (e.g., Login)
+      navigation.navigate('Login');
+    } catch (error) {
+      // If there's an error, show the error message
+      Alert.alert('Error', error.message);
+    }
   };
 
   return (

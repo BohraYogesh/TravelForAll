@@ -21,12 +21,14 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useCurrency} from '../context/CurrencyContext';
 
 import {useTheme} from '../context/theme';
 // import i18n from '../constants/Language';
 
 const CityDetailScreen = ({route, navigation}) => {
   const {colors} = useTheme();
+  const {selectedCurrency} = useCurrency();
   // const { t } = useTranslation();
   const {id, city, state, country, price, description, image} = route.params;
   const [activeTab, setActiveTab] = useState('Overview');
@@ -288,17 +290,43 @@ const CityDetailScreen = ({route, navigation}) => {
       }
     };
 
+    const getCurrencySymbol = () => {
+      switch (selectedCurrency) {
+        case 'USD':
+          return '$';
+        case 'INR':
+          return '₹';
+        default:
+          return '';
+      }
+    };
+
+    const formatPrice = amount => {
+      if (selectedCurrency === 'USD') {
+        return `$ ${parseFloat(amount).toFixed(2)}`;
+      } else {
+        return `₹ ${new Intl.NumberFormat('en-IN').format(amount)}`;
+      }
+    };
+
     const travelerOptions = Array.from({length: 12}, (_, i) => i + 1);
-    const cleanPrice = parseInt(price.replace(/,/g, ''));
-    const totalPrice = parseInt(travelers) * parseInt(cleanPrice);
-    const formattedTotalPrice = totalPrice.toLocaleString();
+    const cleanPrice = parseFloat(price.replace(/,/g, ''));
+    const totalPrice = parseFloat(travelers) * cleanPrice;
+
+    const formattedTotalPrice =
+      selectedCurrency === 'USD'
+        ? totalPrice.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        : totalPrice.toLocaleString('en-IN'); 
 
     return (
       <View style={[styles.bookingCard, {backgroundColor: colors.card}]}>
         {/* Price */}
         <View style={styles.priceHeader}>
           <Text style={[styles.pricePerPerson, {color: colors.primary}]}>
-            ₹ {price}
+            {formatPrice(price)}
           </Text>
           <Text style={[styles.perPerson, {color: colors.text}]}>
             per person
@@ -380,7 +408,7 @@ const CityDetailScreen = ({route, navigation}) => {
             Base price:
           </Text>
           <Text style={[styles.priceValue, {color: colors.text}]}>
-            ₹ {price}
+            {formatPrice(price)}
           </Text>
         </View>
         <View style={styles.priceRow}>
@@ -394,7 +422,7 @@ const CityDetailScreen = ({route, navigation}) => {
         <View style={styles.priceRow}>
           <Text style={[styles.totalLabel, {color: colors.text}]}>Total:</Text>
           <Text style={[styles.totalPrice, {color: colors.text}]}>
-            ₹ {formattedTotalPrice}
+            {getCurrencySymbol()} {formattedTotalPrice}
           </Text>
         </View>
 

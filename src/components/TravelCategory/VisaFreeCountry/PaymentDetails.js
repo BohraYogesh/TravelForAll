@@ -14,21 +14,15 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
-
-const formatIndianCurrency = amount => {
-  const x = amount.toString();
-  const lastThree = x.substring(x.length - 3);
-  const otherNumbers = x.substring(0, x.length - 3);
-  return otherNumbers !== ''
-    ? otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
-    : lastThree;
-};
+import {useCurrency} from '../../../context/CurrencyContext';
 
 export default function PaymentDetails({route}) {
   const navigation = useNavigation();
   const {colors} = useTheme();
+  const {selectedCurrency} = useCurrency();
+
   const {package: packageName, duration, travelers, amount, travelDate} = route.params;
-  console.log('Amount:', route.params?.amount);
+  console.log('Amount', amount)
 
   const [expiry, setExpiry] = React.useState('');
   const [cvv, setCvv] = React.useState('');
@@ -36,8 +30,32 @@ export default function PaymentDetails({route}) {
   const [cardholderName, setCardholderName] = React.useState('');
   const [errors, setErrors] = React.useState({});
 
-  const sanitizedAmount = amount.replace(/,/g, '');
-  const totalAmount = parseInt(travelers) * parseInt(sanitizedAmount);
+  const getCurrencySymbol = () => {
+    switch (selectedCurrency) {
+      case 'USD':
+        return '$';
+      case 'INR':
+        return '₹';
+      default:
+        return '';
+    }
+  };
+
+  const formatCurrency = (amount, currencySymbol) => {
+    if (selectedCurrency === 'INR') {
+      const x = amount.toString();
+      const lastThree = x.substring(x.length - 3);
+      const otherNumbers = x.substring(0, x.length - 3);
+      return otherNumbers !== ''
+        ? currencySymbol + otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
+        : currencySymbol + lastThree;
+    }
+    return currencySymbol + amount;
+  };
+
+  const currencySymbol = getCurrencySymbol();
+  const numericAmount = amount.replace(/[^0-9.]/g, '');
+  const displayAmount = formatCurrency(numericAmount, currencySymbol);
 
   const handleCardNumberChange = text => {
     let formatted = text.replace(/[^0-9]/g, '');
@@ -50,8 +68,8 @@ export default function PaymentDetails({route}) {
     if (formatted.length > 14) {
       formatted = formatted.slice(0, 14) + ' ' + formatted.slice(14);
     }
-    setCardNumber(formatted.slice(0, 19)); 
-    if (errors.cardNumber) setErrors({...errors, cardNumber: false}); 
+    setCardNumber(formatted.slice(0, 19));
+    if (errors.cardNumber) setErrors({...errors, cardNumber: false});
   };
 
   const handleExpiryChange = text => {
@@ -64,20 +82,20 @@ export default function PaymentDetails({route}) {
   };
 
   const handleCvvChange = text => {
-    setCvv(text.replace(/[^0-9]/g, '').slice(0, 4)); 
-    if (errors.cvv) setErrors({...errors, cvv: false}); 
+    setCvv(text.replace(/[^0-9]/g, '').slice(0, 4));
+    if (errors.cvv) setErrors({...errors, cvv: false});
   };
 
   const handleCardholderNameChange = text => {
     setCardholderName(text);
-    if (errors.cardholderName) setErrors({...errors, cardholderName: false}); 
+    if (errors.cardholderName) setErrors({...errors, cardholderName: false});
   };
 
   const handleProceed = () => {
     const newErrors = {};
-    if (!expiry.trim()) newErrors.expiry = true; 
-    if (!cvv.trim()) newErrors.cvv = true; 
-    if (!cardNumber.trim()) newErrors.cardNumber = true; 
+    if (!expiry.trim()) newErrors.expiry = true;
+    if (!cvv.trim()) newErrors.cvv = true;
+    if (!cardNumber.trim()) newErrors.cardNumber = true;
     if (!cardholderName.trim()) newErrors.cardholderName = true;
 
     setErrors(newErrors);
@@ -93,7 +111,7 @@ export default function PaymentDetails({route}) {
       travelers,
       travelDate,
       bookedBy: cardholderName,
-      amount: sanitizedAmount,
+      amount: numericAmount,
     });
   };
 
@@ -103,9 +121,7 @@ export default function PaymentDetails({route}) {
 
       {/* Order Summary */}
       <View style={[styles.summaryCard, {backgroundColor: colors.subbg}]}>
-        <Text style={[styles.summaryTitle, {color: colors.text}]}>
-          Order Summary
-        </Text>
+        <Text style={[styles.summaryTitle, {color: colors.text}]}>{'Order Summary'}</Text>
         <View style={styles.row}>
           <Text style={{color: colors.text}}>Package:</Text>
           <Text style={{color: colors.text}}>{packageName}</Text>
@@ -119,16 +135,14 @@ export default function PaymentDetails({route}) {
           <Text style={{color: colors.text}}>{travelers}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={[styles.totalLabel, {color: colors.text}]} >
-            Total Amount:
-          </Text>
-          <Text style={[styles.totalAmount, {color: colors.primary}]} >
-            ₹ {formatIndianCurrency(sanitizedAmount)}
+          <Text style={[styles.totalLabel, {color: colors.text}]}>Total Amount:</Text>
+          <Text style={[styles.totalAmount, {color: colors.primary}]}>
+            {displayAmount}
           </Text>
         </View>
       </View>
 
-      {/* Card Number */}
+      {/* Card Inputs */}
       <Text style={[styles.label, {color: colors.text}]}>Card Number</Text>
       <TextInput
         placeholder="1234 5678 9012 3456"
@@ -136,15 +150,14 @@ export default function PaymentDetails({route}) {
         style={[
           styles.input,
           {color: colors.text},
-          errors.cardNumber && styles.errorInput, 
+          errors.cardNumber && styles.errorInput,
         ]}
         keyboardType="numeric"
-        maxLength={19} 
+        maxLength={19}
         onChangeText={handleCardNumberChange}
-        value={cardNumber} 
+        value={cardNumber}
       />
 
-      {/* Expiry Date and CVV */}
       <View style={styles.row}>
         <View style={styles.column}>
           <Text style={[styles.label, {color: colors.text}]}>Expiry Date</Text>
@@ -154,7 +167,7 @@ export default function PaymentDetails({route}) {
             style={[
               styles.input,
               styles.halfInput,
-              errors.expiry && styles.errorInput, 
+              errors.expiry && styles.errorInput,
               {color: colors.text},
             ]}
             keyboardType="numeric"
@@ -184,7 +197,6 @@ export default function PaymentDetails({route}) {
         </View>
       </View>
 
-      {/* Cardholder Name */}
       <Text style={[styles.label, {color: colors.text}]}>Cardholder Name</Text>
       <TextInput
         placeholder="Enter your name"
@@ -192,13 +204,12 @@ export default function PaymentDetails({route}) {
         style={[
           styles.input,
           {color: colors.text},
-          errors.cardholderName && styles.errorInput, 
+          errors.cardholderName && styles.errorInput,
         ]}
         value={cardholderName}
         onChangeText={handleCardholderNameChange}
       />
 
-      {/* Payment Button */}
       <TouchableOpacity
         activeOpacity={1}
         style={[styles.payButton, {backgroundColor: '#387c87'}]}

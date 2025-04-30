@@ -16,11 +16,13 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useTheme} from '../../../context/theme';
+import { useCurrency } from '../../../context/CurrencyContext';
 
 export default function BookingDetails() {
   const navigation = useNavigation();
   const route = useRoute();
   const {city, price, description} = route.params || {};
+  const {selectedCurrency} = useCurrency();
 
   console.log('City from params:', city);
   console.log('Price from params:', price);
@@ -75,6 +77,16 @@ export default function BookingDetails() {
       bookedBy: fullName,
     });
   };
+  const getCurrencySymbol = () => {
+    switch (selectedCurrency) {
+      case 'USD':
+        return '$';
+      case 'INR':
+        return '₹';
+      default:
+        return '';
+    }
+  };
 
   return (
     <View style={[styles.container, {backgroundColor: colors.bg}]}>
@@ -85,11 +97,11 @@ export default function BookingDetails() {
       {/* Package Card */}
       <View style={[styles.packageCard, {backgroundColor: colors.subbg}]}>
         <Text style={[styles.packageTitle, {color: colors.text}]}>
-          {description?.country || city || 'No Country Available'}
+          {description?.city || city || 'No Country Available'}
         </Text>
         <Text style={[styles.packageDays, {color: colors.text}]}>5 days</Text>
         <Text style={[styles.packagePrice, {color: colors.primary}]}>
-          ₹ { price || 'N/A'}
+        {getCurrencySymbol()} { price || 'N/A'}
         </Text>
       </View>
 

@@ -15,55 +15,7 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import { useTheme } from '../../context/theme';
-
-const hotels = [
-  {
-    name: 'Radisson Hotel Shimla',
-    location: 'Shimla City Center',
-    rating: '8.2',
-    status: 'Very Good',
-    Reviews: '780 Reviews',
-    image:
-      'https://cf.bstatic.com/xdata/images/hotel/max1024x768/445773682.jpg?k=0f35bfef4772be87015561f512a3ca0e3f2aa2d665e7bf70475d01c1edc67548&o=&hp=1',
-  },
-  {
-    name: 'Welcomhotel by ITC Hotels',
-    location: 'Mashobra',
-    rating: '8.5',
-    status: 'Very Good',
-    Reviews: '780 Reviews',
-    image:
-      'https://www.itchotels.com/content/dam/itchotels/in/umbrella/welcomHotel/hotels/welcomhotelshimla-shimla/images/overview-landing-page/headmast/desktop/inner-facade-evening-view.png',
-  },
-  {
-    name: 'The Oberoi Cecil',
-    location: 'Chaura Maidan, Shimla',
-    rating: '9.1',
-    status: 'Very Good',
-    Reviews: '780 Reviews',
-    image:
-      'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/26/7b/ce/caption.jpg?w=900&h=500&s=1',
-  },
-  {
-    name: 'The Hillsong Homey',
-    location: 'Chaura Maidan, Shimla',
-    rating: '9.3',
-    status: 'Very Good',
-    Reviews: '780 Reviews',
-    image:
-      'https://r1imghtlak.ibcdn.com/9b98ab84d35811ebad360242ac110002.jpg?&downsize=520:350&crop=520:350;81,0&output-format=jpg',
-  },
-  {
-    name: 'Royal Tulip Shimla, Kufri',
-    location: 'Chaura Maidan, Shimla',
-    rating: '9.1',
-    status: 'Very Good',
-    Reviews: '780 Reviews',
-    image:
-      'https://royal-tulip-shimla-kufri-hills.shimlahotels.net/data/Imgs/OriginalPhoto/11431/1143157/1143157720/img-royal-tulip-kufri-hills-hotel-shimla-71.JPEG',
-  },
-];
+import {useTheme} from '../../context/theme';
 
 const HiddenGemDetailScreen = () => {
   const {colors} = useTheme();
@@ -91,12 +43,16 @@ const HiddenGemDetailScreen = () => {
     }
   };
 
+  const handleHotelPress = (hotel) => {
+    // Navigate to the hotel detail screen and pass hotel data
+    navigation.navigate('HiddenHotelDetails', {hotel: hotel});
+  };
+
   return (
-    <ScrollView style={[styles.container, {backgroundColor: colors.subbg}]}>
+    <ScrollView style={[styles.container, {backgroundColor: colors.bg}]}>
       {/* Header Image */}
       <View>
         <Image source={item.image} style={styles.headerImage} />
-
         <TouchableOpacity
           style={styles.backIcon}
           onPress={() => navigation.goBack()}
@@ -118,37 +74,39 @@ const HiddenGemDetailScreen = () => {
 
       {/* Title & Description */}
       <View style={styles.contentContainer}>
-        <Text style={[styles.title, {color:colors.text}]}>{item.title}</Text>
-        <Text style={[styles.description, {color: colors.secondary}]}>
-          {item.description ||
-            'Experience the beauty and charm of this hidden gem. Explore scenic views, comfortable stays, and unforgettable memories.'}
-        </Text>
+        <Text style={[styles.title, {color: colors.text}]}>{item.title}</Text>
+        <Text style={[styles.description, {color: colors.secondary}]}>{item.description || 'Explore this hidden gem.'}</Text>
       </View>
 
       {/* Hotel List */}
       <View style={styles.hotelContainer}>
-        <Text style={[styles.sectionTitle, {color:colors.text}]}>Places to stay</Text>
+        <Text style={[styles.sectionTitle, {color: colors.text}]}>
+          Places to stay
+        </Text>
 
-        {hotels.map((hotel, index) => (
-          <View style={styles.card} key={index}>
+        {item.destinations?.map((hotel, index) => (
+          <TouchableOpacity
+          activeOpacity={1}
+            key={index}
+            style={styles.card}
+            onPress={() => handleHotelPress(hotel)}>
             <Image source={{uri: hotel.image}} style={styles.hotelImage} />
-            <View style={styles.cardContent}>
-              <Text style={[styles.hotelName, {color:colors.text}]}>{hotel.name}</Text>
+            <View style={[styles.cardContent, {backgroundColor: colors.subbg}]}>
+              <Text style={[styles.hotelName, {color: colors.text}]}>{hotel.name}</Text>
               <Text style={[styles.location, {color: colors.secondary}]}>
-                <Icon name="location-outline" size={responsiveFontSize(1.8)} />{' '}
-                {hotel.location}
+                <Icon name="location-outline" size={responsiveFontSize(1.8)} /> {hotel.location}
               </Text>
               <View style={{flexDirection: 'row'}}>
                 <View style={{borderRadius: 5}}>
                   <Text style={styles.ratings}>{hotel.rating}</Text>
                 </View>
                 <View>
-                  <Text style={styles.rating}> {hotel.status}</Text>
-                  <Text style={[styles.ratinges,{color: colors.secondary}]}> {hotel.Reviews}</Text>
+                  <Text style={styles.rating}>{hotel.status}</Text>
+                  <Text style={[styles.ratinges, {color: colors.secondary}]}>{hotel.Reviews}</Text>
                 </View>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
@@ -232,15 +190,15 @@ const styles = StyleSheet.create({
   },
   ratinges: {
     fontSize: responsiveFontSize(1.5),
-    color:'#666'
+    color: '#666',
   },
   ratings: {
     fontSize: responsiveFontSize(1.8),
     backgroundColor: '#388e3c',
     color: '#fff',
     fontWeight: '600',
-    borderRadius:5,
-    padding:responsiveWidth(1)
+    borderRadius: 5,
+    padding: responsiveWidth(1),
   },
 });
 

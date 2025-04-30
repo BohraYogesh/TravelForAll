@@ -396,5 +396,137 @@
         }
       }
     ]
+  },
+  {
+    "city": "Pune",
+    "state": "Maharashtra",
+    "hotels": [
+      {
+        "name": "JW Marriott Hotel Pune",
+        "price": 11000,
+        "rating": 4.8,
+        "location": {
+          "city": "Pune",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://www.marriott.com/content/dam/marriott-renditions/dm-static-renditions/jw/apec/hws/p/pnqmc/en_us/photo/unlimited/assets/jw-pnqmc-hotel-facade-36108-wide-hor.jpg"
+        }
+      },
+      {
+        "name": "The Westin Pune Koregaon Park",
+        "price": 9500,
+        "rating": 4.6,
+        "location": {
+          "city": "Pune",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://cache.marriott.com/is/image/marriotts7prod/wi-pnqwi-asilo-pune-34202:Classic-Hor?wid=750&fit=constrain"
+        }
+      },
+      {
+        "name": "Hyatt Pune",
+        "price": 7000,
+        "rating": 4.4,
+        "location": {
+          "city": "Pune",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/e4/3f/dd/exterior.jpg?w=900&h=-1&s=1"
+        }
+      },
+      {
+        "name": "Conrad Pune",
+        "price": 10500,
+        "rating": 4.7,
+        "location": {
+          "city": "Pune",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://www.conradpune.com/wp-content/uploads/2023/08/kabana.jpg"
+        }
+      },
+      {
+        "name": "Marriott Suites Pune",
+        "price": 8800,
+        "rating": 4.5,
+        "location": {
+          "city": "Pune",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://cache.marriott.com/content/dam/marriott-renditions/PNQMS/pnqms-exterior-0077-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=375px:*"
+        }
+      }
+    ]
+  },
+  {
+    "city": "Lonavala",
+    "state": "Maharashtra",
+    "hotels": [
+      {
+        "name": "The Machan",
+        "price": 12000,
+        "rating": 4.6,
+        "location": {
+          "city": "Lonavala",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://www.themachan.com/img/slider-main/slider/1.webp"
+        }
+      },
+      {
+        "name": "Della Resorts",
+        "price": 14000,
+        "rating": 4.5,
+        "location": {
+          "city": "Lonavala",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://www.dellaresorts.com/new-images/new-imagesgvr-home-feb.webp"
+        }
+      },
+      {
+        "name": "Fariyas Resort Lonavala",
+        "price": 10000,
+        "rating": 4.3,
+        "location": {
+          "city": "Lonavala",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/7e/2a/56/fariyas-resort-lonavala.jpg?w=900&h=-1&s=1"
+        }
+      },
+      {
+        "name": "Rhythm Lonavala",
+        "price": 9000,
+        "rating": 4.4,
+        "location": {
+          "city": "Lonavala",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://assets.simplotel.com/simplotel/image/upload/w_5000,h_3333/x_0,y_260,w_5000,h_2813,r_0,c_crop/q_80,w_900,dpr_1,f_auto,fl_progressive,c_limit/rhythm-lonavala/Swimming_pool_in_the_midst_of_a_garden_ro2srw"
+        }
+      },
+      {
+        "name": "Upper Deck Resort",
+        "price": 8500,
+        "rating": 4.2,
+        "location": {
+          "city": "Lonavala",
+          "state": "Maharashtra"
+        },
+        "image": {
+          "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/66/33/2a/upper-deck-resort-pvt.jpg?w=700&h=-1&s=1"
+        }
+      }
+    ]
   }
 ]

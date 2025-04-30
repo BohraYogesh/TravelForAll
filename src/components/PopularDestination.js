@@ -16,10 +16,14 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import popularindiacities from './popular_indian_cities.json';
 import {useTheme} from '../context/theme';
+import {useTranslation} from 'react-i18next';
+import {useCurrency} from '../context/CurrencyContext';
 
 export default function PopularDestination() {
   const {colors} = useTheme();
   const navigation = useNavigation();
+  const {t} = useTranslation();
+  const {selectedCurrency, conversionRate} = useCurrency();
 
   const groupedData = [];
   for (let i = 0; i < popularindiacities.length; i += 2) {
@@ -27,6 +31,26 @@ export default function PopularDestination() {
     const second = popularindiacities[i + 1];
     groupedData.push([first, second].filter(Boolean));
   }
+
+  const getPriceWithCurrency = price => {
+    let symbol = '';
+    let formattedPrice = price;
+
+    switch (selectedCurrency) {
+      case 'USD':
+        symbol = '$';
+        formattedPrice = (price * conversionRate).toFixed(2);
+        break;
+      case 'INR':
+        symbol = '₹';
+        formattedPrice = new Intl.NumberFormat('en-IN').format(price);
+        break;
+      default:
+        formattedPrice = price;
+    }
+
+    return `${symbol} ${formattedPrice}`;
+  };
 
   return (
     <View style={{padding: responsiveWidth(4), backgroundColor: colors.bg}}>
@@ -36,10 +60,10 @@ export default function PopularDestination() {
         onPress={() => navigation.navigate('PopulorDestination')}>
         <View>
           <Text style={[styles.title, {color: colors.text}]}>
-            Popular Packages
+            {t('Popular Packages')}
           </Text>
           <Text style={styles.subtitle}>
-            Estimated lowest fares found by users
+            {t('Estimated lowest fares found by users')}
           </Text>
         </View>
         <Icon
@@ -56,48 +80,48 @@ export default function PopularDestination() {
         keyExtractor={(_, index) => `col-${index}`}
         renderItem={({item}) => (
           <View style={[styles.column]}>
-            {item.map(
-              (
-                city,
-                index, 
-              ) => (
-                <TouchableOpacity
-                  activeOpacity={1}
-                  key={city.city}
-                  style={[
-                    styles.card,
-                    {
-                      marginBottom:
-                        index !== item.length - 1 ? responsiveHeight(2) : 0, 
-                      backgroundColor: colors.subbg,
-                      borderRadius: responsiveWidth(2),
-                    },
-                  ]}
-                  onPress={() =>
-                    navigation.navigate('CityDetail', {
-                      id: city.id,
-                      city: city.city,
-                      state: city.state,
-                      country: city.country,
-                      price: city.price,
-                      description: city.description,
-                      image: city.image.uri,
-                    })
-                  }>
-                  <ImageBackground
-                    source={{uri: city.image.uri}}
-                    style={styles.image}
-                    imageStyle={{borderRadius: responsiveWidth(2)}}>
-                    <View style={styles.overlay}>
-                      <Text style={styles.city}>{city.city}</Text>
-                      <Text style={styles.country}>{city.country}</Text>
-                    </View>
-                  </ImageBackground>
-                  <Text style={styles.label}>Round-trip from</Text>
-                  <Text style={styles.price}>{city.price}</Text>
-                </TouchableOpacity>
-              ),
-            )}
+            {item.map((city, index) => (
+              <TouchableOpacity
+                activeOpacity={1}
+                key={city.city}
+                style={[
+                  styles.card,
+                  {
+                    marginBottom:
+                      index !== item.length - 1 ? responsiveHeight(2) : 0,
+                    backgroundColor: colors.subbg,
+                    borderRadius: responsiveWidth(2),
+                  },
+                ]}
+                onPress={() =>
+                  navigation.navigate('CityDetail', {
+                    id: city.id,
+                    city: city.city,
+                    state: city.state,
+                    country: city.country,
+                    price:
+                      selectedCurrency === 'USD'
+                        ? (city.price * conversionRate).toFixed(2)
+                        : city.price,
+                    description: city.description,
+                    image: city.image.uri,
+                  })
+                }>
+                <ImageBackground
+                  source={{uri: city.image.uri}}
+                  style={styles.image}
+                  imageStyle={{borderRadius: responsiveWidth(2)}}>
+                  <View style={styles.overlay}>
+                    <Text style={styles.city}>{city.city}</Text>
+                    <Text style={styles.country}>{city.country}</Text>
+                  </View>
+                </ImageBackground>
+                <Text style={styles.label}>{t('Round-trip from')}</Text>
+                <Text style={styles.price}>
+                  {getPriceWithCurrency(city.price)}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
         )}
       />

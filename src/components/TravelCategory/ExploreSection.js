@@ -14,65 +14,34 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
-import { useTheme } from '../../context/theme';
-
-const exploreData = [
-  {
-    title: 'Destinations',
-    destinations: 60,
-    price: '₹17,875',
-    images: [
-      'https://lp-cms-production.imgix.net/2024-10/-CantoiStock-1299735828.jpg?auto=compress&format=auto&fit=crop&q=50&w=1200&h=800',
-      'https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/4b/5d/c8/caption.jpg',
-      'https://www.chaseforadventure.com/wp-content/uploads/2023/07/Things-to-do-in-Krabi.webp',
-    ],
-  },
-  {
-    title: 'Popular Packages',
-    destinations: 87,
-    price: '₹4,233',
-    images: [
-      'https://www.holidify.com/images/bgImages/ROME.jpg',
-      'https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg',
-      'https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg',
-    ],
-  },
-  
-  {
-    title: 'Weekend Getaways',
-    destinations: 3,
-    price: '₹10,466',
-    images: [
-      'https://www.tourmyindia.com/blog//wp-content/uploads/2023/09/Best-Weekend-Destinations-from-Jaipur.jpg',
-      'https://blog.weekendthrill.com/wp-content/uploads/2016/05/053016_0515_16IDEALWEEK1.jpg',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST6I1HUhGQtFEy-ZQsXRprzvCP-BY6QYisPw&s',
-    ],
-  },
-  {
-    title: 'Romantic Destinatios',
-    destinations: 14,
-    price: '₹10,945',
-    images: [
-      'https://media.cntraveler.com/photos/67782447e93d5ea2c59fec07/4:3/w_3148,h_2361,c_limit/Le_Sirenuse_Room_62-0553.jpg',
-      'https://media.cntraveller.com/photos/62f36e42e062900b0e3b7637/master/w_320%2Cc_limit/Le_Sirenuse_ALDOs_BAR-9051-La%2520Sponda%2C%2520Le%2520Sireneuse%2C%2520Positano%2C%2520Italy%2C-jun21-pr.jpg',
-      'https://www.ecstaticindiatours.com/uploads/blog/1696338863o0ow3-udaipur.jpg',
-    ],
-  },
-  {
-    title: 'Nature Destinations',
-    destinations: 13,
-    price: '₹10,945',
-    images: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA1zM1NH3jWBmN47Z-XVm4JiHq1QoDD3Ovow&s',
-      'https://hips.hearstapps.com/hmg-prod/images/snowdonia-national-park-in-wales-uk-royalty-free-image-1729091363.jpg?crop=0.530xw:1.00xh;0.239xw,0&resize=640:*',
-      'https://specials-images.forbesimg.com/imageserve/61cc77ede18f95935e179434/Llynnau-Mymbyr--Mount-Snowdon---Snowdon-Massif/960x0.jpg?fit=scale',
-    ],
-  },
-];
+import {useTheme} from '../../context/theme';
+import {useTranslation} from 'react-i18next';
+import {useCurrency} from '../../context/CurrencyContext';
+import ExploreCategoryHotels from '../TravelCategory/ExploreCategory/ExploreCategoryHotels.json'; 
 
 const ExploreSection = () => {
   const {colors} = useTheme();
   const navigation = useNavigation();
+  const {t} = useTranslation();
+  const {selectedCurrency, conversionRate} = useCurrency();
+
+  const getPriceWithCurrency = price => {
+    let symbol = '';
+    let calculatedPrice = price;
+  
+    if (selectedCurrency === 'USD') {
+      calculatedPrice = (price * conversionRate).toFixed(2);
+      symbol = '$';
+      return `${symbol} ${calculatedPrice}`;
+    } else if (selectedCurrency === 'INR') {
+      symbol = '₹';
+      const formattedPrice = new Intl.NumberFormat('en-IN').format(price);
+      return `${symbol} ${formattedPrice}`;
+    }
+  
+    return price;
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -83,42 +52,38 @@ const ExploreSection = () => {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Text style={[styles.heading, {color:colors.text}]}>Explore</Text>
+        <Text style={[styles.heading, {color: colors.text}]}>
+          {t('Explore')}
+        </Text>
         <Icon name="chevron-right" size={22} color={colors.secondary} />
       </TouchableOpacity>
       <FlatList
-        data={exploreData}
+        data={ExploreCategoryHotels}
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.title}
         renderItem={({item}) => (
           <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            if (item.title === 'Popular Packages') {
-              navigation.navigate('PopulorDestination', {
-                category: item.title,
-                image: item.images[0],
-              });
-            } else if (item.title === 'Destinations') {
-              navigation.navigate('VisaFreeCountry', {
-                category: item.title,
-                image: item.images[0],
-              });
-            // } else if (item.title === 'Weekend Getaways') {
-            //   navigation.navigate('WeekendGetawayScreen', {
-            //     category: item.title,
-            //     image: item.images[0],
-            //   });
-            } else {
-              // Default screen for other categories
-              navigation.navigate('ExploreCategoryScreen', {
-                category: item.title,
-                image: item.images[0],
-              });
-            }
-          }}
-        >
+            activeOpacity={1}
+            onPress={() => {
+              if (item.title === 'Popular Packages') {
+                navigation.navigate('PopulorDestination', {
+                  category: item.title,
+                  image: item.images[0],
+                });
+              } else if (item.title === 'Destinations') {
+                navigation.navigate('VisaFreeCountry', {
+                  category: item.title,
+                  image: item.images[0],
+                });
+              } else {
+                navigation.navigate('ExploreCategoryScreen', {
+                  category: item.title,
+                  image: item.images[0],
+                  data: item.categories,
+                });
+              }
+            }}>
             <View style={[styles.card, {backgroundColor: colors.subbg}]}>
               <View style={styles.imageGrid}>
                 <Image
@@ -136,13 +101,16 @@ const ExploreSection = () => {
                   />
                 </View>
               </View>
-              <Text style={[styles.cardTitle, {
-                color:colors.text
-              }]}>{item.title}</Text>
+              <Text
+                style={[styles.cardTitle, {color: colors.text}]}>
+                {item.title}
+              </Text>
               <Text style={styles.subtitle}>
                 {item.destinations} Destinations from
               </Text>
-              <Text style={styles.price}>{item.price}</Text>
+              <Text style={styles.price}>
+                {getPriceWithCurrency(item.price)}
+              </Text>
             </View>
           </TouchableOpacity>
         )}

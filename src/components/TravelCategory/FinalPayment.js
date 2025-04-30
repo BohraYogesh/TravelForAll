@@ -2,25 +2,29 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../context/theme';
+import {useCurrency} from '../../context/CurrencyContext';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-// Format number to Indian currency format
-const formatIndianCurrency = amount => {
-  const x = amount.toString();
-  const lastThree = x.substring(x.length - 3);
-  const otherNumbers = x.substring(0, x.length - 3);
-  return otherNumbers !== ''
-    ? otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
-    : lastThree;
+const formatCurrency = (amount, currencySymbol, currencyCode) => {
+  if (currencyCode === 'INR') {
+    const x = amount.toString();
+    const lastThree = x.substring(x.length - 3);
+    const otherNumbers = x.substring(0, x.length - 3);
+    return otherNumbers !== ''
+      ? currencySymbol + otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
+      : currencySymbol + lastThree;
+  }
+  return currencySymbol + amount;
 };
 
 export default function FinalPayment({route}) {
   const navigation = useNavigation();
   const {colors} = useTheme();
+  const {selectedCurrency} = useCurrency();
 
   const {
     package: packageName,
@@ -31,6 +35,17 @@ export default function FinalPayment({route}) {
     bookedBy,
     transactionId = 'air87hjcp99',
   } = route.params;
+
+  const getCurrencySymbol = () => {
+    switch (selectedCurrency) {
+      case 'USD':
+        return '$';
+      case 'INR':
+        return '₹';
+      default:
+        return '';
+    }
+  };
 
   return (
     <View style={[styles.container, {backgroundColor: colors.bg}]}>
@@ -63,7 +78,7 @@ export default function FinalPayment({route}) {
             Total Amount:
           </Text>
           <Text style={[styles.totalAmount, {color: colors.primary}]}>
-            ₹{formatIndianCurrency(amount)}
+            {formatCurrency(amount, getCurrencySymbol(),selectedCurrency)}
           </Text>
         </View>
       </View>
@@ -98,7 +113,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: responsiveWidth(5),
     alignItems: 'center',
-    // justifyContent:'center'
   },
   checkmark: {
     fontSize: responsiveFontSize(6),

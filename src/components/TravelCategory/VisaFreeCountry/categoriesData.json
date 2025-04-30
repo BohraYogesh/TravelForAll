@@ -1,0 +1,230 @@
+{
+  "categories": [
+    {
+      "category": "Adventure",
+      "cities": [
+        {
+          "city": "Manali",
+          "state": "Himachal Pradesh",
+          "country": "India",
+          "price": 12000,
+          "des": "Adventure sports like skiing, paragliding and rafting.",
+          "image": "https://cdn.pixabay.com/photo/2017/02/03/17/56/manali-2035750_640.jpg"
+        },
+        {
+          "city": "Rishikesh",
+          "state": "Uttarakhand",
+          "country": "India",
+          "price": 8500,
+          "des": "Yoga capital and white-water rafting hotspot.",
+          "image": "https://www.shutterstock.com/image-photo/rishikesh-yoga-city-india-gange-600nw-1137990866.jpg"
+        },
+        {
+          "city": "Leh",
+          "state": "Ladakh",
+          "country": "India",
+          "price": 18000,
+          "des": "Biking and trekking in high altitude deserts.",
+          "image": "https://media.istockphoto.com/id/1155675399/photo/pangong-lake.jpg?s=612x612&w=0&k=20&c=nBGDknbZslRWqMtQGZOyqkb_KzcT-Mx4DrSfVLQUYxQ="
+        },
+        {
+          "city": "Spiti Valley",
+          "state": "Himachal Pradesh",
+          "country": "India",
+          "price": 16000,
+          "des": "Remote Himalayan road adventures.",
+          "image": "https://t3.ftcdn.net/jpg/05/37/17/02/360_F_537170263_5F7rM9l2jURI7qBVJqTzLER004eZ7awN.jpg"
+        }
+      ]
+    },
+    {
+      "category": "Honeymoon",
+      "cities": [
+        {
+          "city": "Udaipur",
+          "state": "Rajasthan",
+          "country": "India",
+          "price": 14000,
+          "des": "Romantic lakeside palaces and sunsets.",
+          "image": "https://plus.unsplash.com/premium_photo-1697729789803-48b0c82365ff?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHVkYWlwdXJ8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+          "city": "Goa",
+          "state": "Goa",
+          "country": "India",
+          "price": 13000,
+          "des": "Beach paradise with nightlife and luxury.",
+          "image": "https://media.istockphoto.com/id/535168027/photo/india-goa-palolem-beach.jpg?s=612x612&w=0&k=20&c=iGV1Ue0Efj87dQirWnUpZVG1dNobUjfVvMGdKHTJ7Qg="
+        },
+        {
+          "city": "Munnar",
+          "state": "Kerala",
+          "country": "India",
+          "price": 10000,
+          "des": "Tea gardens and misty hills for couples.",
+          "image": "https://t4.ftcdn.net/jpg/01/28/57/63/360_F_128576315_ejpjSy7S7fsH275jCDuUtykU1O3B6rUb.jpg"
+        },
+        {
+          "city": "Andaman",
+          "state": "Andaman & Nicobar",
+          "country": "India",
+          "price": 20000,
+          "des": "Secluded beaches and scuba diving spots.",
+          "image": "https://media.istockphoto.com/id/1480901115/photo/andaman-island.jpg?s=612x612&w=0&k=20&c=pCV7gcVp-k7DeQ-9_aOsSATR37nMjQZN-OC13-G480I="
+        }
+      ]
+    },
+    {
+      "category": "Family",
+      "cities": [
+        {
+          "city": "Jaipur",
+          "state": "Rajasthan",
+          "country": "India",
+          "price": 9000,
+          "des": "Rich heritage and family-friendly forts.",
+          "image": "https://cdn.pixabay.com/photo/2021/04/06/11/22/hawa-mahal-6156123_1280.jpg"
+        },
+        {
+          "city": "Shimla",
+          "state": "Himachal Pradesh",
+          "country": "India",
+          "price": 8000,
+          "des": "Hill station with toy trains and nature.",
+          "image": "https://media.istockphoto.com/id/1224392597/photo/after-snowfall-kalka-shimla-railway-is-a-beautiful-place-in-india.jpg?s=612x612&w=0&k=20&c=_Brr2sB4Amjr2R9j2kjDcuA6b0OH6IybCd1JvcaMBkw="
+        },
+        {
+          "city": "Mysore",
+          "state": "Karnataka",
+          "country": "India",
+          "price": 7500,
+          "des": "Historic palaces and parks for kids.",
+          "image": "https://images.unsplash.com/photo-1600112356915-089abb8fc71a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bXlzb3JlJTIwcGFsYWNlfGVufDB8fDB8fHww"
+        },
+        {
+          "city": "Darjeeling",
+          "state": "West Bengal",
+          "country": "India",
+          "price": 11000,
+          "des": "Scenic hill views and Himalayan toy trains.",
+          "image": "https://ihplb.b-cdn.net/wp-content/uploads/2016/03/Things-to-Do-in-Darjeeling.jpg"
+        }
+      ]
+    },
+    {
+      "category": "Solo",
+      "cities": [
+        {
+          "city": "Kasol",
+          "state": "Himachal Pradesh",
+          "country": "India",
+          "price": 7000,
+          "des": "Peaceful solo treks and café culture.",
+          "image": "https://thumbs.dreamstime.com/b/awesome-trip-to-kasol-month-april-not-much-cold-hot-weather-period-kasol-himachal-pradesh-india-217540623.jpg"
+        },
+        {
+          "city": "Varanasi",
+          "state": "Uttar Pradesh",
+          "country": "India",
+          "price": 6000,
+          "des": "Spiritual solo exploration on the ghats.",
+          "image": "https://media.istockphoto.com/id/537988165/photo/varanasi.jpg?s=612x612&w=0&k=20&c=fFpEL17MiQJx5NkkNIVrTsesd2E8b04SCgzjfhUmQ7g="
+        },
+        {
+          "city": "Pondicherry",
+          "state": "Puducherry",
+          "country": "India",
+          "price": 9500,
+          "des": "French quarters and quiet beaches.",
+          "image": "https://t3.ftcdn.net/jpg/04/17/08/16/360_F_417081637_KDNznlDjp5ekEQb6dPKidJ29DYMdDSuO.jpg"
+        },
+        {
+          "city": "Ziro Valley",
+          "state": "Arunachal Pradesh",
+          "country": "India",
+          "price": 15000,
+          "des": "Remote scenic valleys and solo hikes.",
+          "image": "https://media.istockphoto.com/id/1178712785/photo/view-from-dura-hidden-paradise-ziro.jpg?s=612x612&w=0&k=20&c=PbWUrAVgmNcj9y5wVXDl8b7rhn_ITnI5z4ceQQpv82o="
+        }
+      ]
+    },
+    {
+      "category": "Group",
+      "cities": [
+        {
+          "city": "Lonavala",
+          "state": "Maharashtra",
+          "country": "India",
+          "price": 7000,
+          "des": "Weekend hills getaway for groups.",
+          "image": "https://thumbs.dreamstime.com/b/kataldhar-waterfall-near-lonavala-pune-maharashtra-india-256018447.jpg"
+        },
+        {
+          "city": "Coorg",
+          "state": "Karnataka",
+          "country": "India",
+          "price": 8500,
+          "des": "Trekking and camping for friend groups.",
+          "image": "https://www.shutterstock.com/image-photo/scenic-kote-abbe-falls-coorg-600nw-2439266775.jpg"
+        },
+        {
+          "city": "Alleppey",
+          "state": "Kerala",
+          "country": "India",
+          "price": 10500,
+          "des": "Group houseboat experiences on backwaters.",
+          "image": "https://www.shutterstock.com/image-photo/houseboat-sailing-alappuzha-backwaters-kerala-600nw-2488720059.jpg"
+        },
+        {
+          "city": "Jim Corbett",
+          "state": "Uttarakhand",
+          "country": "India",
+          "price": 9500,
+          "des": "Jungle safari and nature trails.",
+          "image": "https://thumbs.dreamstime.com/b/jim-corbett-national-park-uttarakhand-india-december-wildlife-safari-gypsies-tracking-tiger-natural-tyndall-effect-sun-rays-347964430.jpg"
+        }
+      ]
+    },
+    {
+      "category": "Corporate",
+      "cities": [
+        {
+          "city": "Bengaluru",
+          "state": "Karnataka",
+          "country": "India",
+          "price": 11500,
+          "des": "Corporate retreats and team outings.",
+          "image": "https://plus.unsplash.com/premium_photo-1697729606148-42a74a5bad37?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YmFuZ2Fsb3JlJTIwaW5kaWF8ZW58MHx8MHx8fDA%3D"
+        },
+        {
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "price": 11000,
+          "des": "Business + leisure destination.",
+          "image": "https://t4.ftcdn.net/jpg/00/47/49/01/360_F_47490128_JLClMTbZyVdxl3OW2m8H4vJHW7hDZ8Jj.jpg"
+        },
+        {
+          "city": "Nainital",
+          "state": "Uttarakhand",
+          "country": "India",
+          "price": 9800,
+          "des": "Hill retreat with boating and team bonding.",
+          "image": "https://t3.ftcdn.net/jpg/02/53/61/02/360_F_253610231_wSwYFW9fPJefoSkWk7XqpA7kkh1iKzS7.jpg"
+        },
+        {
+          "city": "Lavasa",
+          "state": "Maharashtra",
+          "country": "India",
+          "price": 9500,
+          "des": "Planned city ideal for corporate getaways.",
+          "image": "https://media.istockphoto.com/id/1154077630/photo/lavasa-city-pune-maharashtra-india.jpg?s=612x612&w=0&k=20&c=fGMDahkf_FI7X8f55I3me4u4ZVc8rjyQncvqvR49SEA="
+        }
+      ]
+    },
+    {
+      "category": "All",
+      "cities": []
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "title": "Destinations",
+    "destinations": 60,
+    "price": "17875",
+    "images": [
+      "https://lp-cms-production.imgix.net/2024-10/-CantoiStock-1299735828.jpg?auto=compress&format=auto&fit=crop&q=50&w=1200&h=800",
+      "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/4b/5d/c8/caption.jpg",
+      "https://www.chaseforadventure.com/wp-content/uploads/2023/07/Things-to-do-in-Krabi.webp"
+    ]
+  },
+  {
+    "title": "Popular Packages",
+    "destinations": 87,
+    "price": "4233",
+    "images": [
+      "https://www.holidify.com/images/bgImages/ROME.jpg",
+      "https://www.qantas.com/content/travelinsider/en/explore/europe/best-places-to-visit-in-europe-historical-destinations-sites/jcr:content/verticalGalleryMain/gallery/galleryItems/218_1686624395243.img.480.medium.jpg/1728624738279.jpg",
+      "https://www.explore.com/img/gallery/the-worlds-best-places-to-put-on-your-travel-bucket-list/rome-italy-1668448379.jpg"
+    ]
+  },
+  {
+    "title": "Weekend Getaways",
+    "destinations": 3,
+    "price": "10466",
+    "images": [
+      "https://www.tourmyindia.com/blog//wp-content/uploads/2023/09/Best-Weekend-Destinations-from-Jaipur.jpg",
+      "https://blog.weekendthrill.com/wp-content/uploads/2016/05/053016_0515_16IDEALWEEK1.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST6I1HUhGQtFEy-ZQsXRprzvCP-BY6QYisPw&s"
+    ],
+    "categories": [
+      {
+        "category": "Weekend Gateways",
+        "destinations": [
+          {
+            "name": "Weekend Escape Resort",
+            "price": 5000,
+            "rating": 4.5,
+            "location": {
+              "city": "Agra",
+              "state": "Uttar Pradesh"
+            },
+            "image": {
+              "uri": "https://www.oberoihotels.com/-/media/oberoi-hotels/website-images/india/agra/oberoi-agra/discover-the-best/discover-image-1.jpg"
+            }
+          },
+          {
+            "name": "Hilltop Retreat",
+            "price": 4000,
+            "rating": 4.3,
+            "location": {
+              "city": "Shimla",
+              "state": "Himachal Pradesh"
+            },
+            "image": {
+              "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/78/ac/b4/hilltop-resort.jpg?w=900&h=500&s=1"
+            }
+          },
+          {
+            "name": "Beachside Bliss",
+            "price": 6000,
+            "rating": 4.7,
+            "location": {
+              "city": "Goa",
+              "state": "Goa"
+            },
+            "image": {
+              "uri": "https://st2.depositphotos.com/1052518/5286/i/450/depositphotos_52863611-stock-photo-beach-with-palm-trees.jpg"
+            }
+          },
+          {
+            "name": "Mountain Lodge",
+            "price": 4500,
+            "rating": 4.4,
+            "location": {
+              "city": "Manali",
+              "state": "Himachal Pradesh"
+            },
+            "image": {
+              "uri": "https://static.vecteezy.com/system/resources/thumbnails/057/779/514/small_2x/luxurious-a-frame-mountain-lodge-in-snowy-winter-landscape-illuminated-at-dusk-photo.jpeg"
+            }
+          },
+          {
+            "name": "Heritage Palace",
+            "price": 3500,
+            "rating": 4.2,
+            "location": {
+              "city": "Jaipur",
+              "state": "Rajasthan"
+            },
+            "image": {
+              "uri": "https://media.istockphoto.com/id/490555943/photo/indian-hotel-resort-evening-scene.jpg?s=612x612&w=0&k=20&c=Kdxdri8dOvSchwNXzV1uYQcXGAI8CD0BKSi7gkxPzKI="
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Romantic Destinations",
+    "destinations": 14,
+    "price": "10945",
+    "images": [
+      "https://media.cntraveler.com/photos/67782447e93d5ea2c59fec07/4:3/w_3148,h_2361,c_limit/Le_Sirenuse_Room_62-0553.jpg",
+      "https://media.cntraveller.com/photos/62f36e42e062900b0e3b7637/master/w_320%2Cc_limit/Le_Sirenuse_ALDOs_BAR-9051-La%2520Sponda%2C%2520Le%2520Sireneuse%2C%2520Positano%2C%2520Italy%2C-jun21-pr.jpg",
+      "https://www.ecstaticindiatours.com/uploads/blog/1696338863o0ow3-udaipur.jpg"
+    ],
+    "categories": [
+      {
+        "category": "Romantic Destinations",
+        "destinations": [
+          {
+            "name": "Lovebird Cottage",
+            "price": 7000,
+            "rating": 4.8,
+            "location": {
+              "city": "Udaipur",
+              "state": "Rajasthan"
+            },
+            "image": {
+              "uri": "https://media.istockphoto.com/id/96669695/photo/luxury-palace-courtyard.jpg?s=612x612&w=0&k=20&c=CAAsyEccQsjiIXST3omGGYzmYNgcad8SrucOyEOxCAs="
+            }
+          },
+          {
+            "name": "Romantic River View",
+            "price": 7500,
+            "rating": 4.6,
+            "location": {
+              "city": "Varanasi",
+              "state": "Uttar Pradesh"
+            },
+            "image": {
+              "uri": "https://media.istockphoto.com/id/1164329797/photo/hindu-sadhu-sitting-on-a-boat-overlooking-varanasi-city-architecture-at-sunset.jpg?s=612x612&w=0&k=20&c=LbpIHRo7kGT7dbUr6b6UuD1d6P0yCaKZ2lbqo3TY988="
+            }
+          },
+          {
+            "name": "Whispering Pines",
+            "price": 6500,
+            "rating": 4.5,
+            "location": {
+              "city": "Mussoorie",
+              "state": "Uttarakhand"
+            },
+            "image": {
+              "uri": "https://www.whisperingpines.in/images/gallery/gallery-6.jpg"
+            }
+          },
+          {
+            "name": "Desert Escape",
+            "price": 8000,
+            "rating": 4.9,
+            "location": {
+              "city": "Jaisalmer",
+              "state": "Rajasthan"
+            },
+            "image": {
+              "uri": "https://images.articlesfactory.com/750x0/1d36566c-dc0f-4500-9dc1-c0283b8cf073.webp"
+            }
+          },
+          {
+            "name": "Lakeside Romance",
+            "price": 6900,
+            "rating": 4.7,
+            "location": {
+              "city": "Nainital",
+              "state": "Uttarakhand"
+            },
+            "image": {
+              "uri": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/30/3a/3c/mesmerizing.jpg?w=1400&h=1400&s=1"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Nature Destinations",
+    "destinations": 13,
+    "price": "10945",
+    "images": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA1zM1NH3jWBmN47Z-XVm4JiHq1QoDD3Ovow&s",
+      "https://hips.hearstapps.com/hmg-prod/images/snowdonia-national-park-in-wales-uk-royalty-free-image-1729091363.jpg?crop=0.530xw:1.00xh;0.239xw,0&resize=640:*",
+      "https://specials-images.forbesimg.com/imageserve/61cc77ede18f95935e179434/Llynnau-Mymbyr--Mount-Snowdon---Snowdon-Massif/960x0.jpg?fit=scale"
+    ],
+    "categories": [
+      {
+        "category": "Nature Destinations",
+        "destinations": [
+          {
+            "name": "Himalayan Retreat",
+            "price": 5500,
+            "rating": 4.6,
+            "location": {
+              "city": "Leh",
+              "state": "Ladakh"
+            },
+            "image": {
+              "uri": "https://www.lehstay.com/img/ToursImage_243_3034.jpg"
+            }
+          },
+          {
+            "name": "Valley of Flowers",
+            "price": 7200,
+            "rating": 4.8,
+            "location": {
+              "city": "Joshimath",
+              "state": "Uttarakhand"
+            },
+            "image": {
+              "uri": "https://media.istockphoto.com/id/1487456405/photo/valley-of-flowers.jpg?s=612x612&w=0&k=20&c=Lr4cLcSYlPVf_Twl91dUqR01VEJQ8FvE-CsG95Ym1ig="
+            }
+          },
+          {
+            "name": "Nanda Devi Base Camp",
+            "price": 9800,
+            "rating": 4.7,
+            "location": {
+              "city": "Nanda Devi",
+              "state": "Uttarakhand"
+            },
+            "image": {
+              "uri": "https://www.himalayanhikers.in/wp-content/uploads/2019/12/Nanda-Devi-Base-Camp-Trek4.jpg"
+            }
+          },
+          {
+            "name": "Sundarbans Tiger Reserve",
+            "price": 12000,
+            "rating": 4.5,
+            "location": {
+              "city": "Sundarbans",
+              "state": "West Bengal"
+            },
+            "image": {
+              "uri": "https://www.setmytrip.in/wp-content/uploads/2024/02/RDT_20240201_0230355242276391099349997.png"
+            }
+          },
+          {
+            "name": "Kedarnath",
+            "price": 8500,
+            "rating": 4.9,
+            "location": {
+              "city": "Kedarnath",
+              "state": "Uttarakhand"
+            },
+            "image": {
+              "uri": "https://media.istockphoto.com/id/515855602/photo/kedarnath-in-india.jpg?s=612x612&w=0&k=20&c=_KmnQbbvqRftKusDTU_JUjVM3V80Mo2jBqaCNx948us="
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
+]

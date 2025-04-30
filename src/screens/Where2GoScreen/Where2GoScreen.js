@@ -18,18 +18,29 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../../context/theme';
 import rajasthanHotels from '../../components/data/rajasthanHotels.json';
+import { useCurrency } from '../../context/CurrencyContext';
 
-const cities = ['All', 'Jaipur', 'Udaipur', 'Jodhpur', 'Pushkar', 'Bikaner'];
+const cities = ['All', 'Pune', 'Lonavala', 'Jaipur', 'Udaipur', 'Jodhpur', 'Pushkar', 'Bikaner'];
 
 const Where2GoHotelsScreen = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
+  const { selectedCurrency, conversionRate } = useCurrency();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCity, setSelectedCity] = useState('All');
+  const [randomizedHotels, setRandomizedHotels] = useState([]);
 
   const allHotels = rajasthanHotels.flatMap(city => city.hotels);
 
-  const filteredHotels = allHotels.filter(hotel => {
+  useEffect(() => {
+    if (selectedCity === 'All') {
+      // Shuffle hotels randomly when screen mounts or selectedCity changes to All
+      const shuffledHotels = [...allHotels].sort(() => Math.random() - 0.5);
+      setRandomizedHotels(shuffledHotels);
+    }
+  }, [selectedCity]);
+
+  const filteredHotels = (selectedCity === 'All' ? randomizedHotels : allHotels).filter(hotel => {
     const matchesCity =
       selectedCity === 'All' ||
       hotel.location?.city?.toLowerCase() === selectedCity.toLowerCase();
@@ -42,7 +53,29 @@ const Where2GoHotelsScreen = () => {
     return matchesCity && matchesSearch;
   });
 
+  const getCurrencySymbol = () => {
+    switch (selectedCurrency) {
+      case 'USD':
+        return '$';
+      case 'INR':
+        return '₹';
+      default:
+        return '';
+    }
+  };
+
+  const convertPrice = (price) => {
+    if (selectedCurrency === 'USD') {
+      return (price * conversionRate).toFixed(2);
+    } else if (selectedCurrency === 'INR') {
+      return price;
+    }
+    return price;
+  };
+
   const renderHotelCard = ({ item }) => {
+    const priceInSelectedCurrency = convertPrice(item.price);
+
     return (
       <View style={[styles.card, { backgroundColor: colors.subbg }]}>
         <Image source={{ uri: item.image.uri }} style={styles.image} />
@@ -52,13 +85,13 @@ const Where2GoHotelsScreen = () => {
             {item.location.city}, {item.location.state}
           </Text>
           <Text style={[styles.price, { color: colors.primary }]}>
-            ₹{item.price} / night
+            {getCurrencySymbol()} {priceInSelectedCurrency} / night
           </Text>
           <Text style={styles.rating}>⭐ {item.rating}</Text>
           <TouchableOpacity
             activeOpacity={1}
             style={[styles.button, { backgroundColor: '#387c87' }]}
-            onPress={() => navigation.navigate('HotelDetails', { hotel: item })}
+            onPress={() => navigation.navigate('HotelDetails', { hotel: item, price: priceInSelectedCurrency })}
           >
             <Text style={styles.buttonText}>Book Now</Text>
           </TouchableOpacity>
@@ -67,23 +100,21 @@ const Where2GoHotelsScreen = () => {
     );
   };
 
-  // Keyboard event listeners
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
-        navigation.setOptions({ tabBarStyle: { display: 'none' } }); // Hide bottom tab
+        navigation.setOptions({ tabBarStyle: { display: 'none' } });
       }
     );
 
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        navigation.setOptions({ tabBarStyle: { display: 'flex' } }); // Show bottom tab
+        navigation.setOptions({ tabBarStyle: { display: 'flex' } });
       }
     );
 
-    // Cleanup listeners on unmount
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
@@ -120,8 +151,7 @@ const Where2GoHotelsScreen = () => {
             style={[
               styles.categoryButton,
               {
-                backgroundColor:
-                  selectedCity === city ? '#387c87' : colors.card,
+                backgroundColor: selectedCity === city ? '#387c87' : colors.card,
                 borderColor: colors.border,
               },
             ]}
@@ -185,9 +215,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: responsiveHeight(5.2), // fix: enough height to show full text
+    height: responsiveHeight(5.2),
   },
-
   card: {
     borderRadius: responsiveWidth(3),
     marginBottom: responsiveHeight(2),
