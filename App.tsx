@@ -51,6 +51,8 @@ import BusesScreen from './src/components/TravelCategory/TravelMenuGrid/BusesScr
 import CabsScreen from './src/components/TravelCategory/TravelMenuGrid/CabsScreen';
 import VisaScreen from './src/components/TravelCategory/TravelMenuGrid/VisaScreen';
 import HiddenHotelDetails from './src/screens/Home/HiddenHotelDetails';
+import {AuthProvider} from './src/context/AuthContext';
+import {useAuth} from './src/context/AuthContext';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -118,156 +120,168 @@ function MainTabs() {
 }
 
 function AppStack() {
+  const {user, loading} = useAuth();
+
+  if (loading) return null;
   return (
     <Stack.Navigator screenOptions={{animation: 'none'}}>
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignupScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MainTabs"
-        component={MainTabs}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="ProfileInfo"
-        component={ProfileInfoScreen}
-        options={{title: 'Profile Info'}}
-      />
-      <Stack.Screen
-        name="HotelBooking"
-        component={HotelBooking}
-        options={{title: 'Hotel Booking'}}
-      />
-      <Stack.Screen
-        name="FlightBooking"
-        component={FlightBooking}
-        options={{title: 'Flight Booking'}}
-      />
-      <Stack.Screen
-        name="Flight"
-        component={FlightScreen}
-        options={{title: 'Flight Search'}}
-      />
-      <Stack.Screen
-        name="Hotel"
-        component={HotelScreen}
-        options={{title: 'Hotel Search'}}
-      />
-      <Stack.Screen
-        name="Trains"
-        component={TrainsScreen}
-        options={{title: 'Trains'}}
-      />
-      <Stack.Screen
-        name="Buses"
-        component={BusesScreen}
-        options={{title: 'Buses'}}
-      />
-      <Stack.Screen
-        name="Cabs"
-        component={CabsScreen}
-        options={{title: 'Cabs'}}
-      />
-      <Stack.Screen
-        name="Visa"
-        component={VisaScreen}
-        options={{title: 'Visa'}}
-      />
-      <Stack.Screen
-        name="Esim"
-        component={EsimScreen}
-        options={{title: 'E-sim'}}
-      />
-      <Stack.Screen
-        name="Account&Security"
-        component={AccountSecurity}
-        options={{title: 'Account & Security'}}
-      />
-      <Stack.Screen
-        name="TermsAndConditions"
-        component={Termsconditions}
-        options={{title: 'Terms & Conditions'}}
-      />
-      <Stack.Screen
-        name="Privacy"
-        component={Privacypolicy}
-        options={{title: 'Privacy'}}
-      />
-      <Stack.Screen
-        name="HiddenGemDetailScreen"
-        component={HiddenGemDetailScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="HiddenHotelDetails"
-        component={HiddenHotelDetails}
-        options={{}}
-      />
-      <Stack.Screen
-        name="Notification"
-        component={Notification}
-        options={{title: 'Notification'}}
-      />
-      <Stack.Screen
-        name="PopulorDestination"
-        component={PopularDestinationScreen}
-        options={{title: 'Popular Destination'}}
-      />
-      <Stack.Screen
-        name="ExploreCategoryScreen"
-        component={ExploreCategoryScreen}
-        options={{title: 'Explore Category'}}
-      />
-      <Stack.Screen
-        name="VisaFreeCountry"
-        component={VisaFreeCountry}
-        options={{title: 'Visa Free Country'}}
-      />
-
-      <Stack.Screen name="Wishlist" component={WishlistScreen} />
-      <Stack.Screen
-        name="CityDetail"
-        component={CityDetailScreen}
-        options={{title: 'City Detail'}}
-      />
-      <Stack.Screen
-        name="HotelDetails"
-        component={HotelDetailsScreen}
-        options={{title: 'Hotel Details'}}
-      />
-      <Stack.Screen
-        name="SearchScreen"
-        component={SearchScreen}
-        options={{title: 'Search Screen'}}
-      />
-      <Stack.Screen
-        name="DescriptionDetails"
-        component={DestinationDetails}
-        options={{title: 'Description Details'}}
-      />
-      <Stack.Screen
-        name="BookingDetails"
-        component={BookingDetails}
-        options={{title: 'Booking Details'}}
-      />
-      <Stack.Screen
-        name="PaymentDetails"
-        component={PaymentDetails}
-        options={{title: 'Payment Details'}}
-      />
-      <Stack.Screen
-        name="FinalPayment"
-        component={FinalPayment}
-        options={{headerShown: false}}
-      />
-
+      {!user ? (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignupScreen}
+            options={{headerShown: false}}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="MainTabs"
+            component={MainTabs}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ProfileInfo"
+            component={ProfileInfoScreen}
+            options={{title: 'Profile Info'}}
+          />
+          <Stack.Screen
+            name="HotelBooking"
+            component={HotelBooking}
+            options={{title: 'Hotel Booking'}}
+          />
+          <Stack.Screen
+            name="FlightBooking"
+            component={FlightBooking}
+            options={{title: 'Flight Booking'}}
+          />
+          <Stack.Screen
+            name="Flight"
+            component={FlightScreen}
+            options={{title: 'Flight Search'}}
+          />
+          <Stack.Screen
+            name="Hotel"
+            component={HotelScreen}
+            options={{title: 'Hotel Search'}}
+          />
+          <Stack.Screen
+            name="Trains"
+            component={TrainsScreen}
+            options={{title: 'Trains'}}
+          />
+          <Stack.Screen
+            name="Buses"
+            component={BusesScreen}
+            options={{title: 'Buses'}}
+          />
+          <Stack.Screen
+            name="Cabs"
+            component={CabsScreen}
+            options={{title: 'Cabs'}}
+          />
+          <Stack.Screen
+            name="Visa"
+            component={VisaScreen}
+            options={{title: 'Visa'}}
+          />
+          <Stack.Screen
+            name="Esim"
+            component={EsimScreen}
+            options={{title: 'E-sim'}}
+          />
+          <Stack.Screen
+            name="Account&Security"
+            component={AccountSecurity}
+            options={{title: 'Account & Security'}}
+          />
+          <Stack.Screen
+            name="TermsAndConditions"
+            component={Termsconditions}
+            options={{title: 'Terms & Conditions'}}
+          />
+          <Stack.Screen
+            name="Privacy"
+            component={Privacypolicy}
+            options={{title: 'Privacy'}}
+          />
+          <Stack.Screen
+            name="HiddenGemDetailScreen"
+            component={HiddenGemDetailScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="HiddenHotelDetails"
+            component={HiddenHotelDetails}
+            options={{title: 'Hidden Hotel Details'}}
+          />
+          <Stack.Screen
+            name="Notification"
+            component={Notification}
+            options={{title: 'Notification'}}
+          />
+          <Stack.Screen
+            name="PopulorDestination"
+            component={PopularDestinationScreen}
+            options={{title: 'Popular Destination'}}
+          />
+          <Stack.Screen
+            name="ExploreCategoryScreen"
+            component={ExploreCategoryScreen}
+            options={{title: 'Explore Category'}}
+          />
+          <Stack.Screen
+            name="VisaFreeCountry"
+            component={VisaFreeCountry}
+            options={{title: 'Visa Free Country'}}
+          />
+          <Stack.Screen
+            name="Wishlist"
+            component={WishlistScreen}
+            options={{title: 'Wishlist'}}
+          />
+          <Stack.Screen
+            name="CityDetail"
+            component={CityDetailScreen}
+            options={{title: 'City Detail'}}
+          />
+          <Stack.Screen
+            name="HotelDetails"
+            component={HotelDetailsScreen}
+            options={{title: 'Hotel Details'}}
+          />
+          <Stack.Screen
+            name="SearchScreen"
+            component={SearchScreen}
+            options={{title: 'Search Screen'}}
+          />
+          <Stack.Screen
+            name="DescriptionDetails"
+            component={DestinationDetails}
+            options={{title: 'Description Details'}}
+          />
+          <Stack.Screen
+            name="BookingDetails"
+            component={BookingDetails}
+            options={{title: 'Booking Details'}}
+          />
+          <Stack.Screen
+            name="PaymentDetails"
+            component={PaymentDetails}
+            options={{title: 'Payment Details'}}
+          />
+          <Stack.Screen
+            name="FinalPayment"
+            component={FinalPayment}
+            options={{headerShown: false}}
+          />
+        </>
+      )}
     </Stack.Navigator>
   );
 }
@@ -293,9 +307,11 @@ export default function App() {
     <GestureHandlerRootView style={styles.container}>
       <CurrencyProvider>
         <ThemeProvider>
-          <PaperProvider>
-            <MainApp />
-          </PaperProvider>
+          <AuthProvider>
+            <PaperProvider>
+              <MainApp />
+            </PaperProvider>
+          </AuthProvider>
         </ThemeProvider>
       </CurrencyProvider>
     </GestureHandlerRootView>

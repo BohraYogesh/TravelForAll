@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -22,6 +22,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useTheme} from '../../context/theme';
 import {useTranslation} from 'react-i18next';
 import {useCurrency} from '../../context/CurrencyContext';
+import {useAuth} from '../../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const currencyOptions = [
 //   {
@@ -63,8 +65,8 @@ import {useCurrency} from '../../context/CurrencyContext';
 // ];
 
 const currencyOptions = [
-  { id: 'INR', symbol: '₹', name: 'Indian Rupee' },
-  { id: 'USD', symbol: '$', name: 'US Dollar' },
+  {id: 'INR', symbol: '₹', name: 'Indian Rupee'},
+  {id: 'USD', symbol: '$', name: 'US Dollar'},
   // Add more currencies as needed
 ];
 
@@ -73,17 +75,21 @@ const SettingsScreen = () => {
   const [visible, setVisible] = useState(false);
   const {theme, setTheme} = useTheme();
   const {t, i18n} = useTranslation();
+  const {logout, user} = useAuth();
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
 
-  const { selectedCurrency, setSelectedCurrency } = useCurrency();
+  const {selectedCurrency, setSelectedCurrency} = useCurrency();
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
 
   const [selectedPayment, setSelectedPayment] = useState(false);
   const [selectedMethods, setSelectedMethods] = useState([]);
   const [showMore, setShowMore] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [firstLetter, setFirstLetter] = useState('');
   const {colors} = useTheme();
 
   const handleLanguageChange = id => {
@@ -91,6 +97,17 @@ const SettingsScreen = () => {
     i18n.changeLanguage(id);
     setLanguageModalVisible(false);
   };
+
+  useEffect(() => {
+    console.log('User from AuthContext:', user); 
+    if (user?.firstName) {
+      setFirstName(user.firstName);
+      setFirstLetter(user.firstName.charAt(0).toUpperCase());
+    }
+    if (user?.email) {
+      setEmail(user.email);
+    }
+  }, [user]);
 
   const languageOptions = [
     {id: 'en', name: `${t('English')}`, icon: 'alpha-e-circle-outline'},
@@ -147,7 +164,22 @@ const SettingsScreen = () => {
     <ScrollView
       style={[styles.container, {backgroundColor: colors.bg}]}
       showsVerticalScrollIndicator={false}>
-      <View>
+      <View style={[styles.containers, {backgroundColor: '#0b544d'}]}>
+        <View style={[styles.circle, {backgroundColor: colors.primary}]}>
+          <Text style={styles.letter}>{firstLetter || ''}</Text>
+        </View>
+        <Text style={styles.greeting}>
+          {t('Hello')},{' '}
+          <Text style={styles.name}>
+            {user?.firstName ? user.firstName + '!' : ''}
+          </Text>
+        </Text>
+        <Text style={[styles.email, {color: 'white'}]}>
+          {email || user?.email || ''}
+        </Text>
+      </View>
+
+      <View style={{borderTopRightRadius: responsiveFontSize(2)}}>
         {/* My Profile */}
         <Text style={[styles.sectionTitle, {color: colors.text}]}>
           {t('My Profile')}
@@ -450,12 +482,21 @@ const SettingsScreen = () => {
 
         {/* Logout */}
         <TouchableOpacity
-          style={[styles.logoutBtn]}
+          style={styles.logoutBtn}
           onPress={() =>
-            Alert.alert('Logout', 'Are you sure you want to logout?')
+            Alert.alert('Logout', 'Are you sure you want to logout?', [
+              {text: 'Cancel', style: 'cancel'},
+              {
+                text: 'Logout',
+                style: 'destructive',
+                onPress: () => {
+                  logout();
+                },
+              },
+            ])
           }
           activeOpacity={1}>
-          <Text style={[styles.logoutText]}>{t('Logout')}</Text>
+          <Text style={styles.logoutText}>{t('Logout')}</Text>
         </TouchableOpacity>
       </View>
 
@@ -679,6 +720,35 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: responsiveWidth(4),
     backgroundColor: '#fff',
+  },
+  containers: {
+    alignItems: 'center',
+    paddingVertical: responsiveHeight(3),
+  },
+  circle: {
+    width: responsiveWidth(20),
+    height: responsiveWidth(20),
+    borderRadius: responsiveWidth(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: responsiveHeight(1.5),
+  },
+  letter: {
+    fontSize: responsiveFontSize(4),
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  greeting: {
+    fontSize: responsiveFontSize(2.3),
+    color: '#fff',
+    marginBottom: responsiveHeight(0.5),
+  },
+  name: {
+    fontWeight: 'bold',
+  },
+  email: {
+    fontSize: responsiveFontSize(1.6),
+    color: '#fff',
   },
   sectionTitle: {
     fontSize: responsiveFontSize(2.2),
